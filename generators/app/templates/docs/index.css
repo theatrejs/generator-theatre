@@ -1,0 +1,20 @@
+html,
+body {
+
+    height: 100%;
+}
+
+body {
+
+    background: #282c34;
+    margin: 0;
+    position: relative;
+}
+
+canvas {
+
+    left: 50%;
+    position: fixed;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}

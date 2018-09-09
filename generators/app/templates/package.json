@@ -1,0 +1,33 @@
+{
+    "name": "<%= title %>",
+    "version": "0.1.0",
+    "description": "<%= description %>",
+    "main": "sources/index.js",
+    "scripts": {
+
+        "build": "webpack --config webpack.production.js",
+        "start": "webpack --config webpack.development.js --watch",
+        "test": "echo \"Hello, friend.\" && exit 0"
+    },
+    "repository": {
+
+        "type": "git",
+        "url": "git+<%= github %>.git"
+    },
+    "author": "<%= username %>",
+    "license": "MIT",
+    "bugs": {
+
+        "url": "<%= github %>/issues"
+    },
+    "homepage": "<%= github %>#readme",
+    "devDependencies": {
+
+        "uglifyjs-webpack-plugin": "1.0.1",
+        "url-loader": "1.0.1",
+        "webpack": "3.8.1",
+        "webpack-merge": "4.1.4",
+        "webpack-notifier": "1.6.0",
+        "webpack-obfuscator": "0.18.0"
+    }
+}

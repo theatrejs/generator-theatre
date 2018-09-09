@@ -1,0 +1,3 @@
+const sounds = [];
+
+export {sounds};

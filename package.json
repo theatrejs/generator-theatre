@@ -1,26 +1,33 @@
 {
-    "name": "generator-theatre",
-    "version": "0.1.0",
-    "description": "javascript es6 game framework generator",
-    "main": "sources/index.js",
-    "scripts": {
+    "author": "deformhead",
+    "bugs": {
 
-        "test": "echo \"Hello, friend.\" && exit 0"
+        "url": "https://github.com/theatrejs/generator-theatre/issues"
     },
+    "dependencies": {
+
+        "yeoman-generator": "3.1.1"
+    },
+    "description": "javascript es6 game framework generator",
+    "files": [
+
+        "generators"
+    ],
+    "homepage": "https://github.com/theatrejs/generator-theatre#readme",
+    "keywords": [
+
+        "yeoman-generator"
+    ],
+    "license": "MIT",
+    "name": "generator-theatre",
     "repository": {
 
         "type": "git",
         "url": "git+https://github.com/theatrejs/generator-theatre.git"
     },
-    "keywords": [
+    "scripts": {
 
-        "yeoman-generator"
-    ],
-    "author": "deformhead",
-    "license": "MIT",
-    "bugs": {
-
-        "url": "https://github.com/theatrejs/generator-theatre/issues"
+        "test": "echo \"Hello, friend.\" && exit 0"
     },
-    "homepage": "https://github.com/theatrejs/generator-theatre#readme"
+    "version": "0.2.0"
 }
