@@ -36,6 +36,20 @@ Then generate your project in this new folder :
 $ yo theatre
 ```
 
+#### Generate a scene
+
+Go to the `scenes` folder :
+
+```
+$ cd sources/game/scenes/
+```
+
+Then generate your new scene in this new folder :
+
+```
+$ yo theatre:scene
+```
+
 ## [Change Log](./CHANGELOG.md)
 
 ## [License](./LICENSE)
