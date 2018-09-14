@@ -23,14 +23,14 @@ Generating a [Theatre](https://github.com/theatrejs) project is as simple as say
 
 #### Quick start
 
-We first create the folder of our new project :
+Create the folder of your new project :
 
 ```
-$ mkdir game
-$ cd game
+$ mkdir <your-game>
+$ cd <your-game>
 ```
 
-Then we generate our project in this new folder :
+Then generate your project in this new folder :
 
 ```
 $ yo theatre
