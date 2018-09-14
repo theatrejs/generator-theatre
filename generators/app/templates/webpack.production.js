@@ -8,20 +8,6 @@ const common = require('./webpack.common.js');
 
 module.exports = merge(common, {
 
-    'mode': 'none',
-    'module': {
-
-        'rules': [
-
-            {
-                'test': /\.ogg|\.png|\.wav$/,
-                'use': [
-
-                    {'loader': 'url-loader'}
-                ]
-            }
-        ]
-    },
     'plugins': [
 
         new JavaScriptObfuscator(),

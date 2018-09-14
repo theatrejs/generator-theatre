@@ -17,22 +17,8 @@ module.exports = merge(common, {
             'warnings': true,
             'errors': true
         },
-        'port': 9000,
+        'port': 8888,
         'watchContentBase': true
-    },
-    'mode': 'none',
-    'module': {
-
-        'rules': [
-
-            {
-                'test': /\.ogg|\.png|\.wav$/,
-                'use': [
-
-                    {'loader': 'url-loader'}
-                ]
-            }
-        ]
     },
     'plugins': [
 

@@ -3,6 +3,22 @@ const path = require('path');
 module.exports = {
 
     'entry': './sources/index.js',
+    'mode': 'none',
+    'module': {
+
+        'rules': [
+
+            {
+                'test': /\.ogg|\.png|\.wav$/,
+                'use': [
+
+                    {
+                        'loader': 'url-loader'
+                    }
+                ]
+            }
+        ]
+    },
     'output': {
 
         'path': path.resolve(__dirname, 'docs/'),
