@@ -1,26 +1,10 @@
 {
-    "name": "<%= title %>",
-    "version": "0.1.0",
-    "description": "<%= description %>",
-    "main": "sources/index.js",
-    "scripts": {
-
-        "build": "webpack --config webpack.production.js",
-        "start": "webpack-dev-server --config webpack.development.js",
-        "test": "echo \"Hello, friend.\" && exit 0"
-    },
-    "repository": {
-
-        "type": "git",
-        "url": "git+<%= github %>.git"
-    },
     "author": "<%= username %>",
-    "license": "MIT",
     "bugs": {
 
         "url": "<%= github %>/issues"
     },
-    "homepage": "<%= github %>#readme",
+    "description": "<%= description %>",
     "devDependencies": {
 
         "uglifyjs-webpack-plugin": "1.0.1",
@@ -31,5 +15,27 @@
         "webpack-merge": "4.1.4",
         "webpack-notifier": "1.6.0",
         "webpack-obfuscator": "0.18.0"
-    }
+    },
+    "homepage": "<%= github %>#readme",
+    "keywords": [
+
+        "theatre",
+        "game",
+        "framework"
+    ],
+    "license": "MIT",
+    "main": "sources/index.js",
+    "name": "<%= title %>",
+    "repository": {
+
+        "type": "git",
+        "url": "git+<%= github %>.git"
+    },
+    "scripts": {
+
+        "build": "webpack --config webpack.production.js",
+        "start": "webpack-dev-server --config webpack.development.js",
+        "test": "echo \"Hello, friend.\" && exit 0"
+    },
+    "version": "0.1.0"
 }

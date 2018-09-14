@@ -16,6 +16,10 @@
     "homepage": "https://github.com/theatrejs/generator-theatre#readme",
     "keywords": [
 
+        "javascript",
+        "es6",
+        "game",
+        "framework",
         "yeoman-generator"
     ],
     "license": "MIT",
