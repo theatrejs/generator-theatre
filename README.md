@@ -3,7 +3,7 @@
 
 # generator-theatre
 
-> *[Theatre](https://github.com/theatrejs) is a javascript game framework.*
+> *[Theatre](https://github.com/theatrejs) is a lightweight, simple and fast javascript game framework.*
 
 ## Overview
 
