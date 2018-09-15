@@ -1,4 +1,5 @@
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
+[![NPM](https://img.shields.io/npm/v/generator-theatre.svg)](https://www.npmjs.com/package/generator-theatre)
 
 # generator-theatre
 
