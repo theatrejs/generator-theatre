@@ -2,13 +2,9 @@ import {Canvas} from 'core/canvas.js';
 import {Loop} from 'core/loop.js';
 import {preload} from 'core/preload.js';
 
-import {assets} from 'assets/index.js';
-
-import * as scenes from 'scenes/index.js';
-
 function Theatre(config) {
 
-    const {container, loading, opening, size} = config;
+    const {assets, container, scenes, size} = config;
 
     const expose = config.expose || false;
     const framerate = config.framerate || 60;
@@ -36,7 +32,7 @@ function Theatre(config) {
         this.delta.render = 0;
         this.delta.update = 0;
 
-        this.scene = this.scenes[loading];
+        this.scene = this.scenes.loading;
         this.scene.setup.call(this);
         this.scene.start.call(this);
 
@@ -81,14 +77,10 @@ function Theatre(config) {
                 this.assets[asset.type + 's'][asset.scope][asset.name] = asset.content;
             });
 
-            this.scene.destroy.call(this);
-
-            this.preloaded = true;
-
-            this.scene = this.scenes[opening];
-            this.scene.setup.call(this);
-            this.scene.start.call(this);
+            this.preloading = false;
         });
+
+        this.preloading = true;
     }
 
     function load(scene) {
@@ -101,9 +93,10 @@ function Theatre(config) {
         this.scene.start.call(this);
     }
 
-    this.preloaded = false;
+    this.preloading = false;
     this.scenes = scenes;
     this.size = size;
+    this.state = {};
     this.version = '0.7.0';
 
     this.load = load;

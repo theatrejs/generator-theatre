@@ -1,6 +1,8 @@
 function start() {
 
-    console.log('start loading scene' + ((this.preloaded === false) ? ' -> loading assets...' : ''));
+    console.log('start loading scene');
+
+    this.state.redirect = false;
 }
 
 export {start};
