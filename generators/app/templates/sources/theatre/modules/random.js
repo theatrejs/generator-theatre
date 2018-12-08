@@ -4,7 +4,7 @@ function random(items) {
     && items % 1 === 0
     && items > 0) {
 
-        return Math.floor(items * Math.random()) + 1;
+        return Math.floor(items * Math.random());
     }
 
     if (Array.isArray(items)
