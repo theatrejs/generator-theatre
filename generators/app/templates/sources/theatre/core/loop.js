@@ -1,9 +1,6 @@
-function Loop(framerate) {
-
-    const timeframe = 1000 / framerate;
+function Loop(framerate = 60, speed = 1) {
 
     let elapsedTime = 0;
-    let framed = false;
     let lastRender = null;
     let lastUpdate = null;
 
@@ -11,7 +8,7 @@ function Loop(framerate) {
 
         const currentRender = Date.now();
 
-        if (framed !== false) {
+        if (lastRender !== null) {
 
             handler(currentRender - lastRender);
         }
@@ -19,7 +16,6 @@ function Loop(framerate) {
         // call user's render handler on each available frame
         requestAnimationFrame(this.render.bind(this, handler));
 
-        framed = true;
         lastRender = currentRender;
     }
 
@@ -33,20 +29,23 @@ function Loop(framerate) {
             elapsedTime += currentUpdate - lastUpdate;
         }
 
-        // call user's update handler matching timeframe and fixing browser time handling
-        while (elapsedTime >= timeframe) {
+        // call user's update handler matching timeframe, speed and fixing browser time handling
+        while (elapsedTime >= 1000 / this.framerate / this.speed) {
 
-            // define elapsed time since last user's update handler matching timeframe
-            elapsedTime -= timeframe;
+            // define elapsed time since last user's update handler matching timeframe and speed
+            elapsedTime -= 1000 / this.framerate / this.speed;
 
-            handler(timeframe);
+            handler(1000 / this.framerate);
         }
 
-        // call user's update handler matching timeframe
-        setTimeout(this.update.bind(this, handler), timeframe);
-
         lastUpdate = currentUpdate;
+
+        // call update loop at least 60 times per second to quickly catch framerate or speed changes
+        setTimeout(this.update.bind(this, handler), 1000 / Math.max(this.framerate, 60));
     }
+
+    this.framerate = framerate;
+    this.speed = speed;
 
     this.render = render;
     this.update = update;

@@ -8,7 +8,6 @@ new Theatre({
     'assets': assets,
     'container': document.body,
     'expose': true,
-    'framerate': 60,
     'scenes': scenes,
     'sharp': true,
     'size': {
