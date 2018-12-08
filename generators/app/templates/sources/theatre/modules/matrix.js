@@ -25,19 +25,10 @@ function create(rows, columns, initialize = () => 1) {
 
 function hadamard(A, B) {
 
-    const matrix = [];
+    return map(A, (value, row, column) => {
 
-    for (let row = 0, rows = A.length; row < rows; row += 1) {
-
-        matrix[row] = [];
-
-        for (let column = 0, columns = A[0].length; column < columns; column += 1) {
-
-            matrix[row][column] = A[row][column] * B[row][column];
-        }
-    }
-
-    return matrix;
+        return A[row][column] * B[row][column];
+    });
 }
 
 function map(A, handler) {
@@ -106,7 +97,10 @@ function squash(A) {
 
 function subtract(A, B) {
 
-    return add(A, scale(B, -1));
+    return map(A, (value, row, column) => {
+
+        return A[row][column] - B[row][column];
+    });
 }
 
 function transpose(A) {
