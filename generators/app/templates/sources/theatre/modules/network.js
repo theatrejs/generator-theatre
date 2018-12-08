@@ -84,6 +84,21 @@ function Network(config) {
         this.biases = data.biases;
     }
 
+    function mutate(rate, handler) {
+
+        const weights = [];
+
+        for (let iterator = 0, length = network.length - 1; iterator < length; iterator += 1) {
+
+            weights[iterator] = matrix.map(this.weights[iterator], (weight) => {
+
+                return Math.random() >= 1 - rate ? handler(weight) : weight;
+            });
+        }
+
+        this.weights = weights;
+    }
+
     function predict(inputs) {
 
         layers = [inputs];
@@ -125,6 +140,7 @@ function Network(config) {
     this.weights = [];
 
     this.load = load;
+    this.mutate = mutate;
     this.predict = predict;
     this.save = save;
     this.train = train;
