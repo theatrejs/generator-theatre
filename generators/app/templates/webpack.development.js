@@ -1,12 +1,9 @@
+const merge = require('webpack-merge');
 const path = require('path');
 
-const merge = require('webpack-merge');
-const SourceMapDevToolPlugin = require('webpack').SourceMapDevToolPlugin;
 const WebpackNotifierPlugin = require('webpack-notifier');
 
-const common = require('./webpack.common.js');
-
-module.exports = merge(common, {
+module.exports = merge(require('./webpack.common.js'), {
 
     'devServer': {
 
@@ -20,9 +17,10 @@ module.exports = merge(common, {
         'port': 8888,
         'watchContentBase': true
     },
+    'devtool': 'inline-source-map',
+    'mode': 'development',
     'plugins': [
 
-        new SourceMapDevToolPlugin(),
         new WebpackNotifierPlugin()
     ]
 });
