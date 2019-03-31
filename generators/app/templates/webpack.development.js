@@ -1,5 +1,6 @@
 const merge = require('webpack-merge');
 const path = require('path');
+const webpack = require('webpack');
 
 const WebpackNotifierPlugin = require('webpack-notifier');
 
@@ -7,7 +8,9 @@ module.exports = merge(require('./webpack.common.js'), {
 
     'devServer': {
 
+        'clientLogLevel': 'warning',
         'contentBase': path.resolve(__dirname, 'docs/'),
+        'hot': true,
         'open': true,
         'overlay': {
 
@@ -21,6 +24,7 @@ module.exports = merge(require('./webpack.common.js'), {
     'mode': 'development',
     'plugins': [
 
+        new webpack.HotModuleReplacementPlugin(),
         new WebpackNotifierPlugin()
     ]
 });
