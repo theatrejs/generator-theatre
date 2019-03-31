@@ -17,9 +17,11 @@ function Entity(name, components) {
 
         for (let iterator = 0, length = components.length; iterator < length; iterator += 1) {
 
-            const component = components[iterator];
+            const search = components[iterator];
+            const component = search.replace('not:', '');
+            const exlude = search !== component;
 
-            if (this.components.hasOwnProperty(component) === false) {
+            if (this.components.hasOwnProperty(component) === exlude) {
 
                 return false;
             }
@@ -50,22 +52,6 @@ function Entity(name, components) {
     this.remove = remove;
 
     this.add(components)
-}
-
-function System(components, handler) {
-
-    function update(entities) {
-
-        entities.forEach((entity) => {
-
-            if (entity.has(components) === true) {
-
-                handler(entity);
-            }
-        });
-    }
-
-    this.update = update;
 }
 
 function World() {
@@ -100,11 +86,23 @@ function World() {
     this.remove = remove;
 }
 
+function system(entities, components, handler) {
+
+    entities.forEach((entity) => {
+
+        if (entity.has(components) === true) {
+
+            handler(entity);
+        }
+    });
+}
+
 export {
 
     // exports current module as an object
     World,
 
     // exports helpers for current module
-    Entity, System
+    Entity,
+    system
 };
