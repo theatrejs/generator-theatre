@@ -54,7 +54,7 @@ function Entity(name, components) {
     this.add(components)
 }
 
-function World() {
+function World(context) {
 
     function add(entity) {
 
@@ -79,22 +79,23 @@ function World() {
         this.entities.splice(this.entities.indexOf(entity), 1);
     }
 
+    function system(components, handler, entities = this.entities) {
+
+        entities.forEach((entity) => {
+
+            if (entity.has(components) === true) {
+
+                handler.call(context, entity);
+            }
+        });
+    }
+
     this.entities = [];
 
     this.add = add;
     this.get = get;
     this.remove = remove;
-}
-
-function system(entities, components, handler) {
-
-    entities.forEach((entity) => {
-
-        if (entity.has(components) === true) {
-
-            handler(entity);
-        }
-    });
+    this.system = system;
 }
 
 export {
@@ -103,6 +104,5 @@ export {
     World,
 
     // exports helpers for current module
-    Entity,
-    system
+    Entity
 };
