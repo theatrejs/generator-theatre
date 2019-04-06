@@ -20,7 +20,7 @@ module.exports = class extends Generator {
         this.fs.copyTpl(
 
             this.templatePath('./**/*'),
-            this.destinationRoot(this.answers.title),
+            this.destinationRoot('sources/game/scenes/' + this.answers.title),
             {
                 'title': this.answers.title
             }

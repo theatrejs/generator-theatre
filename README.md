@@ -39,13 +39,13 @@ $ yo theatre
 
 #### Generate a scene
 
-Go to the `scenes` folder :
+Go to the root folder :
 
 ```
-$ cd sources/game/scenes/
+$ cd <your-game>
 ```
 
-Then generate your new scene in this new folder :
+Then generate your new scene from the root folder :
 
 ```
 $ yo theatre:scene
