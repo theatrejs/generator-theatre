@@ -2,6 +2,7 @@ function Canvas(type, identifier, width, height) {
 
     const element = document.createElement('canvas');
     const context = element.getContext(type);
+    const ratio = window.devicePixelRatio || 1;
 
     function sharp() {
 
@@ -13,8 +14,13 @@ function Canvas(type, identifier, width, height) {
     }
 
     element.setAttribute('id', identifier);
-    element.setAttribute('height', height);
-    element.setAttribute('width', width);
+    element.setAttribute('height', ratio * height);
+    element.setAttribute('width', ratio * width);
+
+    element.style.height = height + 'px';
+    element.style.width = width + 'px';
+
+    context.scale(ratio, ratio);
 
     this.context = context;
     this.element = element;
