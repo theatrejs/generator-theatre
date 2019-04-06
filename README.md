@@ -51,6 +51,20 @@ Then generate your new scene from the root folder :
 $ yo theatre:scene
 ```
 
+#### Generate an `Entity-Component-System` tree structure
+
+Go to the root folder :
+
+```
+$ cd <your-game>
+```
+
+Then generate your `ECS` tree structure :
+
+```
+$ yo theatre:ecs
+```
+
 ## [Change Log](./CHANGELOG.md)
 
 ## [License](./LICENSE)
