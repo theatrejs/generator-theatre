@@ -111,7 +111,7 @@ function Theatre(config) {
     this.scenes = scenes;
     this.size = size;
     this.state = {};
-    this.version = '0.16.0';
+    this.version = '0.17.0';
 
     this.load = load;
     this.restart = restart;
