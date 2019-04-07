@@ -11,7 +11,7 @@ function preload(assets, handler) {
             // if current asset is a dataset then preload it
             if (asset.type === 'dataset') {
 
-                asset.content = asset.source;
+                asset.getter = () => asset.source;
 
                 resolve(asset);
             }
@@ -26,7 +26,7 @@ function preload(assets, handler) {
                 // when current image is loaded then resolve current promise
                 image.onload = function () {
 
-                    asset.content = image;
+                    asset.getter = () => image;
 
                     resolve(asset);
                 };
@@ -40,7 +40,7 @@ function preload(assets, handler) {
                 // when current sound is loaded then resolve current promise
                 sound.oncanplaythrough = function () {
 
-                    asset.content = sound;
+                    asset.getter = () => sound.cloneNode();
 
                     resolve(asset);
                 };
