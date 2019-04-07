@@ -25,7 +25,7 @@ module.exports = {
                 ]
             },
             {
-                'test': /\.ogg|\.png|\.wav$/,
+                'test': /\.mp3|\.png$/,
                 'use': [
 
                     {

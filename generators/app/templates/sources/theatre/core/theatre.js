@@ -87,7 +87,7 @@ function Theatre(config) {
                     this.assets[asset.type + 's'][asset.scope] = {};
                 }
 
-                this.assets[asset.type + 's'][asset.scope][asset.name] = asset.content;
+                this.assets[asset.type + 's'][asset.scope][asset.name] = asset.getter;
             });
 
             this.preloading = false;
