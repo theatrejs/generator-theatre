@@ -20,12 +20,23 @@ function images(entity) {
             }
         }
 
-        this.context.drawImage(
+        this.camera.add({
 
-            source,
-            size[0] * frames[image.frame][0], size[1] * frames[image.frame][1], size[0], size[1],
-            positionComponent.x + shift[0], positionComponent.y + shift[1], size[0], size[1]
-        );
+            'source': source,
+            'frame': {
+
+                'x': size[0] *frames[image.frame][0],
+                'y': size[1] *frames[image.frame][1],
+                'width': size[0],
+                'height': size[1]
+            },
+            'position': {
+
+                'x': positionComponent.x + shift[0],
+                'y': positionComponent.y + shift[1],
+                'z': positionComponent.z + shift[2]
+            }
+        });
     });
 }
 

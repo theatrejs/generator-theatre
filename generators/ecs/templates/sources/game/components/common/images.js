@@ -11,7 +11,7 @@ function Images(parts) {
         image.source = source;
 
         image.size = size || [32, 32];
-        image.shift = shift || [0, 0];
+        image.shift = shift || [0, 0, 0];
         image.frames = frames || [[0, 0]];
         image.frame = frame || 0;
         image.framerate = framerate || 8;
