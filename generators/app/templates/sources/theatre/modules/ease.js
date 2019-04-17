@@ -78,6 +78,12 @@ function easeOutQuart(x) {
     return easeOut(4)(x);
 }
 
+function reverse(handler) {
+
+    // reversing easing function
+    return (x) => handler(1 - x);
+}
+
 // exports current module as functions
 export {
 
@@ -91,5 +97,8 @@ export {
     easeInOutCubic, easeInOutQuad, easeInOutQuart,
 
     // export ease-out functions
-    easeOutCubic, easeOutQuad, easeOutQuart
+    easeOutCubic, easeOutQuad, easeOutQuart,
+
+    // export utility functions
+    reverse
 };
