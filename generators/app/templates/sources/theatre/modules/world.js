@@ -15,13 +15,18 @@ function Entity(name, components) {
 
     function has(components) {
 
+        if (typeof components === 'string') {
+
+            components = [components];
+        }
+
         for (let iterator = 0, length = components.length; iterator < length; iterator += 1) {
 
             const search = components[iterator];
             const component = search.replace('not:', '');
-            const exlude = search !== component;
+            const exclude = search !== component;
 
-            if (this.components.hasOwnProperty(component) === exlude) {
+            if (this.components.hasOwnProperty(component) === exclude) {
 
                 return false;
             }
