@@ -1,6 +1,3 @@
-import {collide} from './collide.js';
-import {Rectangle} from './shape.js';
-
 function Camera(context, width, height) {
 
     let images = [];
@@ -42,16 +39,34 @@ function Camera(context, width, height) {
         images.splice(target, 0, image);
     }
 
-    function draw() {
+    function idle() {
+
+        shaking = {
+
+            'current': false,
+            'duration': 0,
+            'easing': null,
+            'elapsed': 0,
+            'force': {
+
+                'x': 0,
+                'y': 0
+            },
+            'shift': {
+
+                'x': 0,
+                'y': 0
+            }
+        };
+    }
+
+    function render() {
 
         images.forEach((image) => {
 
             const {frame, position, source} = image;
 
-            const imageBox = new Rectangle(position.x, position.y, frame.width, frame.height);
-            const cameraBox = new Rectangle(this.position.x + shaking.shift.x, this.position.y + shaking.shift.y, this.size.width, this.size.height);
-
-            if (collide(imageBox, cameraBox) === true) {
+            if (this.visible(position.x, position.y, frame.width, frame.height) === true) {
 
                 context.drawImage(
 
@@ -63,12 +78,6 @@ function Camera(context, width, height) {
         });
 
         images = [];
-    }
-
-    function move(x, y) {
-
-        this.position.x += x;
-        this.position.y += y;
     }
 
     function set(x, y) {
@@ -101,23 +110,7 @@ function Camera(context, width, height) {
 
         if (shaking.elapsed + delta >= shaking.duration) {
 
-            shaking = {
-
-                'current': false,
-                'duration': 0,
-                'easing': null,
-                'elapsed': 0,
-                'force': {
-
-                    'x': 0,
-                    'y': 0
-                },
-                'shift': {
-
-                    'x': 0,
-                    'y': 0
-                }
-            };
+            this.idle();
 
             return;
         }
@@ -129,6 +122,27 @@ function Camera(context, width, height) {
 
         shaking.shift.x = Math.round(Math.cos(angle) * shaking.force.x * amplitude);
         shaking.shift.y = Math.round(Math.sin(angle) * shaking.force.y * amplitude);
+    }
+
+    function visible(x, y, width, height) {
+
+        const camera = {
+
+            'x': this.position.x + shaking.shift.x,
+            'y': this.position.y + shaking.shift.y,
+            'width': this.size.width,
+            'height': this.size.height
+        };
+
+        if (x + width <= camera.x
+        || x >= camera.x + camera.width
+        || y + height <= camera.y
+        || y >= camera.y + camera.height) {
+
+            return false;
+        }
+
+        return true;
     }
 
     this.position = {
@@ -144,11 +158,12 @@ function Camera(context, width, height) {
     };
 
     this.add = add;
-    this.draw = draw;
-    this.move = move;
+    this.idle = idle;
+    this.render = render;
     this.set = set;
     this.shake = shake;
     this.update = update;
+    this.visible = visible;
 }
 
 // exports current module as an object

@@ -1,5 +1,7 @@
+import {Camera} from 'core/camera.js';
 import {Canvas} from 'core/canvas.js';
 import {Loop} from 'core/loop.js';
+
 import {preload} from 'core/preload.js';
 
 function Theatre(config) {
@@ -16,7 +18,8 @@ function Theatre(config) {
 
     function initialize() {
 
-        const canvas = new Canvas('2d', 'theatre', size.width, size.height);
+        const canvas = new Canvas('2d', 'theatre', this.size.width, this.size.height);
+        const camera = new Camera(canvas.context, this.size.width, this.size.height);
 
         if (sharp === true) {
 
@@ -28,6 +31,7 @@ function Theatre(config) {
         this.container = container;
         this.context = canvas.context;
         this.element = canvas.element;
+        this.camera = camera;
 
         this.assets = {};
         this.delta = {};
@@ -44,6 +48,7 @@ function Theatre(config) {
 
             this.delta.update = timeframe;
             this.scene.update.call(this);
+            this.camera.update(timeframe);
 
             if (restarting === true) {
 
@@ -71,6 +76,7 @@ function Theatre(config) {
 
             this.delta.render = timeframe;
             this.scene.render.call(this);
+            this.camera.render();
         });
 
         preload(assets, (assets) => {
