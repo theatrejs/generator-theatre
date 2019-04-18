@@ -25,8 +25,8 @@ function images(entity) {
             'source': source,
             'frame': {
 
-                'x': size[0] *frames[image.frame][0],
-                'y': size[1] *frames[image.frame][1],
+                'x': size[0] * frames[image.frame][0],
+                'y': size[1] * frames[image.frame][1],
                 'width': size[0],
                 'height': size[1]
             },
