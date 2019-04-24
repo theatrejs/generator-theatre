@@ -28,7 +28,7 @@ function Camera(context, width, height) {
 
             const current = images[iterator];
 
-            if (image.position.z >= current.position.z) {
+            if (image.destination.z >= current.destination.z) {
 
                 target = iterator + 1;
 
@@ -64,15 +64,15 @@ function Camera(context, width, height) {
 
         images.forEach((image) => {
 
-            const {frame, position, source} = image;
+            const {destination, frame, source} = image;
 
-            if (this.visible(position.x, position.y, frame.width, frame.height) === true) {
+            if (this.visible(destination.x, destination.y, frame.width, frame.height) === true) {
 
                 context.drawImage(
 
                     source,
                     frame.x, frame.y, frame.width, frame.height,
-                    position.x - (this.position.x + shaking.shift.x), position.y - (this.position.y + shaking.shift.y), frame.width, frame.height
+                    destination.x - (this.position.x + shaking.shift.x), destination.y - (this.position.y + shaking.shift.y), destination.width, destination.height
                 );
             }
         });

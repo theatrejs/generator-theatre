@@ -6,15 +6,14 @@ function Images(parts) {
 
     this.parts.forEach((image) => {
 
-        const {frame, framerate, frames, shift, size, source} = image;
+        const {destination, frame, framerate, frames, source} = image;
 
         image.source = source;
 
-        image.size = size || [32, 32];
-        image.shift = shift || [0, 0, 0];
-        image.frames = frames || [[0, 0]];
+        image.frames = frames || [[0, 0, 32, 32]];
         image.frame = frame || 0;
         image.framerate = framerate || 8;
+        image.destination = destination || [0, 0, 0, 32, 32];
 
         image.elapsed = 0;
     });

@@ -5,7 +5,7 @@ function images(entity) {
 
     imagesComponent.parts.forEach((image) => {
 
-        const {frame, framerate, frames, shift, size, source} = image;
+        const {destination, frame, framerate, frames, source} = image;
 
         if (frames.length > 1) {
 
@@ -25,16 +25,18 @@ function images(entity) {
             'source': source,
             'frame': {
 
-                'x': size[0] * frames[image.frame][0],
-                'y': size[1] * frames[image.frame][1],
-                'width': size[0],
-                'height': size[1]
+                'x': frames[image.frame][2] * frames[image.frame][0],
+                'y': frames[image.frame][3] * frames[image.frame][1],
+                'width': frames[image.frame][2],
+                'height': frames[image.frame][3]
             },
-            'position': {
+            'destination': {
 
-                'x': positionComponent.x + shift[0],
-                'y': positionComponent.y + shift[1],
-                'z': positionComponent.z + shift[2]
+                'x': positionComponent.x + destination[0],
+                'y': positionComponent.y + destination[1],
+                'z': positionComponent.z + destination[2],
+                'width': destination[3],
+                'height': destination[4]
             }
         });
     });
