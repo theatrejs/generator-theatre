@@ -1,4 +1,6 @@
-function Force(x, y, duration, easing, ending = false) {
+import * as Ease from 'modules/ease.js';
+
+function Force(x, y, duration, easing = Ease.linear(1), ending = false) {
 
     this.name = 'force';
 
