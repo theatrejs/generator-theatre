@@ -1,3 +1,5 @@
+import * as Ease from './ease.js';
+
 function Camera(context, width, height) {
 
     let images = [];
@@ -86,9 +88,9 @@ function Camera(context, width, height) {
         this.position.y = y;
     }
 
-    function shake(force, duration, easing) {
+    function shake(x, y, duration, easing = Ease.reverse(Ease.easeOut(2))) {
 
-        const {x, y} = force;
+        this.idle();
 
         shaking.force = {
 
