@@ -1,5 +1,6 @@
 function images(entity) {
 
+    const cameraComponent = entity.get('camera');
     const imagesComponent = entity.get('images');
     const positionComponent = entity.get('position');
 
@@ -20,7 +21,7 @@ function images(entity) {
             }
         }
 
-        this.camera.add({
+        cameraComponent.camera.add({
 
             'source': source,
             'frame': {

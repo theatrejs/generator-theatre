@@ -3,8 +3,9 @@ function force(entity) {
     const forceComponent = entity.get('force');
     const positionComponent = entity.get('position');
 
+    const limited = typeof forceComponent.ending === 'function';
     const remaining = forceComponent.duration - forceComponent.elapsed;
-    const delta = this.delta.update > remaining ? remaining : this.delta.update;
+    const delta = (limited === true && this.delta.update > remaining) ? remaining : this.delta.update;
 
     const progress = (forceComponent.elapsed + delta) / forceComponent.duration;
 
@@ -20,7 +21,8 @@ function force(entity) {
 
     forceComponent.elapsed += delta;
 
-    if (forceComponent.elapsed >= forceComponent.duration) {
+    if (limited === true
+    && forceComponent.elapsed >= forceComponent.duration) {
 
         forceComponent.ending(entity, this.delta.update - delta);
     }

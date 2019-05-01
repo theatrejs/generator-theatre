@@ -1,4 +1,4 @@
-function Force(x, y, duration, easing, ending = () => {}) {
+function Force(x, y, duration, easing, ending = false) {
 
     this.name = 'force';
 
