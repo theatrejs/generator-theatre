@@ -6,7 +6,7 @@ function images(entity) {
 
     imagesComponent.parts.forEach((image) => {
 
-        const {destination, frame, framerate, frames, source} = image;
+        const {destination, frame, framerate, frames, opacity, source} = image;
 
         if (frames.length > 1) {
 
@@ -38,7 +38,8 @@ function images(entity) {
                 'z': positionComponent.z + destination[2],
                 'width': destination[3],
                 'height': destination[4]
-            }
+            },
+            'opacity': cameraComponent.opacity * opacity
         });
     });
 }

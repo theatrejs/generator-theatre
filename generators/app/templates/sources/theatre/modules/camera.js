@@ -66,9 +66,14 @@ function Camera(context, width, height) {
 
         images.forEach((image) => {
 
-            const {destination, frame, source} = image;
+            const {destination, frame, opacity, source} = image;
 
-            if (this.visible(destination.x, destination.y, frame.width, frame.height) === true) {
+            if (opacity > 0
+            && this.visible(destination.x, destination.y, frame.width, frame.height) === true) {
+
+                const alpha = context.globalAlpha;
+
+                context.globalAlpha = opacity;
 
                 context.drawImage(
 
@@ -76,6 +81,8 @@ function Camera(context, width, height) {
                     frame.x, frame.y, frame.width, frame.height,
                     destination.x - (this.position.x + shaking.shift.x), destination.y - (this.position.y + shaking.shift.y), destination.width, destination.height
                 );
+
+                context.globalAlpha = alpha;
             }
         });
 
