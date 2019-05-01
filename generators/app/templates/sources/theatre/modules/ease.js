@@ -24,6 +24,12 @@ function easeOut(power) {
     return (x) => 1 - easeIn(power)(1 - x);
 }
 
+function linear(factor) {
+
+    // linear progression
+    return (x) => x * factor;
+}
+
 function easeInQuad(x) {
 
     // accelerating from zero velocity
@@ -88,7 +94,7 @@ function reverse(handler) {
 export {
 
     // export ease function creators
-    easeIn, easeInOut, easeOut,
+    easeIn, easeInOut, easeOut, linear,
 
     // export ease-in functions
     easeInCubic, easeInQuad, easeInQuart,
