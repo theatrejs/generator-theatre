@@ -2,6 +2,11 @@ function Entity(name, components) {
 
     function add(components) {
 
+        if (Array.isArray(components) === false) {
+
+            components = [components];
+        }
+
         components.forEach((component) => {
 
             this.components[component.name] = component;
@@ -15,7 +20,7 @@ function Entity(name, components) {
 
     function has(components) {
 
-        if (typeof components === 'string') {
+        if (Array.isArray(components) === false) {
 
             components = [components];
         }
@@ -37,6 +42,11 @@ function Entity(name, components) {
 
     function remove(components) {
 
+        if (Array.isArray(components) === false) {
+
+            components = [components];
+        }
+
         for (let iterator = 0, length = components.length; iterator < length; iterator += 1) {
 
             const component = components[iterator];
@@ -56,46 +66,61 @@ function Entity(name, components) {
     this.has = has;
     this.remove = remove;
 
-    this.add(components)
+    this.add(components);
 }
 
 function World(context) {
 
-    function add(entity) {
+    function add(entities) {
 
-        this.entities.push(entity);
+        if (Array.isArray(entities) === false) {
+
+            entities = [entities];
+        }
+
+        entities.forEach((entity) => {
+
+            this.entities[entity.name] = entity;
+        });
     }
 
     function get(entity) {
 
-        for (let iterator = 0, length = this.entities.length; iterator < length; iterator += 1) {
+        return this.entities[entity];
+    }
 
-            const current = this.entities[iterator];
+    function remove(entities) {
 
-            if (current.name === entity) {
+        if (Array.isArray(entities) === false) {
 
-                return current;
+            entities = [entities];
+        }
+
+        for (let iterator = 0, length = entities.length; iterator < length; iterator += 1) {
+
+            const entity = entities[iterator];
+            const key = entity.name || entity;
+
+            if (this.entities.hasOwnProperty(key) === true) {
+
+                delete this.entities[key];
             }
         }
     }
 
-    function remove(entity) {
-
-        this.entities.splice(this.entities.indexOf(entity), 1);
-    }
-
     function system(components, handler, entities = this.entities) {
 
-        entities.forEach((entity) => {
+        for (const key in entities) {
 
-            if (entity.has(components) === true) {
+            if (entities.hasOwnProperty(key) === true
+            && entities[key].has(components) === true) {
 
-                handler.call(context, entity);
+                handler.call(context, entities[key]);
             }
-        });
+        }
     }
 
-    this.entities = [];
+    this.entities = {};
 
     this.add = add;
     this.get = get;
