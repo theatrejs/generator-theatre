@@ -9,7 +9,7 @@ module.exports = merge(require('./webpack.common.js'), {
     'devServer': {
 
         'clientLogLevel': 'warning',
-        'contentBase': path.resolve(__dirname, 'docs/'),
+        'contentBase': path.resolve(__dirname, 'dist/'),
         'hot': true,
         'open': true,
         'overlay': {

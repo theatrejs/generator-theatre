@@ -1,0 +1,5 @@
+{
+    "author": "<%= username %>",
+    "license": "MIT",
+    "main": "electron.js"
+}
