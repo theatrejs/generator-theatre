@@ -110,14 +110,17 @@ function World(context) {
 
     function system(components, handler, entities = this.entities) {
 
-        for (const key in entities) {
+        const chosen = {};
 
-            if (entities.hasOwnProperty(key) === true
-            && entities[key].has(components) === true) {
+        Object.entries(entities).forEach(([name, entity]) => {
 
-                handler.call(context, entities[key]);
+            if (entity.has(components) === true) {
+
+                chosen[name] = entity;
             }
-        }
+        });
+
+        handler.call(context, chosen);
     }
 
     this.entities = {};
