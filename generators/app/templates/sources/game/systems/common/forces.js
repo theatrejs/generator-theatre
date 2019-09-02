@@ -1,42 +1,45 @@
-function forces(entity) {
+function forces(entities) {
 
-    const forcesComponent = entity.get('forces');
-    const positionComponent = entity.get('position');
+    Object.entries(entities).forEach(([name, entity]) => {
 
-    forcesComponent.parts.forEach((force) => {
+        const forcesComponent = entity.get('forces');
+        const positionComponent = entity.get('position');
 
-        const unlimited = force.ending === false;
-        const remaining = force.duration - force.elapsed;
-        const delta = (unlimited === false && this.delta.update > remaining) ? remaining : this.delta.update;
+        forcesComponent.parts.forEach((force) => {
 
-        const progress = (force.elapsed + delta) / force.duration;
+            const unlimited = force.ending === false;
+            const remaining = force.duration - force.elapsed;
+            const delta = (unlimited === false && this.delta.update > remaining) ? remaining : this.delta.update;
 
-        const moved = {
+            const progress = (force.elapsed + delta) / force.duration;
 
-            'x': force.x * force.easing(progress),
-            'y': force.y * force.easing(progress)
-        };
+            const moved = {
 
-        positionComponent.x += moved.x - force.moved.x;
-        positionComponent.y += moved.y - force.moved.y;
-        force.moved = moved;
+                'x': force.x * force.easing(progress),
+                'y': force.y * force.easing(progress)
+            };
 
-        force.elapsed += this.delta.update;
-    });
+            positionComponent.x += moved.x - force.moved.x;
+            positionComponent.y += moved.y - force.moved.y;
+            force.moved = moved;
 
-    forcesComponent.parts.forEach((force) => {
+            force.elapsed += this.delta.update;
+        });
 
-        if (force.elapsed >= force.duration
-        && typeof force.ending === 'function') {
+        forcesComponent.parts.forEach((force) => {
 
-            force.ending(entity, force.elapsed - force.duration);
-        }
-    });
+            if (force.elapsed >= force.duration
+            && typeof force.ending === 'function') {
 
-    forcesComponent.parts = forcesComponent.parts.filter((force) => {
+                force.ending(entity, force.elapsed - force.duration);
+            }
+        });
 
-        return (force.elapsed <= force.duration
-        || force.ending === false);
+        forcesComponent.parts = forcesComponent.parts.filter((force) => {
+
+            return (force.elapsed <= force.duration
+            || force.ending === false);
+        });
     });
 }
 

@@ -1,45 +1,48 @@
-function images(entity) {
+function images(entities) {
 
-    const cameraComponent = entity.get('camera');
-    const imagesComponent = entity.get('images');
-    const positionComponent = entity.get('position');
+    Object.entries(entities).forEach(([name, entity]) => {
 
-    imagesComponent.parts.forEach((image) => {
+        const cameraComponent = entity.get('camera');
+        const imagesComponent = entity.get('images');
+        const positionComponent = entity.get('position');
 
-        const {destination, frame, framerate, frames, opacity, source} = image;
+        imagesComponent.parts.forEach((image) => {
 
-        if (frames.length > 1) {
+            const {destination, frame, framerate, frames, opacity, source} = image;
 
-            image.elapsed += this.delta.render;
+            if (frames.length > 1) {
 
-            const duration = 1000 / framerate;
+                image.elapsed += this.delta.render;
 
-            while (image.elapsed >= duration) {
+                const duration = 1000 / framerate;
 
-                image.elapsed -= duration;
-                image.frame = (frame === frames.length - 1) ? 0 : frame + 1;
+                while (image.elapsed >= duration) {
+
+                    image.elapsed -= duration;
+                    image.frame = (frame === frames.length - 1) ? 0 : frame + 1;
+                }
             }
-        }
 
-        cameraComponent.camera.add({
+            cameraComponent.camera.add({
 
-            'source': source,
-            'frame': {
+                'source': source,
+                'frame': {
 
-                'x': frames[image.frame][2] * frames[image.frame][0],
-                'y': frames[image.frame][3] * frames[image.frame][1],
-                'width': frames[image.frame][2],
-                'height': frames[image.frame][3]
-            },
-            'destination': {
+                    'x': frames[image.frame][2] * frames[image.frame][0],
+                    'y': frames[image.frame][3] * frames[image.frame][1],
+                    'width': frames[image.frame][2],
+                    'height': frames[image.frame][3]
+                },
+                'destination': {
 
-                'x': positionComponent.x + destination[0],
-                'y': positionComponent.y + destination[1],
-                'z': positionComponent.z + destination[2],
-                'width': destination[3],
-                'height': destination[4]
-            },
-            'opacity': cameraComponent.opacity * opacity
+                    'x': positionComponent.x + destination[0],
+                    'y': positionComponent.y + destination[1],
+                    'z': positionComponent.z + destination[2],
+                    'width': destination[3],
+                    'height': destination[4]
+                },
+                'opacity': cameraComponent.opacity * opacity
+            });
         });
     });
 }

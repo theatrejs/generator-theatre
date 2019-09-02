@@ -1,29 +1,32 @@
-function fade(entity) {
+function fade(entities) {
 
-    const cameraComponent = entity.get('camera');
-    const fadeComponent = entity.get('fade');
+    Object.entries(entities).forEach(([name, entity]) => {
 
-    if (fadeComponent.fade === null) {
+        const cameraComponent = entity.get('camera');
+        const fadeComponent = entity.get('fade');
 
-        fadeComponent.fade = fadeComponent.opacity - cameraComponent.opacity;
-    }
+        if (fadeComponent.fade === null) {
 
-    const remaining = fadeComponent.duration - fadeComponent.elapsed;
-    const delta = this.delta.render > remaining ? remaining : this.delta.render;
+            fadeComponent.fade = fadeComponent.opacity - cameraComponent.opacity;
+        }
 
-    const progress = (fadeComponent.elapsed + delta) / fadeComponent.duration;
-    const faded = fadeComponent.fade * fadeComponent.easing(progress);
+        const remaining = fadeComponent.duration - fadeComponent.elapsed;
+        const delta = this.delta.render > remaining ? remaining : this.delta.render;
 
-    cameraComponent.opacity += faded - fadeComponent.faded;
-    fadeComponent.faded = faded;
+        const progress = (fadeComponent.elapsed + delta) / fadeComponent.duration;
+        const faded = fadeComponent.fade * fadeComponent.easing(progress);
 
-    fadeComponent.elapsed += delta;
+        cameraComponent.opacity += faded - fadeComponent.faded;
+        fadeComponent.faded = faded;
 
-    if (fadeComponent.elapsed >= fadeComponent.duration
-    && typeof fadeComponent.ending === 'function') {
+        fadeComponent.elapsed += delta;
 
-        fadeComponent.ending(entity, this.delta.render - delta);
-    }
+        if (fadeComponent.elapsed >= fadeComponent.duration
+        && typeof fadeComponent.ending === 'function') {
+
+            fadeComponent.ending(entity, this.delta.render - delta);
+        }
+    });
 }
 
 export {fade};
