@@ -5,6 +5,8 @@ function forces(entities) {
         const forcesComponent = entity.get('forces');
         const positionComponent = entity.get('position');
 
+        const trashes = [];
+
         forcesComponent.parts.forEach((force) => {
 
             const unlimited = force.ending === false;
@@ -24,21 +26,29 @@ function forces(entities) {
             force.moved = moved;
 
             force.elapsed += this.delta.update;
-        });
 
-        forcesComponent.parts.forEach((force) => {
+            if (typeof force.handling === 'function') {
+
+                const remove = () => {
+
+                    trashes.push(force);
+                };
+
+                force.handling(entity, force.moved.x, force.moved.y, force.elapsed, remove);
+            }
 
             if (force.elapsed >= force.duration
-            && typeof force.ending === 'function') {
+            && typeof force.ending === 'function'
+            && trashes.indexOf(force) === -1) {
 
-                force.ending(entity, force.elapsed - force.duration);
+                force.ending(entity, force.moved.x, force.moved.y, force.elapsed);
+                trashes.push(force);
             }
         });
 
         forcesComponent.parts = forcesComponent.parts.filter((force) => {
 
-            return (force.elapsed <= force.duration
-            || force.ending === false);
+            return trashes.indexOf(force) === -1;
         });
     });
 }

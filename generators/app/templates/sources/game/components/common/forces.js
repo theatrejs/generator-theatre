@@ -6,7 +6,7 @@ function Forces(parts) {
 
     function add(force) {
 
-        const {easing, elapsed, ending, duration, x, y} = force;
+        const {easing, elapsed, ending, handling, duration, x, y} = force;
 
         force.x = x;
         force.y = y;
@@ -14,6 +14,7 @@ function Forces(parts) {
         force.easing = easing || Ease.linear(1);
         force.elapsed = elapsed || 0;
         force.ending = ending || false;
+        force.handling = handling || false;
 
         force.moved = {
 
