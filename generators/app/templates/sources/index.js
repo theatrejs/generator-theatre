@@ -9,10 +9,5 @@ new Theatre({
     'container': document.body,
     'expose': true,
     'scenes': scenes,
-    'sharp': true,
-    'size': {
-
-        'width': 320,
-        'height': 288
-    }
+    'sharp': true
 });

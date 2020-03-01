@@ -5,12 +5,18 @@ import {preload} from 'core/preload.js';
 
 function Theatre(config) {
 
-    const {assets, container, scenes, size} = config;
+    const {assets, container, scenes} = config;
 
     const expose = config.expose || false;
     const framerate = config.framerate || 60;
     const sharp = config.sharp || false;
     const speed = config.speed || 1;
+
+    const size = {
+
+        'height' : container.offsetHeight,
+        'width' : container.offsetWidth
+    };
 
     let loading = null;
     let restarting = false;
@@ -71,6 +77,23 @@ function Theatre(config) {
         loop.render((timeframe) => {
 
             this.delta.render = timeframe;
+
+            if (container.offsetWidth !== this.size.width
+            || container.offsetHeight !== this.size.height) {
+
+                this.size.width = container.offsetWidth;
+                this.size.height = container.offsetHeight;
+
+                canvas.resize(this.size.width, this.size.height);
+
+                if (sharp === true) {
+
+                    canvas.sharp();
+                }
+
+                this.scene.resize.call(this);
+            }
+
             this.scene.render.call(this);
         });
 
