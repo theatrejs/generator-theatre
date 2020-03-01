@@ -5,6 +5,7 @@ function images(entities) {
         const cameraComponent = entity.get('camera');
         const imagesComponent = entity.get('images');
         const positionComponent = entity.get('position');
+        const zoneComponent = entity.get('zone');
 
         imagesComponent.parts.forEach((image) => {
 
@@ -35,9 +36,9 @@ function images(entities) {
                 },
                 'destination': {
 
-                    'x': positionComponent.x + destination[0],
-                    'y': positionComponent.y + destination[1],
-                    'z': positionComponent.z + destination[2],
+                    'x': positionComponent.x + destination[0] + zoneComponent.frame.x,
+                    'y': positionComponent.y + destination[1] + zoneComponent.frame.y,
+                    'z': positionComponent.z + destination[2] + zoneComponent.frame.z,
                     'width': destination[3],
                     'height': destination[4]
                 },
