@@ -69,7 +69,7 @@ function Camera(context, width, height) {
             const {destination, frame, opacity, source} = image;
 
             if (opacity > 0
-            && this.visible(destination.x, destination.y, frame.width, frame.height) === true) {
+            && this.visible(destination.x, destination.y, destination.width, destination.height) === true) {
 
                 const alpha = context.globalAlpha;
 
