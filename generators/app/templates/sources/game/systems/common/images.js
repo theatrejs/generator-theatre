@@ -50,11 +50,11 @@ function images(entities) {
                 },
                 'destination': {
 
-                    'x': positionComponent.x + destination[0] + zoneComponent.frame.x,
-                    'y': positionComponent.y + destination[1] + zoneComponent.frame.y,
+                    'x': (positionComponent.x + destination[0]) * zoneComponent.frame.scale + zoneComponent.frame.x,
+                    'y': (positionComponent.y + destination[1]) * zoneComponent.frame.scale + zoneComponent.frame.y,
                     'z': positionComponent.z + destination[2] + zoneComponent.frame.z,
-                    'width': destination[3],
-                    'height': destination[4]
+                    'width': (destination[3] * zoneComponent.frame.scale),
+                    'height': (destination[4] * zoneComponent.frame.scale)
                 },
                 'opacity': cameraComponent.opacity * opacity
             });
