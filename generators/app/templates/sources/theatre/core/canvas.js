@@ -1,10 +1,16 @@
-function Canvas(type, identifier, width, height) {
+function Canvas(type, identifier, width, height, pixelated = false) {
 
     const element = document.createElement('canvas');
     const context = element.getContext(type);
-    const ratio = window.devicePixelRatio || 1;
 
     function resize(width, height) {
+
+        let ratio = window.devicePixelRatio || 1;
+
+        if (pixelated === true) {
+
+            ratio = Math.floor(ratio);
+        }
 
         element.setAttribute('height', ratio * height);
         element.setAttribute('width', ratio * width);
@@ -13,6 +19,11 @@ function Canvas(type, identifier, width, height) {
         element.style.width = width + 'px';
 
         context.scale(ratio, ratio);
+
+        if (pixelated === true) {
+
+            sharp();
+        }
     }
 
     function sharp() {
@@ -31,7 +42,6 @@ function Canvas(type, identifier, width, height) {
     this.context = context;
     this.element = element;
     this.resize = resize;
-    this.sharp = sharp;
 }
 
 // exports current module as an object

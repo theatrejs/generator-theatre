@@ -23,12 +23,7 @@ function Theatre(config) {
 
     function initialize() {
 
-        const canvas = new Canvas('2d', 'theatre', this.size.width, this.size.height);
-
-        if (sharp === true) {
-
-            canvas.sharp();
-        }
+        const canvas = new Canvas('2d', 'theatre', this.size.width, this.size.height, sharp);
 
         container.appendChild(canvas.element);
 
@@ -85,11 +80,6 @@ function Theatre(config) {
                 this.size.height = container.offsetHeight;
 
                 canvas.resize(this.size.width, this.size.height);
-
-                if (sharp === true) {
-
-                    canvas.sharp();
-                }
 
                 this.scene.resize.call(this);
             }
