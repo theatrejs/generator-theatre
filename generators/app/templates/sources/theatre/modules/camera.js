@@ -30,7 +30,9 @@ function Camera(context, width, height) {
 
             const current = images[iterator];
 
-            if (image.destination.z >= current.destination.z) {
+            if (image.destination.z > current.destination.z
+            || image.destination.z === current.destination.z
+            && image.destination.y >= current.destination.y) {
 
                 target = iterator + 1;
 
