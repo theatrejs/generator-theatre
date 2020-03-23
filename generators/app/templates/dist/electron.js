@@ -6,6 +6,7 @@ app.on('ready', () => {
     const accelerators = [
 
         'CommandOrControl+R',
+        'CommandOrControl+Shift+R',
         'CommandOrControl+W',
         'F11'
     ];
