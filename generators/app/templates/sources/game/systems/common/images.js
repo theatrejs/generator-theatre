@@ -9,7 +9,9 @@ function images(entities) {
 
         imagesComponent.parts.forEach((image) => {
 
-            const {destination, frame, framerate, frames, opacity, source} = image;
+            const {destination, frame, framerate, frames, opacity} = image;
+
+            let {source} = image;
 
             if (frames.length > 1) {
 
@@ -24,15 +26,27 @@ function images(entities) {
                 }
             }
 
+            let [x, y, width, height] = frames[image.frame];
+
+            if (typeof source === 'undefined') {
+
+                source = this.assets.images.common.placeholder();
+
+                x = x % 8;
+                y = y % 1;
+                width = 1;
+                height = 1;
+            }
+
             cameraComponent.camera.add({
 
                 'source': source,
                 'frame': {
 
-                    'x': frames[image.frame][2] * frames[image.frame][0],
-                    'y': frames[image.frame][3] * frames[image.frame][1],
-                    'width': frames[image.frame][2],
-                    'height': frames[image.frame][3]
+                    'x': width * x,
+                    'y': height * y,
+                    'width': width,
+                    'height': height
                 },
                 'destination': {
 
