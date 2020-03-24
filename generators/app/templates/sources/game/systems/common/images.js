@@ -9,20 +9,20 @@ function images(entities) {
 
         imagesComponent.parts.forEach((image) => {
 
-            const {destination, frame, framerate, frames, opacity} = image;
+            const {destination, framerate, frames, opacity} = image;
 
             let {source} = image;
 
             if (frames.length > 1) {
 
-                image.elapsed += this.delta.render;
+                image.elapsed += this.delta.update;
 
                 const duration = 1000 / framerate;
 
                 while (image.elapsed >= duration) {
 
                     image.elapsed -= duration;
-                    image.frame = (frame === frames.length - 1) ? 0 : frame + 1;
+                    image.frame = (image.frame === frames.length - 1) ? 0 : image.frame + 1;
                 }
             }
 
