@@ -1,4 +1,4 @@
-import * as Ease from 'modules/ease.js';
+import * as Ease from './ease.js';
 
 function Camera(context, width, height) {
 

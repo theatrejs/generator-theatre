@@ -1,4 +1,3 @@
-import {Camera} from 'core/camera.js';
 import {Canvas} from 'core/canvas.js';
 import {Loop} from 'core/loop.js';
 
@@ -37,7 +36,6 @@ function Theatre(config) {
         this.delta.render = 0;
         this.delta.update = 0;
 
-        this.camera = new Camera(this.context, this.size.width, this.size.height);
         this.loop = new Loop(framerate, speed);
 
         this.scene = this.scenes.loading;
@@ -47,7 +45,6 @@ function Theatre(config) {
         this.loop.update((timeframe) => {
 
             this.delta.update = timeframe;
-            this.camera.update(this.delta.update);
             this.scene.update.call(this);
 
             if (restarting === true) {
@@ -84,14 +81,10 @@ function Theatre(config) {
 
                 canvas.resize(this.size.width, this.size.height);
 
-                this.camera.size.height = this.size.height;
-                this.camera.size.width = this.size.width;
-
                 this.scene.resize.call(this);
             }
 
             this.scene.render.call(this);
-            this.camera.render();
         });
 
         preload(assets, (assets) => {
