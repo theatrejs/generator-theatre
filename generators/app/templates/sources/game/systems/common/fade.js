@@ -11,7 +11,7 @@ function fade(entities) {
         }
 
         const remaining = fadeComponent.duration - fadeComponent.elapsed;
-        const delta = this.delta.render > remaining ? remaining : this.delta.render;
+        const delta = this.delta.update > remaining ? remaining : this.delta.update;
 
         const progress = (fadeComponent.elapsed + delta) / fadeComponent.duration;
         const faded = fadeComponent.fade * fadeComponent.easing(progress);
@@ -24,7 +24,7 @@ function fade(entities) {
         if (fadeComponent.elapsed >= fadeComponent.duration
         && typeof fadeComponent.ending === 'function') {
 
-            fadeComponent.ending(entity, this.delta.render - delta);
+            fadeComponent.ending(entity, this.delta.update - delta);
         }
     });
 }
