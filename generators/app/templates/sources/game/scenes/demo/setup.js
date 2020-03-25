@@ -8,7 +8,7 @@ function setup() {
     this.$camera = new Camera(this.context, this.size.width, this.size.height);
     this.$world = new World(this);
 
-    this.$zones = {
+    this.$origins = {
 
         'default': {
 

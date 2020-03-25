@@ -4,8 +4,8 @@ function images(entities) {
 
         const cameraComponent = entity.get('camera');
         const imagesComponent = entity.get('images');
+        const originComponent = entity.get('origin');
         const positionComponent = entity.get('position');
-        const zoneComponent = entity.get('zone');
 
         imagesComponent.parts.forEach((image) => {
 
@@ -50,11 +50,11 @@ function images(entities) {
                 },
                 'destination': {
 
-                    'x': Math.floor((positionComponent.x + destination[0]) * zoneComponent.frame.scale + zoneComponent.frame.x),
-                    'y': Math.floor((positionComponent.y + destination[1]) * zoneComponent.frame.scale + zoneComponent.frame.y),
-                    'z': Math.floor(positionComponent.z + destination[2] + zoneComponent.frame.z),
-                    'width': (destination[3] * zoneComponent.frame.scale),
-                    'height': (destination[4] * zoneComponent.frame.scale)
+                    'x': Math.floor((positionComponent.x + destination[0]) * originComponent.reference.scale + originComponent.reference.x),
+                    'y': Math.floor((positionComponent.y + destination[1]) * originComponent.reference.scale + originComponent.reference.y),
+                    'z': Math.floor(positionComponent.z + destination[2] + originComponent.reference.z),
+                    'width': (destination[3] * originComponent.reference.scale),
+                    'height': (destination[4] * originComponent.reference.scale)
                 },
                 'opacity': cameraComponent.opacity * opacity
             });

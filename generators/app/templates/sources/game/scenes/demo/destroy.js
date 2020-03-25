@@ -4,8 +4,8 @@ function destroy() {
     console.log('-------');
 
     delete this.$camera;
+    delete this.$origins;
     delete this.$world;
-    delete this.$zones;
 }
 
 export {destroy};

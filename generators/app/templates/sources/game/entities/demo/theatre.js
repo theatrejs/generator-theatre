@@ -2,8 +2,8 @@ import {Entity} from 'modules/world.js';
 
 import {Camera} from 'components/common/camera.js';
 import {Images} from 'components/common/images.js';
+import {Origin} from 'components/common/origin.js';
 import {Position} from 'components/common/position.js';
-import {Zone} from 'components/common/zone.js';
 
 function theatre() {
 
@@ -29,13 +29,13 @@ function theatre() {
                 'destination': [0, 0, 0, 64, 64]
             }
         ]),
+        new Origin(this.$origins.default),
         new Position(
 
             -(64 / 2),
             -(64 / 2),
             0
-        ),
-        new Zone(this.$zones.default)
+        )
     ]);
 
     return entity;

@@ -9,7 +9,7 @@ function render() {
     this.context.fillRect(0, 0, this.size.width, this.size.height);
 
     this.$world.system(['camera', 'fade'], fade);
-    this.$world.system(['camera', 'images', 'position', 'zone'], images);
+    this.$world.system(['camera', 'images', 'origin', 'position'], images);
 
     this.$camera.render();
 }
