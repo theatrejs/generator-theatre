@@ -45,6 +45,18 @@ function Theatre(config) {
         this.loop.update((timeframe) => {
 
             this.delta.update = timeframe;
+
+            if (container.offsetWidth !== this.size.width
+            || container.offsetHeight !== this.size.height) {
+
+                this.size.width = container.offsetWidth;
+                this.size.height = container.offsetHeight;
+
+                canvas.resize(this.size.width, this.size.height);
+
+                this.scene.resize.call(this);
+            }
+
             this.scene.update.call(this);
 
             if (restarting === true) {
@@ -72,17 +84,6 @@ function Theatre(config) {
         this.loop.render((timeframe) => {
 
             this.delta.render = timeframe;
-
-            if (container.offsetWidth !== this.size.width
-            || container.offsetHeight !== this.size.height) {
-
-                this.size.width = container.offsetWidth;
-                this.size.height = container.offsetHeight;
-
-                canvas.resize(this.size.width, this.size.height);
-
-                this.scene.resize.call(this);
-            }
 
             this.scene.render.call(this);
         });
