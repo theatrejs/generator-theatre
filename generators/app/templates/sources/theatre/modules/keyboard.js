@@ -1,8 +1,7 @@
 import {keynames} from './keynames.js';
 
-function Keyboard(codes, inputs) {
+function Keyboard(container, actions, inputs) {
 
-    const names = [];
     const states = {};
 
     function blur() {
@@ -26,27 +25,26 @@ function Keyboard(codes, inputs) {
 
     function destroy() {
 
-        removeEventListener('blur', blur);
-        removeEventListener('keydown', keydown);
-        removeEventListener('keyup', keyup);
+        container.removeEventListener('blur', blur);
+        container.removeEventListener('keydown', keydown);
+        container.removeEventListener('keyup', keyup);
     }
 
     function keydown(event) {
 
-        const code = event.keyCode;
-        const index = codes.indexOf(code);
+        const action = 'KEY_' + keynames[event.keyCode];
 
-        if (index !== -1
-        && states[names[index]] === false) {
+        if (actions.indexOf(action) !== -1
+        && states[action] === false) {
 
             event.preventDefault();
 
-            states[names[index]] = true;
+            states[action] = true;
 
             inputs.push({
 
                 'type': 'KEYBOARD',
-                'action': names[index],
+                'action': action,
                 'state': 'DOWN'
             });
         }
@@ -54,20 +52,19 @@ function Keyboard(codes, inputs) {
 
     function keyup(event) {
 
-        const code = event.keyCode;
-        const index = codes.indexOf(code);
+        const action = 'KEY_' + keynames[event.keyCode];
 
-        if (index !== -1
-        && states[names[index]] === true) {
+        if (actions.indexOf(action) !== -1
+        && states[action] === true) {
 
             event.preventDefault();
 
-            states[names[index]] = false;
+            states[action] = false;
 
             inputs.push({
 
                 'type': 'KEYBOARD',
-                'action': names[index],
+                'action': action,
                 'state': 'UP'
             });
         }
@@ -75,22 +72,17 @@ function Keyboard(codes, inputs) {
 
     function setup() {
 
-        addEventListener('blur', blur);
-        addEventListener('keydown', keydown);
-        addEventListener('keyup', keyup);
+        // focuses the container to allow keyboard event listeners binding
+        container.setAttribute('tabindex', 0);
+
+        container.addEventListener('blur', blur);
+        container.addEventListener('keydown', keydown);
+        container.addEventListener('keyup', keyup);
     }
 
-    codes.forEach((code) => {
+    actions.forEach((action) => {
 
-        if (typeof keynames[code] !== 'undefined') {
-
-            const name = 'KEY_' + keynames[code];
-
-            codes.push(code);
-            names.push(name);
-
-            states[name] = false;
-        }
+        states[action] = false;
     });
 
     setup.call(this);
