@@ -1,10 +1,10 @@
-import {theatre} from 'entities/demo/theatre.js';
+import {character} from 'entities/demo/character.js';
 
 function start() {
 
     console.log('start demo scene');
 
-    this.$world.add(theatre.call(this));
+    this.$world.add(character.call(this));
 }
 
 export {start};

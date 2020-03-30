@@ -2,18 +2,23 @@ import {Entity} from 'modules/world.js';
 
 import {Camera} from 'components/common/camera.js';
 import {Images} from 'components/common/images.js';
+import {Inputs} from 'components/common/inputs.js';
 import {Origin} from 'components/common/origin.js';
 import {Position} from 'components/common/position.js';
 
-function theatre() {
+function character() {
 
-    const entity = new Entity('theatre', [
+    const entity = new Entity('character', [
 
         new Camera(this.$camera),
         new Images([
 
             {
-                'source': this.assets.images.common.theatre(),
+                'source': {
+
+                    'scope': 'demo',
+                    'name': 'character-32x32'
+                },
                 'frames': [
 
                     [0, 0, 32, 32],
@@ -29,6 +34,7 @@ function theatre() {
                 'destination': [0, 0, 0, 64, 64]
             }
         ]),
+        new Inputs(this.assets.datasets.demo['character']()),
         new Origin(this.$origins.default),
         new Position(
 
@@ -41,4 +47,4 @@ function theatre() {
     return entity;
 }
 
-export {theatre};
+export {character};
