@@ -74,6 +74,7 @@ function Keyboard(container, actions, inputs) {
 
         // focuses the container to allow keyboard event listeners binding
         container.setAttribute('tabindex', 0);
+        container.focus();
 
         container.addEventListener('blur', blur);
         container.addEventListener('keydown', keydown);
