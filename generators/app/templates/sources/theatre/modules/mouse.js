@@ -1,8 +1,13 @@
-function Mouse(container, inputs) {
+function Mouse(container, actions, inputs) {
 
     function contextmenu(event) {
 
-        event.preventDefault();
+        const action = 'CLICK_RIGHT';
+
+        if (actions.indexOf(action) !== -1) {
+
+            event.preventDefault();
+        }
     }
 
     function destroy() {
@@ -26,73 +31,93 @@ function Mouse(container, inputs) {
             return;
         }
 
-        const rectangle = event.target.getBoundingClientRect();
-        const x = event.clientX - rectangle.left;
-        const y = event.clientY - rectangle.top;
+        const action = 'CLICK_' + buttons[button];
 
-        inputs.push({
+        if (actions.indexOf(action) !== -1) {
 
-            'type': 'MOUSE',
-            'action': 'CLICK_' + buttons[button],
-            'state': 'DOWN',
-            'x': x,
-            'y': y
-        });
+            event.preventDefault();
 
-        event.preventDefault();
+            const rectangle = event.target.getBoundingClientRect();
+            const x = event.clientX - rectangle.left;
+            const y = event.clientY - rectangle.top;
+
+            inputs.push({
+
+                'type': 'MOUSE',
+                'action': action,
+                'state': 'DOWN',
+                'x': x,
+                'y': y
+            });
+        }
     }
 
     function mouseenter(event) {
 
-        const rectangle = event.target.getBoundingClientRect();
-        const x = event.clientX - rectangle.left;
-        const y = event.clientY - rectangle.top;
+        const action = 'MOVE';
 
-        inputs.push({
+        if (actions.indexOf(action) !== -1) {
 
-            'type': 'MOUSE',
-            'action': 'MOVE',
-            'state': 'ENTER',
-            'x': x,
-            'y': y
-        });
+            event.preventDefault();
 
-        event.preventDefault();
+            const rectangle = event.target.getBoundingClientRect();
+            const x = event.clientX - rectangle.left;
+            const y = event.clientY - rectangle.top;
+
+            inputs.push({
+
+                'type': 'MOUSE',
+                'action': action,
+                'state': 'ENTER',
+                'x': x,
+                'y': y
+            });
+        }
     }
 
     function mouseleave(event) {
 
-        const rectangle = event.target.getBoundingClientRect();
-        const x = event.clientX - rectangle.left;
-        const y = event.clientY - rectangle.top;
+        const action = 'MOVE';
 
-        inputs.push({
+        if (actions.indexOf(action) !== -1) {
 
-            'type': 'MOUSE',
-            'action': 'MOVE',
-            'state': 'LEAVE',
-            'x': x,
-            'y': y
-        });
+            event.preventDefault();
 
-        event.preventDefault();
+            const rectangle = event.target.getBoundingClientRect();
+            const x = event.clientX - rectangle.left;
+            const y = event.clientY - rectangle.top;
+
+            inputs.push({
+
+                'type': 'MOUSE',
+                'action': action,
+                'state': 'LEAVE',
+                'x': x,
+                'y': y
+            });
+        }
     }
 
     function mousemove(event) {
 
-        const rectangle = event.target.getBoundingClientRect();
-        const x = event.clientX - rectangle.left;
-        const y = event.clientY - rectangle.top;
+        const action = 'MOVE';
 
-        inputs.push({
+        if (actions.indexOf(action) !== -1) {
 
-            'type': 'MOUSE',
-            'action': 'MOVE',
-            'x': x,
-            'y': y
-        });
+            event.preventDefault();
 
-        event.preventDefault();
+            const rectangle = event.target.getBoundingClientRect();
+            const x = event.clientX - rectangle.left;
+            const y = event.clientY - rectangle.top;
+
+            inputs.push({
+
+                'type': 'MOUSE',
+                'action': action,
+                'x': x,
+                'y': y
+            });
+        }
     }
 
     function mouseup(event) {
@@ -105,20 +130,25 @@ function Mouse(container, inputs) {
             return;
         }
 
-        const rectangle = event.target.getBoundingClientRect();
-        const x = event.clientX - rectangle.left;
-        const y = event.clientY - rectangle.top;
+        const action = 'CLICK_' + buttons[button];
 
-        inputs.push({
+        if (actions.indexOf(action) !== -1) {
 
-            'type': 'MOUSE',
-            'action': 'CLICK_' + buttons[button],
-            'state': 'UP',
-            'x': x,
-            'y': y
-        });
+            event.preventDefault();
 
-        event.preventDefault();
+            const rectangle = event.target.getBoundingClientRect();
+            const x = event.clientX - rectangle.left;
+            const y = event.clientY - rectangle.top;
+
+            inputs.push({
+
+                'type': 'MOUSE',
+                'action': action,
+                'state': 'UP',
+                'x': x,
+                'y': y
+            });
+        }
     }
 
     function setup() {
@@ -134,19 +164,47 @@ function Mouse(container, inputs) {
 
     function wheel(event) {
 
-        const rectangle = event.target.getBoundingClientRect();
-        const x = event.clientX - rectangle.left;
-        const y = event.clientY - rectangle.top;
+        const action = 'SCROLL';
 
-        inputs.push({
+        if (actions.indexOf(action) !== -1) {
 
-            'type': 'MOUSE',
-            'action': 'SCROLL_' + (event.deltaY > 0 ? 'DOWN' : 'UP'),
-            'x': x,
-            'y': y
-        });
+            event.preventDefault();
 
-        event.preventDefault();
+            const rectangle = event.target.getBoundingClientRect();
+            const x = event.clientX - rectangle.left;
+            const y = event.clientY - rectangle.top;
+
+            let state;
+
+            if (Math.abs(event.deltaY) >= Math.abs(event.deltaX)) {
+
+                state = 'DOWN';
+
+                if (event.deltaY < 0) {
+
+                    state = 'UP';
+                }
+            }
+
+            else {
+
+                state = 'RIGHT';
+
+                if (event.deltaX < 0) {
+
+                    state = 'LEFT';
+                }
+            }
+
+            inputs.push({
+
+                'type': 'MOUSE',
+                'action': action,
+                'state': state,
+                'x': x,
+                'y': y
+            });
+        }
     }
 
     setup.call(this);
