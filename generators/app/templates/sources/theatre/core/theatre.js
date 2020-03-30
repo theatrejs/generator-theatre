@@ -47,6 +47,14 @@ function Theatre(config) {
             this.preloading = false;
         });
 
+        if (typeof module.hot !== 'undefined') {
+
+            module.hot.accept(context.id, () => {
+
+                assets.call(this);
+            });
+        }
+
         this.preloading = true;
     }
 

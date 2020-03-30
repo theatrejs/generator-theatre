@@ -30,7 +30,11 @@ function images(entities) {
 
             if (typeof source === 'undefined') {
 
-                source = this.assets.images.common.placeholder();
+                source = {
+
+                    'scope': 'common',
+                    'name': 'placeholder-8x1'
+                };
 
                 x = x % 8;
                 y = y % 1;
@@ -40,7 +44,7 @@ function images(entities) {
 
             cameraComponent.camera.add({
 
-                'source': source,
+                'source': this.assets.images[source.scope][source.name](),
                 'frame': {
 
                     'x': width * x,
