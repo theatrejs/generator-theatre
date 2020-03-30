@@ -1,3 +1,0 @@
-const sounds = [];
-
-export {sounds};

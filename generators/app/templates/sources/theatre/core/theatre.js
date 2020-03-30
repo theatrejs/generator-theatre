@@ -5,7 +5,7 @@ import {preload} from 'core/preload.js';
 
 function Theatre(config) {
 
-    const {assets, container, scenes} = config;
+    const {container, scenes} = config;
 
     const expose = config.expose || false;
     const framerate = config.framerate || 60;
@@ -20,6 +20,35 @@ function Theatre(config) {
 
     let loading = null;
     let restarting = false;
+
+    function assets() {
+
+        const context = require.context('assets/', true, /\.[a-zA-Z0-9]+$/, 'lazy');
+
+        preload(context, (assets) => {
+
+            assets.forEach((asset) => {
+
+                const {getter, name, scope, source, type} = asset;
+
+                if (typeof this.assets[type] === 'undefined') {
+
+                    this.assets[type] = {};
+                }
+
+                if (typeof this.assets[type][scope] === 'undefined') {
+
+                    this.assets[type][scope] = {};
+                }
+
+                this.assets[type][scope][name] = getter;
+            });
+
+            this.preloading = false;
+        });
+
+        this.preloading = true;
+    }
 
     function initialize() {
 
@@ -88,27 +117,7 @@ function Theatre(config) {
             this.scene.render.call(this);
         });
 
-        preload(assets, (assets) => {
-
-            assets.forEach((asset) => {
-
-                if (typeof this.assets[asset.type + 's'] === 'undefined') {
-
-                    this.assets[asset.type + 's'] = {};
-                }
-
-                if (typeof this.assets[asset.type + 's'][asset.scope] === 'undefined') {
-
-                    this.assets[asset.type + 's'][asset.scope] = {};
-                }
-
-                this.assets[asset.type + 's'][asset.scope][asset.name] = asset.getter;
-            });
-
-            this.preloading = false;
-        });
-
-        this.preloading = true;
+        assets.call(this);
     }
 
     function load(scene) {

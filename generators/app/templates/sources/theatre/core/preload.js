@@ -1,49 +1,73 @@
-function preload(assets, handler) {
+function preload(context, handler) {
 
-    let promises = [];
+    const promises = [];
 
     // preloads each asset
-    assets.forEach(function (asset) {
+    context.keys().map((key) => {
+
+        const [type, scope, name] = key.match(/(?!\.\/|\/)(.+?)(?=(?:\.[a-zA-Z0-9]+$)|\/)/g);
+
+        const asset = {
+
+            'getter': null,
+            'name': name,
+            'scope': scope,
+            'source': null,
+            'type': type
+        };
 
         // creates a promise for current asset preloading
         const promise = new Promise(function (resolve, reject) {
 
             // if current asset is a dataset then preload it
-            if (asset.type === 'dataset') {
+            if (asset.type === 'datasets') {
 
-                asset.getter = () => asset.source;
+                context(key).then((source) => {
 
-                resolve(asset);
+                    asset.source = source;
+                    asset.getter = () => source;
+
+                    resolve(asset);
+                });
             }
 
             // if current asset is an image then preload it
-            if (asset.type === 'image') {
+            else if (asset.type === 'images') {
 
                 const image = new Image();
 
-                image.src = asset.source;
+                context(key).then((source) => {
 
-                // when current image is loaded then resolve current promise
-                image.onload = function () {
+                    image.src = source;
 
-                    asset.getter = () => image;
+                    // when current image is loaded then resolve current promise
+                    image.onload = function () {
 
-                    resolve(asset);
-                };
+                        asset.source = source;
+                        asset.getter = () => image;
+
+                        resolve(asset);
+                    };
+                });
+
             }
 
             // if current asset is a sound then preload it
-            else if (asset.type === 'sound') {
+            else if (asset.type === 'sounds') {
 
-                const sound = new Audio(asset.source);
+                context(key).then((source) => {
 
-                // when current sound is loaded then resolve current promise
-                sound.oncanplaythrough = function () {
+                    const sound = new Audio(source);
 
-                    asset.getter = () => sound.cloneNode();
+                    // when current sound is loaded then resolve current promise
+                    sound.oncanplaythrough = function () {
 
-                    resolve(asset);
-                };
+                        asset.source = source;
+                        asset.getter = () => sound.cloneNode();
+
+                        resolve(asset);
+                    };
+                });
             }
         });
 

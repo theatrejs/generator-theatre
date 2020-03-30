@@ -1,3 +1,0 @@
-const datasets = [];
-
-export {datasets};
