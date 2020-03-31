@@ -4,6 +4,7 @@ function destroy() {
     console.log('-------');
 
     delete this.$camera;
+    delete this.$controllers;
     delete this.$origins;
     delete this.$world;
 }
