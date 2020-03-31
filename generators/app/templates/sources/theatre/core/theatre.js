@@ -5,7 +5,7 @@ import {preload} from 'core/preload.js';
 
 function Theatre(config) {
 
-    const {container, scenes} = config;
+    const {container} = config;
 
     const expose = config.expose || false;
     const framerate = config.framerate || 60;
@@ -75,6 +75,8 @@ function Theatre(config) {
 
         this.loop = new Loop(framerate, speed);
 
+        scenes.call(this);
+
         this.scene = this.scenes.loading;
         this.scene.setup.call(this);
         this.scene.start.call(this);
@@ -138,8 +140,20 @@ function Theatre(config) {
         restarting = true;
     }
 
+    function scenes() {
+
+        const context = require.context('scenes/', true, /^\.\/[^\/]+\/index\.js$/, 'sync');
+
+        context.keys().forEach((key) => {
+
+            const name = key.match(/^\.\/([^\/]+)\/index\.js$/)[1];
+
+            this.scenes[name] = context(key);
+        });
+    }
+
     this.preloading = false;
-    this.scenes = scenes;
+    this.scenes = {};
     this.size = size;
     this.state = {};
     this.version = '0.36.0';
