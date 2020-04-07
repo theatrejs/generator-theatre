@@ -108,7 +108,7 @@ function World(context) {
         }
     }
 
-    function system(components, handler, entities = this.entities) {
+    function system(name, components, handler, entities = this.entities) {
 
         const chosen = {};
 
@@ -120,10 +120,17 @@ function World(context) {
             }
         });
 
+        this.systems[name] = {
+
+            'components': components,
+            'entities': chosen
+        };
+
         handler.call(context, chosen);
     }
 
     this.entities = {};
+    this.systems = {};
 
     this.add = add;
     this.get = get;
