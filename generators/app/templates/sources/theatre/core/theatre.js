@@ -75,7 +75,7 @@ function Theatre(config) {
         this.delta.render = 0;
         this.delta.update = 0;
 
-        this.loop = new Loop(framerate, speed);
+        this.loop = new Loop(update.bind(this), framerate, speed);
 
         scenes.call(this);
 
@@ -84,47 +84,7 @@ function Theatre(config) {
         this.scene.start.call(this);
         this.scene.render.call(this);
 
-        this.loop.update((timeframe) => {
-
-            this.delta.update = timeframe;
-
-            if (container.offsetWidth !== this.size.width
-            || container.offsetHeight !== this.size.height) {
-
-                this.size.width = container.offsetWidth;
-                this.size.height = container.offsetHeight;
-
-                canvas.resize(this.size.width, this.size.height);
-
-                this.scene.resize.call(this);
-            }
-
-            this.scene.update.call(this);
-            this.scene.render.call(this);
-
-            if (restarting === true) {
-
-                this.scene.start.call(this);
-                this.scene.render.call(this);
-
-                restarting = false;
-
-                return;
-            }
-
-            if (loading !== null) {
-
-                this.scene.destroy.call(this);
-                this.scene = this.scenes[loading];
-                this.scene.setup.call(this);
-                this.scene.start.call(this);
-                this.scene.render.call(this);
-
-                loading = null;
-
-                return;
-            }
-        });
+        this.loop.update();
 
         assets.call(this);
     }
@@ -149,6 +109,48 @@ function Theatre(config) {
 
             this.scenes[name] = context(key);
         });
+    }
+
+    function update(timeframe) {
+
+        this.delta.update = timeframe;
+
+        if (container.offsetWidth !== this.size.width
+        || container.offsetHeight !== this.size.height) {
+
+            this.size.width = container.offsetWidth;
+            this.size.height = container.offsetHeight;
+
+            canvas.resize(this.size.width, this.size.height);
+
+            this.scene.resize.call(this);
+        }
+
+        this.scene.update.call(this);
+        this.scene.render.call(this);
+
+        if (restarting === true) {
+
+            this.scene.start.call(this);
+            this.scene.render.call(this);
+
+            restarting = false;
+
+            return;
+        }
+
+        if (loading !== null) {
+
+            this.scene.destroy.call(this);
+            this.scene = this.scenes[loading];
+            this.scene.setup.call(this);
+            this.scene.start.call(this);
+            this.scene.render.call(this);
+
+            loading = null;
+
+            return;
+        }
     }
 
     this.preloading = false;
