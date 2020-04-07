@@ -28,7 +28,13 @@ function images(entities) {
 
             let [x, y, width, height] = frames[image.frame];
 
-            if (typeof source === 'undefined') {
+            let data;
+
+            try {
+
+                data = this.assets.images[source.scope][source.name]();
+            }
+            catch (error) {
 
                 source = {
 
@@ -40,11 +46,13 @@ function images(entities) {
                 y = y % 1;
                 width = 1;
                 height = 1;
+
+                data = this.assets.images[source.scope][source.name]();
             }
 
             cameraComponent.camera.add({
 
-                'source': this.assets.images[source.scope][source.name](),
+                'source': data,
                 'frame': {
 
                     'x': width * x,

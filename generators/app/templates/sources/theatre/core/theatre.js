@@ -27,6 +27,8 @@ function Theatre(config) {
 
         preload(context, (assets) => {
 
+            this.assets = {};
+
             assets.forEach((asset) => {
 
                 const {getter, name, scope, source, type} = asset;
