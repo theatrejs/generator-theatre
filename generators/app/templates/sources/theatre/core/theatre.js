@@ -82,6 +82,7 @@ function Theatre(config) {
         this.scene = this.scenes.loading;
         this.scene.setup.call(this);
         this.scene.start.call(this);
+        this.scene.render.call(this);
 
         this.loop.update((timeframe) => {
 
@@ -99,10 +100,12 @@ function Theatre(config) {
             }
 
             this.scene.update.call(this);
+            this.scene.render.call(this);
 
             if (restarting === true) {
 
                 this.scene.start.call(this);
+                this.scene.render.call(this);
 
                 restarting = false;
 
@@ -115,18 +118,12 @@ function Theatre(config) {
                 this.scene = this.scenes[loading];
                 this.scene.setup.call(this);
                 this.scene.start.call(this);
+                this.scene.render.call(this);
 
                 loading = null;
 
                 return;
             }
-        });
-
-        this.loop.render((timeframe) => {
-
-            this.delta.render = timeframe;
-
-            this.scene.render.call(this);
         });
 
         assets.call(this);

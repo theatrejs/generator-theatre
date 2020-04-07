@@ -1,23 +1,7 @@
 function Loop(framerate = 60, speed = 1) {
 
     let elapsedTime = 0;
-    let lastRender = null;
     let lastUpdate = null;
-
-    function render(handler) {
-
-        const currentRender = performance.now();
-
-        if (lastRender !== null) {
-
-            handler(currentRender - lastRender);
-        }
-
-        // call user's render handler on each available frame
-        requestAnimationFrame(this.render.bind(this, handler));
-
-        lastRender = currentRender;
-    }
 
     function update(handler) {
 
@@ -47,7 +31,6 @@ function Loop(framerate = 60, speed = 1) {
     this.framerate = framerate;
     this.speed = speed;
 
-    this.render = render;
     this.update = update;
 }
 
