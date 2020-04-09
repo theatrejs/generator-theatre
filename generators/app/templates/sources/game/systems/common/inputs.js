@@ -2,11 +2,6 @@ import {Commands} from 'components/common/commands.js';
 
 function inputs(entities) {
 
-    this.$controllers.inputs.forEach((input) => {
-
-        // console.log(input);
-    });
-
     Object.entries(entities).forEach(([name, entity]) => {
 
         this.$controllers.inputs.forEach(({action, state}) => {
@@ -31,8 +26,6 @@ function inputs(entities) {
             });
         });
     });
-
-    this.$controllers.inputs.length = 0;
 }
 
 export {inputs};

@@ -45,7 +45,7 @@ function Camera(context, width, height) {
 
     function idle() {
 
-        shaking = {
+        this.shaking = {
 
             'current': false,
             'duration': 0,
@@ -81,7 +81,7 @@ function Camera(context, width, height) {
 
                     source,
                     frame.x, frame.y, frame.width, frame.height,
-                    destination.x - (this.position.x + shaking.shift.x), destination.y - (this.position.y + shaking.shift.y), destination.width, destination.height
+                    destination.x - (this.position.x + this.shaking.shift.x), destination.y - (this.position.y + this.shaking.shift.y), destination.width, destination.height
                 );
 
                 context.globalAlpha = alpha;
@@ -101,46 +101,46 @@ function Camera(context, width, height) {
 
         this.idle();
 
-        shaking.force = {
+        this.shaking.force = {
 
             'x': x,
             'y': y
         };
 
-        shaking.current = true;
-        shaking.duration = duration;
-        shaking.easing = easing;
+        this.shaking.current = true;
+        this.shaking.duration = duration;
+        this.shaking.easing = easing;
     }
 
     function update(delta) {
 
-        if (shaking.current === false) {
+        if (this.shaking.current === false) {
 
             return;
         }
 
-        if (shaking.elapsed + delta >= shaking.duration) {
+        if (this.shaking.elapsed + delta >= this.shaking.duration) {
 
             this.idle();
 
             return;
         }
 
-        shaking.elapsed += delta;
+        this.shaking.elapsed += delta;
 
-        const amplitude = shaking.easing(shaking.elapsed / shaking.duration);
+        const amplitude = this.shaking.easing(this.shaking.elapsed / this.shaking.duration);
         const angle = Math.random() * 2 * Math.PI;
 
-        shaking.shift.x = Math.round(Math.cos(angle) * shaking.force.x * amplitude);
-        shaking.shift.y = Math.round(Math.sin(angle) * shaking.force.y * amplitude);
+        this.shaking.shift.x = Math.round(Math.cos(angle) * this.shaking.force.x * amplitude);
+        this.shaking.shift.y = Math.round(Math.sin(angle) * this.shaking.force.y * amplitude);
     }
 
     function visible(x, y, width, height) {
 
         const camera = {
 
-            'x': this.position.x + shaking.shift.x,
-            'y': this.position.y + shaking.shift.y,
+            'x': this.position.x + this.shaking.shift.x,
+            'y': this.position.y + this.shaking.shift.y,
             'width': this.size.width,
             'height': this.size.height
         };
@@ -161,6 +161,8 @@ function Camera(context, width, height) {
         'x': 0,
         'y': 0
     };
+
+    this.shaking = shaking;
 
     this.size = {
 

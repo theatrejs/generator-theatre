@@ -14,6 +14,7 @@ function character() {
         new Images([
 
             {
+                'name': 'idle',
                 'source': {
 
                     'scope': 'demo',

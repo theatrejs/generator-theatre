@@ -77,12 +77,15 @@ function Theatre(config) {
             this.tick();
         }
 
+        this.scene.before.call(this);
+
         if (updates > 0) {
 
             update.call(this);
         }
 
         this.scene.render.call(this);
+        this.scene.after.call(this);
     }
 
     function initialize() {
@@ -107,7 +110,6 @@ function Theatre(config) {
         this.scene = this.scenes.loading;
         this.scene.setup.call(this);
         this.scene.start.call(this);
-        this.scene.render.call(this);
 
         this.loop.update();
 
