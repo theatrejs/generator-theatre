@@ -18,6 +18,7 @@ function Theatre(config) {
         'width' : container.offsetWidth
     };
 
+    let canvas = null;
     let loading = null;
     let restarting = false;
 
@@ -62,7 +63,7 @@ function Theatre(config) {
 
     function initialize() {
 
-        const canvas = new Canvas('2d', 'theatre', this.size.width, this.size.height, sharp);
+        canvas = new Canvas('2d', 'theatre', this.size.width, this.size.height, sharp);
 
         container.appendChild(canvas.element);
 
