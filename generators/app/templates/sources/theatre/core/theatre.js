@@ -62,6 +62,29 @@ function Theatre(config) {
         this.preloading = true;
     }
 
+    function forward(timeframe) {
+
+        this.delta.update = timeframe;
+
+        if (container.offsetWidth !== this.size.width
+        || container.offsetHeight !== this.size.height) {
+
+            resize.call(this);
+        }
+
+        if (this.playing === true) {
+
+            this.tick();
+        }
+
+        if (updates > 0) {
+
+            update.call(this);
+        }
+
+        this.scene.render.call(this);
+    }
+
     function initialize() {
 
         canvas = new Canvas('2d', 'theatre', this.size.width, this.size.height, sharp);
@@ -77,7 +100,7 @@ function Theatre(config) {
         this.delta.render = 0;
         this.delta.update = 0;
 
-        this.loop = new Loop(update.bind(this), framerate, speed);
+        this.loop = new Loop(forward.bind(this), framerate, speed);
 
         scenes.call(this);
 
@@ -106,6 +129,16 @@ function Theatre(config) {
         this.playing = true;
     }
 
+    function resize() {
+
+        this.size.width = container.offsetWidth;
+        this.size.height = container.offsetHeight;
+
+        canvas.resize(this.size.width, this.size.height);
+
+        this.scene.resize.call(this);
+    }
+
     function restart() {
 
         restarting = true;
@@ -128,25 +161,7 @@ function Theatre(config) {
         updates += times;
     }
 
-    function update(timeframe) {
-
-        this.delta.update = timeframe;
-
-        if (container.offsetWidth !== this.size.width
-        || container.offsetHeight !== this.size.height) {
-
-            this.size.width = container.offsetWidth;
-            this.size.height = container.offsetHeight;
-
-            canvas.resize(this.size.width, this.size.height);
-
-            this.scene.resize.call(this);
-        }
-
-        if (this.playing === true) {
-
-            this.tick();
-        }
+    function update() {
 
         while (updates > 0) {
 
@@ -175,8 +190,6 @@ function Theatre(config) {
                 continue;
             }
         }
-
-        this.scene.render.call(this);
     }
 
     this.playing = true;
