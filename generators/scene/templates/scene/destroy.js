@@ -1,7 +1,9 @@
 function destroy() {
 
-    console.log('destroy <%= title %> scene');
-    console.log('-------');
+    console.log('lifecycle :', 'destroy <%= title %> scene');
+    console.log('---------');
+
+    this.$controllers.destroy();
 
     delete this.$camera;
     delete this.$controllers;

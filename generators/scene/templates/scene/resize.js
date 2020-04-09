@@ -1,6 +1,6 @@
 function resize() {
 
-    console.log('resize <%= title %> scene');
+    console.log('lifecycle :', 'resize <%= title %> scene');
 
     this.$camera.size.height = this.size.height;
     this.$camera.size.width = this.size.width;

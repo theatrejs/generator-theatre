@@ -1,6 +1,6 @@
 function start() {
 
-    console.log('start <%= title %> scene');
+    console.log('lifecycle :', 'start <%= title %> scene');
 }
 
 export {start};
