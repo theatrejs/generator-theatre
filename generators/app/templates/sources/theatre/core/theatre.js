@@ -21,6 +21,7 @@ function Theatre(config) {
     let canvas = null;
     let loading = null;
     let restarting = false;
+    let updates = 0;
 
     function assets() {
 
@@ -95,6 +96,16 @@ function Theatre(config) {
         loading = scene;
     }
 
+    function pause() {
+
+        this.playing = false;
+    }
+
+    function play() {
+
+        this.playing = true;
+    }
+
     function restart() {
 
         restarting = true;
@@ -112,6 +123,11 @@ function Theatre(config) {
         });
     }
 
+    function tick(times = 1) {
+
+        updates += times;
+    }
+
     function update(timeframe) {
 
         this.delta.update = timeframe;
@@ -127,33 +143,43 @@ function Theatre(config) {
             this.scene.resize.call(this);
         }
 
-        this.scene.update.call(this);
+        if (this.playing === true) {
+
+            this.tick();
+        }
+
+        while (updates > 0) {
+
+            this.scene.update.call(this);
+
+            updates -= 1;
+
+            if (restarting === true) {
+
+                this.scene.start.call(this);
+
+                restarting = false;
+
+                continue;
+            }
+
+            if (loading !== null) {
+
+                this.scene.destroy.call(this);
+                this.scene = this.scenes[loading];
+                this.scene.setup.call(this);
+                this.scene.start.call(this);
+
+                loading = null;
+
+                continue;
+            }
+        }
+
         this.scene.render.call(this);
-
-        if (restarting === true) {
-
-            this.scene.start.call(this);
-            this.scene.render.call(this);
-
-            restarting = false;
-
-            return;
-        }
-
-        if (loading !== null) {
-
-            this.scene.destroy.call(this);
-            this.scene = this.scenes[loading];
-            this.scene.setup.call(this);
-            this.scene.start.call(this);
-            this.scene.render.call(this);
-
-            loading = null;
-
-            return;
-        }
     }
 
+    this.playing = true;
     this.preloading = false;
     this.scenes = {};
     this.size = size;
@@ -161,7 +187,10 @@ function Theatre(config) {
     this.version = '0.38.0';
 
     this.load = load;
+    this.pause = pause;
+    this.play = play;
     this.restart = restart;
+    this.tick = tick;
 
     initialize.call(this, config);
 
