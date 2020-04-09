@@ -4,7 +4,7 @@ import {World} from 'modules/world.js';
 
 function setup() {
 
-    console.log('setup demo scene');
+    console.log('lifecycle :', 'setup demo scene');
 
     this.$origins = {
 
@@ -17,9 +17,14 @@ function setup() {
         }
     };
 
-    this.$controllers = new Controllers(this.element, this.assets.datasets.demo['inputs']());
     this.$world = new World(this);
     this.$camera = new Camera(this.context, this.size.width, this.size.height);
+
+    this.$controllers = new Controllers(this.element, [
+
+        ...this.assets.datasets.common['inputs'](),
+        ...this.assets.datasets.demo['inputs']()
+    ]);
 }
 
 export {setup};

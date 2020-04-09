@@ -1,6 +1,6 @@
 function resize() {
 
-    console.log('resize demo scene');
+    console.log('lifecycle :', 'resize demo scene');
 
     this.$camera.size.height = this.size.height;
     this.$camera.size.width = this.size.width;

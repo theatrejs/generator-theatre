@@ -1,7 +1,7 @@
 function destroy() {
 
-    console.log('destroy demo scene');
-    console.log('-------');
+    console.log('lifecycle :', 'destroy demo scene');
+    console.log('---------');
 
     this.$controllers.destroy();
 
