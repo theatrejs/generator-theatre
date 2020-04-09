@@ -1,9 +1,9 @@
 function destroy() {
 
-    console.log('destroy loading scene');
-    console.log('-------');
+    console.log('lifecycle :', 'destroy loading scene');
+    console.log('---------');
 
-    delete this.state.redirect;
+    delete this.state.timeout;
 }
 
 export {destroy};

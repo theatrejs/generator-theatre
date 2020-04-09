@@ -1,16 +1,15 @@
 function update() {
 
-    // console.log('update loading scene');
+    // console.log('lifecycle :', 'update loading scene');
 
-    if (this.preloading === false && this.state.redirect === false) {
+    if (this.preloading === false) {
 
-        setTimeout(() => {
+        this.state.timeout += this.delta.update;
+
+        if (this.state.timeout >= 1000) {
 
             this.load('demo');
-
-        }, 1000);
-
-        this.state.redirect = true;
+        }
     }
 }
 

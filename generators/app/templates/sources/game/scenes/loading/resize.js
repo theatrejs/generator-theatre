@@ -1,6 +1,6 @@
 function resize() {
 
-    console.log('resize loading scene');
+    console.log('lifecycle :', 'resize loading scene');
 }
 
 export {resize};

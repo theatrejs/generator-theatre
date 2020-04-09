@@ -1,6 +1,6 @@
 function render() {
 
-    // console.log('render loading scene');
+    // console.log('lifecycle :', 'render loading scene');
 
     this.context.fillStyle = '#181a1f';
     this.context.fillRect(0, 0, this.size.width, this.size.height);

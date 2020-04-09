@@ -1,3 +1,5 @@
+import {after} from './after.js';
+import {before} from './before.js';
 import {destroy} from './destroy.js';
 import {render} from './render.js';
 import {resize} from './resize.js';
@@ -9,6 +11,8 @@ if (typeof module.hot !== 'undefined') {
 
     module.hot.accept([
 
+        './after.js',
+        './before.js',
         './destroy.js',
         './render.js',
         './resize.js',
@@ -18,4 +22,4 @@ if (typeof module.hot !== 'undefined') {
     ]);
 }
 
-export {destroy, render, resize, setup, start, update};
+export {after, before, destroy, render, resize, setup, start, update};

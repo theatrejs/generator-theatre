@@ -1,6 +1,6 @@
 function start() {
 
-    console.log('start loading scene');
+    console.log('lifecycle :', 'start loading scene');
 
     this.state.redirect = false;
 }
