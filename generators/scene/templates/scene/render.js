@@ -1,4 +1,3 @@
-import {fade} from 'systems/common/fade.js';
 import {images} from 'systems/common/images.js';
 
 function render() {
@@ -8,10 +7,8 @@ function render() {
     this.context.fillStyle = '#d7dae0';
     this.context.fillRect(0, 0, this.size.width, this.size.height);
 
-    this.$world.system('fade', ['camera', 'fade'], fade);
     this.$world.system('images', ['camera', 'images', 'origin', 'position'], images);
 
-    this.$camera.update(this.delta.update);
     this.$camera.render();
 }
 
