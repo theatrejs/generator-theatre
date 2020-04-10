@@ -9,22 +9,9 @@ function images(entities) {
 
         imagesComponent.parts.forEach((image) => {
 
-            const {destination, framerate, frames, opacity} = image;
+            const {destination, frames, opacity} = image;
 
             let {source} = image;
-
-            if (frames.length > 1) {
-
-                image.elapsed += this.delta.update;
-
-                const duration = 1000 / framerate;
-
-                while (image.elapsed >= duration) {
-
-                    image.elapsed -= duration;
-                    image.frame = (image.frame === frames.length - 1) ? 0 : image.frame + 1;
-                }
-            }
 
             let [x, y, width, height] = frames[image.frame];
 
