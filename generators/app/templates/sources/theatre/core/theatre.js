@@ -94,6 +94,8 @@ function Theatre(config) {
 
         container.appendChild(canvas.element);
 
+        canvas.focus();
+
         this.container = container;
         this.context = canvas.context;
         this.element = canvas.element;
