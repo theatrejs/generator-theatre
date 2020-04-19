@@ -10,7 +10,7 @@ function spritesheets(entities) {
 
             if (frames.length > 1) {
 
-                image.elapsed += this.delta.update;
+                image.elapsed += this.delta;
 
                 const duration = 1000 / framerate;
 

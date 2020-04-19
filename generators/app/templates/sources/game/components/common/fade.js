@@ -1,13 +1,11 @@
-import * as Ease from 'modules/ease.js';
-
-function Fade(opacity, duration, easing = Ease.linear(1), ending = false) {
+function Fade(opacity, duration, $easing = false, $ending = false, elapsed = 0) {
 
     this.name = 'fade';
 
     this.duration = duration;
-    this.easing = easing;
-    this.elapsed = 0;
-    this.ending = ending;
+    this.$easing = $easing;
+    this.elapsed = elapsed;
+    this.$ending = $ending;
     this.fade = null
     this.faded = 0;
     this.opacity = opacity;

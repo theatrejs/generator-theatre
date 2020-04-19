@@ -1,6 +1,6 @@
 import * as Ease from './ease.js';
 
-function Camera(context, width, height) {
+function Camera(context, $width, $height) {
 
     let images = [];
 
@@ -141,8 +141,8 @@ function Camera(context, width, height) {
 
             'x': this.position.x + this.shaking.shift.x,
             'y': this.position.y + this.shaking.shift.y,
-            'width': this.size.width,
-            'height': this.size.height
+            'width': this.size.$width(),
+            'height': this.size.$height()
         };
 
         if (x + width <= camera.x
@@ -166,8 +166,8 @@ function Camera(context, width, height) {
 
     this.size = {
 
-        'width': width,
-        'height': height
+        '$width': $width,
+        '$height': $height
     };
 
     this.add = add;

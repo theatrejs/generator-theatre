@@ -1,8 +1,8 @@
-function Origin(reference) {
+function Origin($origin) {
 
     this.name = 'origin';
 
-    this.reference = reference;
+    this.$origin = $origin;
 }
 
 export {Origin};

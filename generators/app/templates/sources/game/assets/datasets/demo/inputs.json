@@ -2,5 +2,10 @@
     "KEY_UP",
     "KEY_RIGHT",
     "KEY_DOWN",
-    "KEY_LEFT"
+    "KEY_LEFT",
+
+    "CLICK_LEFT",
+    "KEY_ENTER",
+    "KEY_SPACE",
+    "MOVE"
 ]

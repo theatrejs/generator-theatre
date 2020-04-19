@@ -1,0 +1,211 @@
+{
+    "name": "character",
+    "components": [
+
+        {
+            "name": "camera",
+            "parameters": [
+
+                {
+                    "type": "$",
+                    "name": "camera"
+                },
+                0
+            ]
+        },
+        {
+            "name": "fade",
+            "parameters": [
+
+                1,
+                800,
+                {
+                    "type": "snippets",
+                    "scope": "demo",
+                    "name": "handle-fade-easing"
+                },
+                {
+                    "type": "snippets",
+                    "scope": "demo",
+                    "name": "remove-fade"
+                }
+            ]
+        },
+        {
+            "name": "forces",
+            "parameters": [
+
+                [
+                    {
+                        "x": 0,
+                        "y": 800,
+                        "duration": 800,
+                        "$easing": {
+
+                            "type": "snippets",
+                            "scope": "demo",
+                            "name": "handle-forces-easing"
+                        },
+                        "elapsed": 0,
+                        "$ending": {
+
+                            "type": "snippets",
+                            "scope": "demo",
+                            "name": "remove-forces"
+                        },
+                        "$handling": false
+                    }
+                ]
+            ]
+        },
+        {
+            "name": "images",
+            "parameters": [
+
+                [
+                    {
+                        "name": "idle",
+                        "$source": {
+
+                            "type": "images",
+                            "scope": "demo",
+                            "name": "character-32x32"
+                        },
+                        "frames": [
+
+                            [1, 1, 32, 32],
+                            [2, 1, 32, 32],
+                            [3, 1, 32, 32],
+                            [4, 1, 32, 32],
+                            [5, 1, 32, 32],
+                            [6, 1, 32, 32],
+                            [7, 1, 32, 32],
+                            [8, 1, 32, 32]
+                        ],
+                        "frame": 0,
+                        "framerate": 8,
+                        "destination": [0, 0, 0, 64, 64],
+                        "opacity": 1
+                    }
+                ]
+            ]
+        },
+        {
+            "name": "inputs",
+            "parameters": [
+
+                [
+                    {
+                        "action": "KEY_UP",
+                        "state": "DOWN",
+                        "$command": {
+
+                            "type": "snippets",
+                            "scope": "demo",
+                            "name": "handle-command-up-start"
+                        }
+                    },
+                    {
+                        "action": "KEY_UP",
+                        "state": "UP",
+                        "$command": {
+
+                            "type": "snippets",
+                            "scope": "demo",
+                            "name": "handle-command-up-end"
+                        }
+                    },
+                    {
+                        "action": "KEY_RIGHT",
+                        "state": "DOWN",
+                        "$command": {
+
+                            "type": "snippets",
+                            "scope": "demo",
+                            "name": "handle-command-right-start"
+                        }
+                    },
+                    {
+                        "action": "KEY_RIGHT",
+                        "state": "UP",
+                        "$command": {
+
+                            "type": "snippets",
+                            "scope": "demo",
+                            "name": "handle-command-right-end"
+                        }
+                    },
+                    {
+                        "action": "KEY_DOWN",
+                        "state": "DOWN",
+                        "$command": {
+
+                            "type": "snippets",
+                            "scope": "demo",
+                            "name": "handle-command-down-start"
+                        }
+                    },
+                    {
+                        "action": "KEY_DOWN",
+                        "state": "UP",
+                        "$command": {
+
+                            "type": "snippets",
+                            "scope": "demo",
+                            "name": "handle-command-down-end"
+                        }
+                    },
+                    {
+                        "action": "KEY_LEFT",
+                        "state": "DOWN",
+                        "$command": {
+
+                            "type": "snippets",
+                            "scope": "demo",
+                            "name": "handle-command-left-start"
+                        }
+                    },
+                    {
+                        "action": "KEY_LEFT",
+                        "state": "UP",
+                        "$command": {
+
+                            "type": "snippets",
+                            "scope": "demo",
+                            "name": "handle-command-left-end"
+                        }
+                    }
+                ]
+            ]
+        },
+        {
+            "name": "origin",
+            "parameters": [{
+
+                "type": "$",
+                "name": "origin"
+            }]
+        },
+        {
+            "name": "position",
+            "parameters": [-32, -832, 0]
+        },
+        {
+            "name": "state",
+            "parameters": [
+
+                {
+                    "UP": 0,
+                    "RIGHT": 0,
+                    "DOWN": 0,
+                    "LEFT": 0
+                },
+                {
+                    "type": "snippets",
+                    "scope": "demo",
+                    "name": "handle-state"
+                }
+            ]
+        }
+    ]
+}

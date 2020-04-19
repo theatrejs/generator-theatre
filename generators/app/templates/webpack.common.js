@@ -48,6 +48,7 @@ module.exports = {
             'components': path.resolve(__dirname, 'sources/game/components/'),
             'entities': path.resolve(__dirname, 'sources/game/entities/'),
             'scenes': path.resolve(__dirname, 'sources/game/scenes/'),
+            'snippets': path.resolve(__dirname, 'sources/game/snippets/'),
             'systems': path.resolve(__dirname, 'sources/game/systems/'),
 
             'core': path.resolve(__dirname, 'sources/theatre/core/'),

@@ -4,19 +4,17 @@ function timeout(entities) {
 
         const timeoutComponent = entity.get('timeout');
 
-        timeoutComponent.elapsed += this.delta.update;
+        timeoutComponent.elapsed += this.delta;
 
-        if (timeoutComponent.elapsed >= timeoutComponent.duration) {
+        if (timeoutComponent.elapsed >= timeoutComponent.duration
+        && timeoutComponent.$ending !== false) {
+
+            const $source = timeoutComponent.$ending;
+            const $ending = this.snippets[$source.scope][$source.name];
 
             const extra = timeoutComponent.elapsed - timeoutComponent.duration;
-            const ending = timeoutComponent.ending;
 
-            entity.remove('timeout');
-
-            if (typeof ending === 'function') {
-
-                ending(entity, extra);
-            }
+            $ending(entity, extra);
         }
     });
 }

@@ -1,8 +1,8 @@
-function Camera(camera, opacity = 1) {
+function Camera($camera, opacity = 1) {
 
     this.name = 'camera';
 
-    this.camera = camera;
+    this.$camera = $camera;
     this.opacity = opacity;
 }
 

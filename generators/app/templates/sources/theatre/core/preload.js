@@ -25,7 +25,7 @@ function preload(context, handler) {
                 context(key).then((source) => {
 
                     asset.source = source;
-                    asset.getter = () => source;
+                    asset.getter = () => JSON.parse(JSON.stringify(source));
 
                     resolve(asset);
                 });

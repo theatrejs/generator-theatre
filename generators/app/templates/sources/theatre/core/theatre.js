@@ -62,9 +62,65 @@ function Theatre(config) {
         this.preloading = true;
     }
 
+    function components() {
+
+        const context = require.context('components/', true, /^\.\/[^\/]+\/[^\/]+\.js$/, 'sync');
+
+        this.components = {};
+
+        context.keys().forEach((key) => {
+
+            const name = key.match(/^\.\/[^\/]+\/([^\/]+)\.js$/)[1];
+
+            this.components[name] = context(key)[name.charAt(0).toUpperCase() + name.slice(1)];
+        });
+
+        if (typeof module.hot !== 'undefined') {
+
+            module.hot.accept(context.id, () => {
+
+                components.call(this);
+            });
+        }
+    }
+
+    function entities() {
+
+        const context = require.context('entities/', true, /^\.\/([^\/]+)\/([^\/]+)\.json$/, 'sync');
+
+        this.entities = {};
+
+        context.keys().forEach((key) => {
+
+            const [path, scope, name] = key.match(/^\.\/([^\/]+)\/([^\/]+)\.json$/);
+
+            if (typeof this.entities[scope] === 'undefined') {
+
+                this.entities[scope] = {};
+            }
+
+            if (typeof this.entities[scope][name] === 'undefined') {
+
+                this.entities[scope][name] = {};
+            }
+
+            const getter = () => JSON.parse(JSON.stringify(context(key)));
+
+            this.entities[scope][name] = getter;
+        });
+
+        if (typeof module.hot !== 'undefined') {
+
+            module.hot.accept(context.id, () => {
+
+                entities.call(this);
+            });
+        }
+    }
+
     function forward(timeframe) {
 
-        this.delta.update = timeframe;
+        this.delta = timeframe;
 
         if (container.offsetWidth !== this.size.width
         || container.offsetHeight !== this.size.height) {
@@ -101,21 +157,22 @@ function Theatre(config) {
         this.element = canvas.element;
 
         this.assets = {};
-        this.delta = {};
-        this.delta.render = 0;
-        this.delta.update = 0;
+        this.delta = 0;
 
         this.loop = new Loop(forward.bind(this), framerate, speed);
 
+        assets.call(this);
+        components.call(this);
+        entities.call(this);
         scenes.call(this);
+        snippets.call(this);
+        systems.call(this);
 
         this.scene = this.scenes.loading;
         this.scene.setup.call(this);
         this.scene.start.call(this);
 
         this.loop.update();
-
-        assets.call(this);
     }
 
     function load(scene) {
@@ -150,14 +207,88 @@ function Theatre(config) {
 
     function scenes() {
 
-        const context = require.context('scenes/', true, /^\.\/[^\/]+\/index\.js$/, 'sync');
+        const context = require.context('scenes/', true, /^\.\/([^\/]+)\/index\.js$/, 'sync');
+
+        this.scenes = {};
 
         context.keys().forEach((key) => {
 
-            const name = key.match(/^\.\/([^\/]+)\/index\.js$/)[1];
+            const [path, name] = key.match(/^\.\/([^\/]+)\/index\.js$/);
 
             this.scenes[name] = context(key);
         });
+
+        if (typeof module.hot !== 'undefined') {
+
+            module.hot.accept(context.id, () => {
+
+                scenes.call(this);
+            });
+        }
+    }
+
+    function snippets() {
+
+        const context = require.context('snippets/', true, /^\.\/([^\/]+)\/([^\/]+)\.js$/, 'sync');
+
+        this.snippets = {};
+
+        context.keys().forEach((key) => {
+
+            const [path, scope, name] = key.match(/^\.\/([^\/]+)\/([^\/]+)\.js$/);
+
+            if (typeof this.snippets[scope] === 'undefined') {
+
+                this.snippets[scope] = {};
+            }
+
+            if (typeof this.snippets[scope][name] === 'undefined') {
+
+                this.snippets[scope][name] = {};
+            }
+
+            this.snippets[scope][name] = context(key).default.bind(this);
+        });
+
+        if (typeof module.hot !== 'undefined') {
+
+            module.hot.accept(context.id, () => {
+
+                snippets.call(this);
+            });
+        }
+    }
+
+    function systems() {
+
+        const context = require.context('systems/', true, /^\.\/([^\/]+)\/([^\/]+)\.js$/, 'sync');
+
+        this.systems = {};
+
+        context.keys().forEach((key) => {
+
+            const [path, scope, name] = key.match(/^\.\/([^\/]+)\/([^\/]+)\.js$/);
+
+            if (typeof this.systems[scope] === 'undefined') {
+
+                this.systems[scope] = {};
+            }
+
+            if (typeof this.systems[scope][name] === 'undefined') {
+
+                this.systems[scope][name] = {};
+            }
+
+            this.systems[scope][name] = context(key)[name];
+        });
+
+        if (typeof module.hot !== 'undefined') {
+
+            module.hot.accept(context.id, () => {
+
+                systems.call(this);
+            });
+        }
     }
 
     function tick(times = 1) {
@@ -196,11 +327,15 @@ function Theatre(config) {
         }
     }
 
+    this.$ = {};
+    this.components = {};
+    this.entities = {};
     this.playing = true;
     this.preloading = false;
     this.scenes = {};
     this.size = size;
-    this.state = {};
+    this.snippets = {};
+    this.systems = {};
     this.version = '0.39.0';
 
     this.load = load;

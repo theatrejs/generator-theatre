@@ -1,4 +1,4 @@
-function Entity(name, components) {
+function Entity(name, components = [], catalog) {
 
     function add(components) {
 
@@ -7,10 +7,20 @@ function Entity(name, components) {
             components = [components];
         }
 
-        components.forEach((component) => {
+        components.forEach(({name, parameters}) => {
 
-            this.components[component.name] = component;
+            const $catalog = catalog();
+
+            if (name in $catalog) {
+
+                this.components[name] = new $catalog[name](...parameters);
+            }
         });
+    }
+
+    function empty() {
+
+        this.components = {};
     }
 
     function get(component) {
@@ -40,6 +50,12 @@ function Entity(name, components) {
         return true;
     }
 
+    function initialize(components) {
+
+        this.empty();
+        this.add(components);
+    }
+
     function remove(components) {
 
         if (Array.isArray(components) === false) {
@@ -62,14 +78,16 @@ function Entity(name, components) {
     this.name = name;
 
     this.add = add;
+    this.empty = empty;
     this.get = get;
     this.has = has;
+    this.initialize = initialize;
     this.remove = remove;
 
     this.add(components);
 }
 
-function World(context) {
+function World(context, catalog) {
 
     function add(entities) {
 
@@ -80,13 +98,24 @@ function World(context) {
 
         entities.forEach((entity) => {
 
-            this.entities[entity.name] = entity;
+            this.entities[entity.name] = new Entity(entity.name, entity.components, catalog);
         });
+    }
+
+    function empty() {
+
+        this.entities = {};
     }
 
     function get(entity) {
 
         return this.entities[entity];
+    }
+
+    function initialize(entities) {
+
+        this.empty();
+        this.add(entities);
     }
 
     function remove(entities) {
@@ -133,16 +162,12 @@ function World(context) {
     this.systems = {};
 
     this.add = add;
+    this.empty = empty;
     this.get = get;
+    this.initialize = initialize;
     this.remove = remove;
     this.system = system;
 }
 
-export {
-
-    // exports current module as an object
-    World,
-
-    // exports helpers for current module
-    Entity
-};
+// exports current module as an object
+export {World};

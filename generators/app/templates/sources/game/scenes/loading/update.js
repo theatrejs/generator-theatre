@@ -4,9 +4,9 @@ function update() {
 
     if (this.preloading === false) {
 
-        this.state.timeout += this.delta.update;
+        this.$.timeout += this.delta;
 
-        if (this.state.timeout >= 1000) {
+        if (this.$.timeout >= 1000) {
 
             this.load('demo');
         }

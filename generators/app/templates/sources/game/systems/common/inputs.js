@@ -4,23 +4,36 @@ function inputs(entities) {
 
     Object.entries(entities).forEach(([name, entity]) => {
 
-        this.$controllers.inputs.forEach(({action, state}) => {
+        this.$.controllers.inputs.forEach((input) => {
 
             const inputsComponent = entity.get('inputs');
 
-            inputsComponent.inputs.forEach((input) => {
+            inputsComponent.inputs.forEach((control) => {
 
-                if (input.action === action
-                && input.state === state) {
+                if (control.action === input.action
+                && control.state === input.state) {
+
+                    const command = {
+
+                        '$command': control.$command,
+                        'parameters': [input]
+                    };
 
                     if (entity.has('commands') === true) {
 
-                        entity.get('commands').commands.push(input.command);
+                        entity.get('commands').commands.push(command);
                     }
 
                     else {
 
-                        entity.add(new Commands([input.command]));
+                        entity.add({
+
+                            'name': 'commands',
+                            'parameters': [
+
+                                [command]
+                            ]
+                        });
                     }
                 }
             });
