@@ -336,7 +336,7 @@ function Theatre(config) {
     this.size = size;
     this.snippets = {};
     this.systems = {};
-    this.version = '0.39.0';
+    this.version = '0.40.0';
 
     this.load = load;
     this.pause = pause;
