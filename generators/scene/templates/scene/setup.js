@@ -6,25 +6,21 @@ function setup() {
 
     console.log('lifecycle :', 'setup <%= title %> scene');
 
-    this.$origins = {
+    this.$.controllers = new Controllers(this.element, [
 
-        'default': {
-
-            'x': this.size.width / 2,
-            'y': this.size.height / 2,
-            'z': 0,
-            'scale': 1
-        }
-    };
-
-    this.$world = new World(this);
-    this.$camera = new Camera(this.context, this.size.width, this.size.height);
-
-    this.$controllers = new Controllers(this.element, [
-
-        ...this.assets.datasets.common['inputs'](),
         ...this.assets.datasets.<%= title %>['inputs']()
     ]);
+
+    this.$.origin = {
+
+        'x': () => this.size.width / 2,
+        'y': () => this.size.height / 2,
+        'z': () => 0,
+        'scale': () => 1
+    };
+
+    this.$.camera = new Camera(this.context, () => this.size.width, () => this.size.height);
+    this.$.world = new World(this, () => this.components);
 }
 
 export {setup};

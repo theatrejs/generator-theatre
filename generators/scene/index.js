@@ -24,6 +24,10 @@ module.exports = class extends Generator {
             this.destinationPath('sources/game/assets/datasets/' + this.answers.title),
             {
                 'title': this.answers.title
+            },
+            undefined,
+            {
+                'globOptions': {'dot': true}
             }
         );
 
@@ -90,6 +94,24 @@ module.exports = class extends Generator {
             this.destinationPath('sources/game/scenes/' + this.answers.title),
             {
                 'title': this.answers.title
+            },
+            undefined,
+            {
+                'globOptions': {'dot': true}
+            }
+        );
+
+        // generates snippets structure
+        this.fs.copyTpl(
+
+            this.templatePath('./snippets/**/*'),
+            this.destinationPath('sources/game/snippets/' + this.answers.title),
+            {
+                'title': this.answers.title
+            },
+            undefined,
+            {
+                'globOptions': {'dot': true}
             }
         );
 
@@ -100,6 +122,10 @@ module.exports = class extends Generator {
             this.destinationPath('sources/game/systems/' + this.answers.title),
             {
                 'title': this.answers.title
+            },
+            undefined,
+            {
+                'globOptions': {'dot': true}
             }
         );
     }

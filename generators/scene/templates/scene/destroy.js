@@ -3,12 +3,12 @@ function destroy() {
     console.log('lifecycle :', 'destroy <%= title %> scene');
     console.log('---------');
 
-    this.$controllers.destroy();
+    this.$.controllers.destroy();
 
-    delete this.$camera;
-    delete this.$controllers;
-    delete this.$origins;
-    delete this.$world;
+    delete this.$.camera;
+    delete this.$.controllers;
+    delete this.$.origins;
+    delete this.$.world;
 }
 
 export {destroy};
