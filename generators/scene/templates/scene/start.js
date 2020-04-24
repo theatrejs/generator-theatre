@@ -6,6 +6,12 @@ function start() {
 
         //
     ]);
+
+    this.$.camera.look(
+
+        this.$.origin.x,
+        this.$.origin.y
+    );
 }
 
 export {start};

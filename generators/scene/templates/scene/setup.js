@@ -13,13 +13,21 @@ function setup() {
 
     this.$.origin = {
 
-        'x': () => this.size.width / 2,
-        'y': () => this.size.height / 2,
+        'x': () => 0,
+        'y': () => 0,
         'z': () => 0,
         'scale': () => 1
     };
 
-    this.$.camera = new Camera(this.context, () => this.size.width, () => this.size.height);
+    this.$.camera = new Camera(this.context, 'default', {
+
+        'x': () => 0,
+        'y': () => 0,
+        'width': () => this.size.width,
+        'height': () => this.size.height,
+        'scale': () => 1
+    });
+
     this.$.world = new World(this, () => this.components);
 }
 
