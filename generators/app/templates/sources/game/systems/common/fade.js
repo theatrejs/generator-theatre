@@ -4,12 +4,22 @@ function fade(entities) {
 
     Object.entries(entities).forEach(([name, entity]) => {
 
-        const cameraComponent = entity.get('camera');
         const fadeComponent = entity.get('fade');
+
+        if (entity.has('opacity') === false) {
+
+            entity.add({
+
+                'name': 'opacity',
+                'parameters': [1]
+            });
+        }
+
+        const opacityComponent = entity.get('opacity');
 
         if (fadeComponent.fade === null) {
 
-            fadeComponent.fade = fadeComponent.opacity - cameraComponent.opacity;
+            fadeComponent.fade = fadeComponent.opacity - opacityComponent.opacity;
         }
 
         const $source = fadeComponent.$easing;
@@ -21,7 +31,7 @@ function fade(entities) {
         const progress = (fadeComponent.elapsed + delta) / fadeComponent.duration;
         const faded = fadeComponent.fade * $easing(progress);
 
-        cameraComponent.opacity += faded - fadeComponent.faded;
+        opacityComponent.opacity += faded - fadeComponent.faded;
         fadeComponent.faded = faded;
 
         fadeComponent.elapsed += delta;

@@ -5,10 +5,11 @@ function debug(entities) {
         this.snippets.demo['handle-debug-inputs'](input);
     });
 
+    this.snippets.demo['draw-debug-camera'](this.$.camera);
+
     Object.entries(entities).forEach(([name, entity]) => {
 
-        if (entity.has(['camera', 'images', 'origin', 'position']) === true
-        && entity.get('camera').opacity > 0) {
+        if (entity.has(['cameras', 'images', 'origin', 'position']) === true) {
 
             const imagesComponent = entity.get('images');
 

@@ -6,7 +6,7 @@ function update() {
     this.$.world.system('commands', ['commands'], this.systems.common.commands);
     this.$.world.system('state', ['state'], this.systems.common.state);
     this.$.world.system('forces', ['position', 'forces'], this.systems.common.forces);
-    this.$.world.system('fade', ['camera', 'fade'], this.systems.common.fade);
+    this.$.world.system('fade', ['fade'], this.systems.common.fade);
     this.$.world.system('spritesheets', ['images'], this.systems.common.spritesheets);
 
     this.$.camera.update(this.delta);

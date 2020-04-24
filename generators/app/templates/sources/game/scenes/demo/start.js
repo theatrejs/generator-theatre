@@ -9,6 +9,12 @@ function start() {
         this.entities.demo.character(),
         this.entities.demo.controls()
     ]);
+
+    this.$.camera.look(
+
+        this.$.origin.x,
+        this.$.origin.y
+    );
 }
 
 export {start};

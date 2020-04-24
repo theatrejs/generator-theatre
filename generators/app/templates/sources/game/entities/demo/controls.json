@@ -3,14 +3,19 @@
     "components": [
 
         {
-            "name": "camera",
+            "name": "cameras",
             "parameters": [
 
-                {
-                    "type": "$",
-                    "name": "camera"
-                },
-                0
+                [
+                    {
+                        "$camera": {
+
+                            "type": "$",
+                            "name": "camera"
+                        },
+                        "opacity": 1
+                    }
+                ]
             ]
         },
         {
@@ -90,6 +95,10 @@
             ]
         },
         {
+            "name": "opacity",
+            "parameters": [0]
+        },
+        {
             "name": "origin",
             "parameters": [{
 
@@ -99,7 +108,7 @@
         },
         {
             "name": "position",
-            "parameters": [-32, -32, 0]
+            "parameters": [-32, -32, 1]
         },
         {
             "name": "timeout",

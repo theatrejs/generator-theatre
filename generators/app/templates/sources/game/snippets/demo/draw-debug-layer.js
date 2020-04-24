@@ -1,9 +1,9 @@
 export default function (entity, spritesheet) {
 
-    this.context.save();
-
     const width = 2;
     const offset = width / 2;
+
+    this.context.save();
 
     this.context.lineWidth = width;
     this.context.font = 'bold 16px Courier New';

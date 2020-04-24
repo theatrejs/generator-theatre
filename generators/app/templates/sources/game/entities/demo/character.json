@@ -3,14 +3,19 @@
     "components": [
 
         {
-            "name": "camera",
+            "name": "cameras",
             "parameters": [
 
-                {
-                    "type": "$",
-                    "name": "camera"
-                },
-                0
+                [
+                    {
+                        "$camera": {
+
+                            "type": "$",
+                            "name": "camera"
+                        },
+                        "opacity": 1
+                    }
+                ]
             ]
         },
         {
@@ -177,6 +182,10 @@
                     }
                 ]
             ]
+        },
+        {
+            "name": "opacity",
+            "parameters": [0]
         },
         {
             "name": "origin",
