@@ -1,23 +1,14 @@
 {
     "name": "character",
-    "components": [
+    "models": [
 
         {
-            "name": "cameras",
-            "parameters": [
+            "scope": "demo",
+            "name": "display"
+        }
+    ],
+    "components": [
 
-                [
-                    {
-                        "$camera": {
-
-                            "type": "$",
-                            "name": "camera"
-                        },
-                        "opacity": 1
-                    }
-                ]
-            ]
-        },
         {
             "name": "fade",
             "parameters": [
@@ -101,7 +92,7 @@
 
                 [
                     {
-                        "action": "KEY_UP",
+                        "actions": ["KEY_UP", "GAMEPAD_UP", "GAMEPAD_LS_UP"],
                         "state": "DOWN",
                         "$command": {
 
@@ -111,7 +102,7 @@
                         }
                     },
                     {
-                        "action": "KEY_UP",
+                        "actions": ["KEY_UP", "GAMEPAD_UP", "GAMEPAD_LS_UP"],
                         "state": "UP",
                         "$command": {
 
@@ -121,7 +112,7 @@
                         }
                     },
                     {
-                        "action": "KEY_RIGHT",
+                        "actions": ["KEY_RIGHT", "GAMEPAD_RIGHT", "GAMEPAD_LS_RIGHT"],
                         "state": "DOWN",
                         "$command": {
 
@@ -131,7 +122,7 @@
                         }
                     },
                     {
-                        "action": "KEY_RIGHT",
+                        "actions": ["KEY_RIGHT", "GAMEPAD_RIGHT", "GAMEPAD_LS_RIGHT"],
                         "state": "UP",
                         "$command": {
 
@@ -141,7 +132,7 @@
                         }
                     },
                     {
-                        "action": "KEY_DOWN",
+                        "actions": ["KEY_DOWN", "GAMEPAD_DOWN", "GAMEPAD_LS_DOWN"],
                         "state": "DOWN",
                         "$command": {
 
@@ -151,7 +142,7 @@
                         }
                     },
                     {
-                        "action": "KEY_DOWN",
+                        "actions": ["KEY_DOWN", "GAMEPAD_DOWN", "GAMEPAD_LS_DOWN"],
                         "state": "UP",
                         "$command": {
 
@@ -161,7 +152,7 @@
                         }
                     },
                     {
-                        "action": "KEY_LEFT",
+                        "actions": ["KEY_LEFT", "GAMEPAD_LEFT", "GAMEPAD_LS_LEFT"],
                         "state": "DOWN",
                         "$command": {
 
@@ -171,7 +162,7 @@
                         }
                     },
                     {
-                        "action": "KEY_LEFT",
+                        "actions": ["KEY_LEFT", "GAMEPAD_LEFT", "GAMEPAD_LS_LEFT"],
                         "state": "UP",
                         "$command": {
 
@@ -182,18 +173,6 @@
                     }
                 ]
             ]
-        },
-        {
-            "name": "opacity",
-            "parameters": [0]
-        },
-        {
-            "name": "origin",
-            "parameters": [{
-
-                "type": "$",
-                "name": "origin"
-            }]
         },
         {
             "name": "position",

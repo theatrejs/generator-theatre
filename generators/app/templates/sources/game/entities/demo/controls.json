@@ -1,23 +1,14 @@
 {
     "name": "controls",
-    "components": [
+    "models": [
 
         {
-            "name": "cameras",
-            "parameters": [
+            "scope": "demo",
+            "name": "display"
+        }
+    ],
+    "components": [
 
-                [
-                    {
-                        "$camera": {
-
-                            "type": "$",
-                            "name": "camera"
-                        },
-                        "opacity": 1
-                    }
-                ]
-            ]
-        },
         {
             "name": "images",
             "parameters": [
@@ -93,18 +84,6 @@
                     }
                 ]
             ]
-        },
-        {
-            "name": "opacity",
-            "parameters": [0]
-        },
-        {
-            "name": "origin",
-            "parameters": [{
-
-                "type": "$",
-                "name": "origin"
-            }]
         },
         {
             "name": "position",

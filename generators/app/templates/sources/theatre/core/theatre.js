@@ -104,7 +104,20 @@ function Theatre(config) {
                 this.entities[scope][name] = {};
             }
 
-            const getter = () => JSON.parse(JSON.stringify(context(key)));
+            const entity = JSON.parse(JSON.stringify(context(key)));
+
+            if (entity.hasOwnProperty('models') === true) {
+
+                entity.models.reverse().forEach((model) => {
+
+                    const {scope, name} = model;
+                    const components = this.models[scope][name]().components;
+
+                    entity.components = components.concat(entity.components);
+                });
+            }
+
+            const getter = () => JSON.parse(JSON.stringify(entity));
 
             this.entities[scope][name] = getter;
         });
@@ -163,6 +176,7 @@ function Theatre(config) {
 
         assets.call(this);
         components.call(this);
+        models.call(this);
         entities.call(this);
         scenes.call(this);
         snippets.call(this);
@@ -178,6 +192,41 @@ function Theatre(config) {
     function load(scene) {
 
         loading = scene;
+    }
+
+    function models() {
+
+        const context = require.context('models/', true, /^\.\/([^\/]+)\/([^\/]+)\.json$/, 'sync');
+
+        this.models = {};
+
+        context.keys().forEach((key) => {
+
+            const [path, scope, name] = key.match(/^\.\/([^\/]+)\/([^\/]+)\.json$/);
+
+            if (typeof this.models[scope] === 'undefined') {
+
+                this.models[scope] = {};
+            }
+
+            if (typeof this.models[scope][name] === 'undefined') {
+
+                this.models[scope][name] = {};
+            }
+
+            const getter = () => JSON.parse(JSON.stringify(context(key)));
+
+            this.models[scope][name] = getter;
+        });
+
+        if (typeof module.hot !== 'undefined') {
+
+            module.hot.accept(context.id, () => {
+
+                models.call(this);
+                entities.call(this);
+            });
+        }
     }
 
     function pause() {
@@ -330,6 +379,7 @@ function Theatre(config) {
     this.$ = {};
     this.components = {};
     this.entities = {};
+    this.models = {};
     this.playing = true;
     this.preloading = false;
     this.scenes = {};

@@ -10,7 +10,8 @@ function inputs(entities) {
 
             inputsComponent.inputs.forEach((control) => {
 
-                if (control.action === input.action
+                if (Array.isArray(control.actions) === true
+                && control.actions.indexOf(input.action) !== -1
                 && control.state === input.state) {
 
                     const command = {
