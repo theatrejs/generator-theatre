@@ -87,6 +87,20 @@ module.exports = class extends Generator {
             }
         );
 
+        // generates models structure
+        this.fs.copyTpl(
+
+            this.templatePath('./models/**/*'),
+            this.destinationPath('sources/game/models/' + this.answers.title),
+            {
+                'title': this.answers.title
+            },
+            undefined,
+            {
+                'globOptions': {'dot': true}
+            }
+        );
+
         // generates scene structure
         this.fs.copyTpl(
 
