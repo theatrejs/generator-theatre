@@ -15,6 +15,7 @@ app.on('ready', () => {
 
         'frame': false,
         'fullscreen': true,
+        'icon': path.resolve(__dirname, 'icon.ico'),
         'resizable': false,
         'useContentSize': true,
         'webPreferences': {

@@ -36,9 +36,9 @@
     "scripts": {
 
         "build": "npm run build:linux:64 && npm run build:windows:32 && npm run build:windows:64",
-        "build:linux:64": "electron-packager dist/ <%= title %> --arch=x64 --asar --out=build/ --overwrite --platform=linux",
-        "build:windows:32": "electron-packager dist/ <%= title %> --arch=ia32 --asar --out=build/ --overwrite --platform=win32",
-        "build:windows:64": "electron-packager dist/ <%= title %> --arch=x64 --asar --out=build/ --overwrite --platform=win32",
+        "build:linux:64": "electron-packager dist/ <%= title %> --arch=x64 --asar --icon=dist/icon.ico --out=build/ --overwrite --platform=linux",
+        "build:windows:32": "electron-packager dist/ <%= title %> --arch=ia32 --asar --icon=dist/icon.ico --out=build/ --overwrite --platform=win32",
+        "build:windows:64": "electron-packager dist/ <%= title %> --arch=x64 --asar --icon=dist/icon.ico --out=build/ --overwrite --platform=win32",
         "dist": "webpack --config webpack.production.js",
         "electron": "electron dist/",
         "postinstall": "npm run dist",
