@@ -1,6 +1,6 @@
 const merge = require('webpack-merge');
 
-const WebpackNotifierPlugin = require('webpack-notifier');
+const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 
 module.exports = merge(require('./webpack.common.js'), {
 
@@ -8,6 +8,6 @@ module.exports = merge(require('./webpack.common.js'), {
     'mode': 'production',
     'plugins': [
 
-        new WebpackNotifierPlugin()
+        new FriendlyErrorsWebpackPlugin()
     ]
 });

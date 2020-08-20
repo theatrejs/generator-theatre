@@ -2,7 +2,7 @@ const merge = require('webpack-merge');
 const path = require('path');
 const webpack = require('webpack');
 
-const WebpackNotifierPlugin = require('webpack-notifier');
+const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 
 module.exports = merge(require('./webpack.common.js'), {
 
@@ -24,7 +24,7 @@ module.exports = merge(require('./webpack.common.js'), {
     'mode': 'development',
     'plugins': [
 
-        new webpack.HotModuleReplacementPlugin(),
-        new WebpackNotifierPlugin()
+        new FriendlyErrorsWebpackPlugin(),
+        new webpack.HotModuleReplacementPlugin()
     ]
 });
