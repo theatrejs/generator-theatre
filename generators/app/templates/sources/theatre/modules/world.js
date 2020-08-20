@@ -13,7 +13,14 @@ function Entity(name, components = [], catalog) {
 
             if (name in $catalog) {
 
-                this.components[name] = new $catalog[name](...parameters);
+                let reference = parameters;
+
+                if (typeof reference === 'undefined') {
+
+                    reference = $catalog[name]();
+                }
+
+                this.components[name] = reference;
             }
         });
     }

@@ -1,5 +1,3 @@
-import {Commands} from 'components/common/commands.js';
-
 function inputs(entities) {
 
     Object.entries(entities).forEach(([name, entity]) => {
@@ -8,7 +6,7 @@ function inputs(entities) {
 
             const inputsComponent = entity.get('inputs');
 
-            inputsComponent.inputs.forEach((control) => {
+            inputsComponent.forEach((control) => {
 
                 if (Array.isArray(control.actions) === true
                 && control.actions.indexOf(input.action) !== -1
@@ -22,7 +20,7 @@ function inputs(entities) {
 
                     if (entity.has('commands') === true) {
 
-                        entity.get('commands').commands.push(command);
+                        entity.get('commands').push(command);
                     }
 
                     else {
@@ -30,10 +28,7 @@ function inputs(entities) {
                         entity.add({
 
                             'name': 'commands',
-                            'parameters': [
-
-                                [command]
-                            ]
+                            'parameters': [command]
                         });
                     }
                 }

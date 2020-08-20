@@ -1,0 +1,13 @@
+{
+    "state": {
+
+        "IDLE": 1
+    },
+    "$handling": {
+
+        "type": "snippets",
+        "scope": "common",
+        "name": "handle-state"
+    },
+    "changes": []
+}

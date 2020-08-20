@@ -1,0 +1,14 @@
+[
+    {
+        "$command": {
+
+            "type": "snippets",
+            "scope": "common",
+            "name": "handle-command"
+        },
+        "parameters": [
+
+            "Hello, friend."
+        ]
+    }
+]

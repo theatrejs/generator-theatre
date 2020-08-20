@@ -3,21 +3,23 @@ export default function (entity, extra) {
     entity.add({
 
         'name': 'fade',
-        'parameters': [
+        'parameters': {
 
-            1,
-            800,
-            {
-                'type': 'snippets',
-                'scope': 'demo',
-                'name': 'handle-fade-easing'
+            "opacity": 1,
+            "duration": 800,
+            "$easing": {
+
+                "type": "snippets",
+                "scope": "demo",
+                "name": "handle-fade-easing"
             },
-            {
-                'type': 'snippets',
-                'scope': 'demo',
-                'name': 'remove-fade'
+            "$ending": {
+
+                "type": "snippets",
+                "scope": "common",
+                "name": "remove-fade"
             },
-            extra
-        ]
+            "elapsed": extra
+        }
     });
 };

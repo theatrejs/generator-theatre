@@ -6,8 +6,7 @@ function start() {
 
     this.$.world.initialize([
 
-        this.entities.demo.character(),
-        this.entities.demo.controls()
+        ...this.pools.demo.start()
     ]);
 
     this.$.camera.look(

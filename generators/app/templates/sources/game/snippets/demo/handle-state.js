@@ -1,7 +1,7 @@
 export default function (entity, changes) {
 
     const state = entity.get('state').state;
-    const part = entity.get('images').parts[0];
+    const part = entity.get('images')[0];
 
     switch ('' + state.UP + state.RIGHT + state.DOWN + state.LEFT) {
 

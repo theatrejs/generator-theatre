@@ -1,0 +1,17 @@
+{
+    "opacity": 0,
+    "duration": 1000,
+    "$easing": {
+
+        "type": "snippets",
+        "scope": "common",
+        "name": "easing-linear"
+    },
+    "$ending": {
+
+        "type": "snippets",
+        "scope": "common",
+        "name": "handle-fade-ending"
+    },
+    "elapsed": 0
+}

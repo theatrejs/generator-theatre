@@ -64,15 +64,17 @@ function Theatre(config) {
 
     function components() {
 
-        const context = require.context('components/', true, /^\.\/[^\/]+\/[^\/]+\.js$/, 'sync');
+        const context = require.context('components/', true, /^\.\/[^\/]+\.json$/, 'sync');
 
         this.components = {};
 
         context.keys().forEach((key) => {
 
-            const name = key.match(/^\.\/[^\/]+\/([^\/]+)\.js$/)[1];
+            const name = key.match(/^\.\/([^\/]+)\.json$/)[1];
+            const component = context(key);
+            const getter = () => JSON.parse(JSON.stringify(component));
 
-            this.components[name] = context(key)[name.charAt(0).toUpperCase() + name.slice(1)];
+            this.components[name] = getter;
         });
 
         if (typeof module.hot !== 'undefined') {
@@ -106,15 +108,9 @@ function Theatre(config) {
 
             const entity = JSON.parse(JSON.stringify(context(key)));
 
-            if (entity.hasOwnProperty('models') === true) {
+            if (entity.hasOwnProperty('components') === false) {
 
-                entity.models.reverse().forEach((model) => {
-
-                    const {scope, name} = model;
-                    const components = this.models[scope][name]().components;
-
-                    entity.components = components.concat(entity.components);
-                });
+                entity.components = [];
             }
 
             const getter = () => JSON.parse(JSON.stringify(entity));
@@ -127,6 +123,7 @@ function Theatre(config) {
             module.hot.accept(context.id, () => {
 
                 entities.call(this);
+                pools.call(this);
             });
         }
     }
@@ -176,8 +173,8 @@ function Theatre(config) {
 
         assets.call(this);
         components.call(this);
-        models.call(this);
         entities.call(this);
+        pools.call(this);
         scenes.call(this);
         snippets.call(this);
         systems.call(this);
@@ -194,41 +191,6 @@ function Theatre(config) {
         loading = scene;
     }
 
-    function models() {
-
-        const context = require.context('models/', true, /^\.\/([^\/]+)\/([^\/]+)\.json$/, 'sync');
-
-        this.models = {};
-
-        context.keys().forEach((key) => {
-
-            const [path, scope, name] = key.match(/^\.\/([^\/]+)\/([^\/]+)\.json$/);
-
-            if (typeof this.models[scope] === 'undefined') {
-
-                this.models[scope] = {};
-            }
-
-            if (typeof this.models[scope][name] === 'undefined') {
-
-                this.models[scope][name] = {};
-            }
-
-            const getter = () => JSON.parse(JSON.stringify(context(key)));
-
-            this.models[scope][name] = getter;
-        });
-
-        if (typeof module.hot !== 'undefined') {
-
-            module.hot.accept(context.id, () => {
-
-                models.call(this);
-                entities.call(this);
-            });
-        }
-    }
-
     function pause() {
 
         this.playing = false;
@@ -237,6 +199,60 @@ function Theatre(config) {
     function play() {
 
         this.playing = true;
+    }
+
+    function pools() {
+
+        const context = require.context('pools/', true, /^\.\/([^\/]+)\/([^\/]+)\.json$/, 'sync');
+
+        this.pools = {};
+
+        context.keys().forEach((key) => {
+
+            const [path, scope, name] = key.match(/^\.\/([^\/]+)\/([^\/]+)\.json$/);
+
+            if (typeof this.pools[scope] === 'undefined') {
+
+                this.pools[scope] = {};
+            }
+
+            if (typeof this.pools[scope][name] === 'undefined') {
+
+                this.pools[scope][name] = {};
+            }
+
+            const pools = JSON.parse(JSON.stringify(context(key)));
+
+            pools.forEach((entity) => {
+
+                if (entity.hasOwnProperty('components') === false) {
+
+                    entity.components = [];
+                }
+
+                const components = this.entities[entity.entity.scope][entity.entity.name]().components;
+
+                entity.components = components
+                .concat(entity.components)
+                .reverse()
+                .filter((component, index, self) => index === self.findIndex((model) => component.name === model.name))
+                .reverse();
+
+                delete entity.entity;
+            });
+
+            const getter = () => JSON.parse(JSON.stringify(pools));
+
+            this.pools[scope][name] = getter;
+        });
+
+        if (typeof module.hot !== 'undefined') {
+
+            module.hot.accept(context.id, () => {
+
+                pools.call(this);
+            });
+        }
     }
 
     function resize() {
@@ -379,8 +395,8 @@ function Theatre(config) {
     this.$ = {};
     this.components = {};
     this.entities = {};
-    this.models = {};
     this.playing = true;
+    this.pools = {};
     this.preloading = false;
     this.scenes = {};
     this.size = size;

@@ -7,7 +7,7 @@ export default function (spritesheet, entity) {
     const originComponent = entity.get('origin');
     const positionComponent = entity.get('position');
 
-    camerasComponent.cameras.forEach((camera) => {
+    camerasComponent.forEach((camera) => {
 
         const $camera = this.$[camera.$camera.name];
         const $origin = this.$[originComponent.$origin.name];

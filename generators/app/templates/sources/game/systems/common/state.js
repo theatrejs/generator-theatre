@@ -14,7 +14,6 @@ function state(entities) {
             stateComponent.changes = [];
 
             $handling(entity, changes);
-
         }
     });
 }

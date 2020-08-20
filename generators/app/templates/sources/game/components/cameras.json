@@ -1,0 +1,10 @@
+[
+    {
+        "$camera": {
+
+            "type": "$",
+            "name": "camera"
+        },
+        "opacity": 1
+    }
+]

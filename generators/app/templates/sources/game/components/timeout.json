@@ -1,0 +1,10 @@
+{
+    "duration": 1000,
+    "elapsed": 0,
+    "$ending": {
+
+        "type": "snippets",
+        "scope": "common",
+        "name": "handle-timeout-ending"
+    }
+}

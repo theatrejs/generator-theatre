@@ -4,7 +4,7 @@ function spritesheets(entities) {
 
         const imagesComponent = entity.get('images');
 
-        imagesComponent.parts.forEach((image) => {
+        imagesComponent.forEach((image) => {
 
             const {framerate, frames} = image;
 

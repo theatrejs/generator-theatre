@@ -1,0 +1,107 @@
+[
+    {
+        "name": "demo-character",
+        "entity": {
+
+            "scope": "demo",
+            "name": "character"
+        },
+        "components": [
+
+            {
+                "name": "fade",
+                "parameters": {
+
+                    "opacity": 1,
+                    "duration": 800,
+                    "$easing": {
+
+                        "type": "snippets",
+                        "scope": "demo",
+                        "name": "handle-fade-easing"
+                    },
+                    "$ending": {
+
+                        "type": "snippets",
+                        "scope": "common",
+                        "name": "remove-fade"
+                    },
+                    "elapsed": 0
+                }
+            },
+            {
+                "name": "forces",
+                "parameters": [
+
+                    {
+                        "x": 0,
+                        "y": 800,
+                        "duration": 800,
+                        "$easing": {
+
+                            "type": "snippets",
+                            "scope": "demo",
+                            "name": "handle-forces-easing"
+                        },
+                        "$handling": false,
+                        "$ending": {
+
+                            "type": "snippets",
+                            "scope": "common",
+                            "name": "remove-forces"
+                        },
+                        "elapsed": 0
+                    }
+                ]
+            },
+            {
+                "name": "opacity",
+                "parameters": {
+
+                    "opacity": 0
+                }
+            },
+            {
+                "name": "position",
+                "parameters": {
+
+                    "x": -32,
+                    "y": -832,
+                    "z": 0
+                }
+            }
+        ]
+    },
+    {
+        "name": "demo-controls",
+        "entity": {
+
+            "scope": "demo",
+            "name": "controls"
+        },
+        "components": [
+
+            {
+                "name": "opacity",
+                "parameters": {
+
+                    "opacity": 0
+                }
+            },
+            {
+                "name": "timeout",
+                "parameters": {
+
+                    "duration": 800,
+                    "elapsed": 0,
+                    "$ending": {
+
+                        "type": "snippets",
+                        "scope": "demo",
+                        "name": "handle-timeout-ending"
+                    }
+                }
+            }
+        ]
+    }
+]

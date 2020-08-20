@@ -13,7 +13,7 @@ function debug(entities) {
 
             const imagesComponent = entity.get('images');
 
-            imagesComponent.parts.forEach((spritesheet) => {
+            imagesComponent.forEach((spritesheet) => {
 
                 this.snippets.demo['handle-debug-spritesheet'](spritesheet, entity);
             });

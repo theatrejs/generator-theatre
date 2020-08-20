@@ -11,15 +11,23 @@ function fade(entities) {
             entity.add({
 
                 'name': 'opacity',
-                'parameters': [1]
+                'parameters': {
+
+                    "opacity": 1
+                }
             });
         }
 
         const opacityComponent = entity.get('opacity');
 
-        if (fadeComponent.fade === null) {
+        if (typeof fadeComponent.fade === 'undefined') {
 
             fadeComponent.fade = fadeComponent.opacity - opacityComponent.opacity;
+        }
+
+        if (typeof fadeComponent.faded === 'undefined') {
+
+            fadeComponent.faded = 0;
         }
 
         const $source = fadeComponent.$easing;

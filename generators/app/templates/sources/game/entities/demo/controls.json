@@ -1,105 +1,99 @@
 {
     "name": "controls",
-    "models": [
-
-        {
-            "scope": "demo",
-            "name": "display"
-        }
-    ],
     "components": [
 
+        {
+            "name": "cameras"
+        },
         {
             "name": "images",
             "parameters": [
 
-                [
-                    {
-                        "name": "up",
-                        "$source": {
+                {
+                    "name": "up",
+                    "$source": {
 
-                            "type": "images",
-                            "scope": "demo",
-                            "name": "controls-32x32"
-                        },
-                        "frames": [
-
-                            [1, 1, 32, 32]
-                        ],
-                        "frame": 0,
-                        "framerate": 1,
-                        "destination": [0, -64, 0, 64, 64],
-                        "opacity": 1
+                        "type": "images",
+                        "scope": "demo",
+                        "name": "controls-32x32"
                     },
-                    {
-                        "name": "right",
-                        "$source": {
+                    "frames": [
 
-                            "type": "images",
-                            "scope": "demo",
-                            "name": "controls-32x32"
-                        },
-                        "frames": [
+                        [1, 1, 32, 32]
+                    ],
+                    "frame": 0,
+                    "framerate": 1,
+                    "destination": [0, -64, 0, 64, 64],
+                    "opacity": 1,
+                    "elapsed": 0
+                },
+                {
+                    "name": "right",
+                    "$source": {
 
-                            [1, 2, 32, 32]
-                        ],
-                        "frame": 0,
-                        "framerate": 1,
-                        "destination": [64, 0, 0, 64, 64],
-                        "opacity": 1
+                        "type": "images",
+                        "scope": "demo",
+                        "name": "controls-32x32"
                     },
-                    {
-                        "name": "down",
-                        "$source": {
+                    "frames": [
 
-                            "type": "images",
-                            "scope": "demo",
-                            "name": "controls-32x32"
-                        },
-                        "frames": [
+                        [1, 2, 32, 32]
+                    ],
+                    "frame": 0,
+                    "framerate": 1,
+                    "destination": [64, 0, 0, 64, 64],
+                    "opacity": 1,
+                    "elapsed": 0
+                },
+                {
+                    "name": "down",
+                    "$source": {
 
-                            [1, 3, 32, 32]
-                        ],
-                        "frame": 0,
-                        "framerate": 1,
-                        "destination": [0, 64, 0, 64, 64],
-                        "opacity": 1
+                        "type": "images",
+                        "scope": "demo",
+                        "name": "controls-32x32"
                     },
-                    {
-                        "name": "left",
-                        "$source": {
+                    "frames": [
 
-                            "type": "images",
-                            "scope": "demo",
-                            "name": "controls-32x32"
-                        },
-                        "frames": [
+                        [1, 3, 32, 32]
+                    ],
+                    "frame": 0,
+                    "framerate": 1,
+                    "destination": [0, 64, 0, 64, 64],
+                    "opacity": 1,
+                    "elapsed": 0
+                },
+                {
+                    "name": "left",
+                    "$source": {
 
-                            [1, 4, 32, 32]
-                        ],
-                        "frame": 0,
-                        "framerate": 1,
-                        "destination": [-64, 0, 0, 64, 64],
-                        "opacity": 1
-                    }
-                ]
+                        "type": "images",
+                        "scope": "demo",
+                        "name": "controls-32x32"
+                    },
+                    "frames": [
+
+                        [1, 4, 32, 32]
+                    ],
+                    "frame": 0,
+                    "framerate": 1,
+                    "destination": [-64, 0, 0, 64, 64],
+                    "opacity": 1,
+                    "elapsed": 0
+                }
             ]
+        },
+        {
+            "name": "origin"
         },
         {
             "name": "position",
-            "parameters": [-32, -32, 1]
-        },
-        {
-            "name": "timeout",
-            "parameters": [
+            "parameters": {
 
-                800,
-                {
-                    "type": "snippets",
-                    "scope": "demo",
-                    "name": "handle-timeout-ending"
-                }
-            ]
+                "x": -32,
+                "y": -32,
+                "z": 1
+            }
         }
     ]
 }

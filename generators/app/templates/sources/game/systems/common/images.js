@@ -7,12 +7,12 @@ function images(entities) {
         const originComponent = entity.get('origin');
         const positionComponent = entity.get('position');
 
-        camerasComponent.cameras.forEach((camera) => {
+        camerasComponent.forEach((camera) => {
 
             const $camera = this.$[camera.$camera.name];
             const $origin = this.$[originComponent.$origin.name];
 
-            imagesComponent.parts.forEach((image) => {
+            imagesComponent.forEach((image) => {
 
                 const {destination, frames, opacity, $source} = image;
 
