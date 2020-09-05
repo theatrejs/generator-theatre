@@ -59,20 +59,6 @@ module.exports = class extends Generator {
             }
         );
 
-        // generates components structure
-        this.fs.copyTpl(
-
-            this.templatePath('./components/**/*'),
-            this.destinationPath('sources/game/components/' + this.answers.title),
-            {
-                'title': this.answers.title
-            },
-            undefined,
-            {
-                'globOptions': {'dot': true}
-            }
-        );
-
         // generates entities structure
         this.fs.copyTpl(
 
@@ -87,11 +73,11 @@ module.exports = class extends Generator {
             }
         );
 
-        // generates models structure
+        // generates pools structure
         this.fs.copyTpl(
 
-            this.templatePath('./models/**/*'),
-            this.destinationPath('sources/game/models/' + this.answers.title),
+            this.templatePath('./pools/**/*'),
+            this.destinationPath('sources/game/pools/' + this.answers.title),
             {
                 'title': this.answers.title
             },
