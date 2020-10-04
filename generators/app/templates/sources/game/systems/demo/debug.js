@@ -5,6 +5,14 @@ function debug(entities) {
         this.snippets.demo['handle-debug-inputs'](input);
     });
 
+    Object.entries(entities).forEach(([name, entity]) => {
+
+        if (entity.has(['cameras', 'hitbox', 'origin', 'position']) === true) {
+
+            this.snippets.demo['draw-debug-hitbox'](entity);
+        }
+    });
+
     this.snippets.demo['draw-debug-camera'](this.$.camera);
 
     Object.entries(entities).forEach(([name, entity]) => {

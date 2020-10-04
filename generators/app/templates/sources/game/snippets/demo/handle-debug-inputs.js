@@ -1,6 +1,15 @@
 export default function (input) {
 
     if (input.type === 'KEYBOARD'
+    && input.action === 'KEY_SHIFT'
+    && input.state === 'DOWN') {
+
+        console.log('debugging :', 'restart game', '(' + this.loop.framerate + 'fps @' + this.loop.speed + 'x)');
+
+        this.restart();
+    }
+
+    else if (input.type === 'KEYBOARD'
     && input.action === 'KEY_SPACE'
     && input.state === 'DOWN') {
 
