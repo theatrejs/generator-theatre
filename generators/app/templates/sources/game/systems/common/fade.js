@@ -13,7 +13,7 @@ function fade(entities) {
                 'name': 'opacity',
                 'parameters': {
 
-                    "opacity": 1
+                    'opacity': 1
                 }
             });
         }

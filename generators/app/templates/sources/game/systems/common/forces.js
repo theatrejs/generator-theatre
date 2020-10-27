@@ -5,7 +5,23 @@ function forces(entities) {
     Object.entries(entities).forEach(([name, entity]) => {
 
         const forcesComponent = entity.get('forces');
-        const positionComponent = entity.get('position');
+
+        if (entity.has('velocity') === false) {
+
+            entity.add({
+
+                'name': 'velocity',
+                'parameters': {
+
+                    'top': 0,
+                    'right': 0,
+                    'bottom': 0,
+                    'left': 0
+                }
+            });
+        }
+
+        const velocityComponent = entity.get('velocity');
 
         const trashes = [];
 
@@ -35,8 +51,16 @@ function forces(entities) {
                 'y': force.y * $easing(progress)
             };
 
-            positionComponent.x += moved.x - force.moved.x;
-            positionComponent.y += moved.y - force.moved.y;
+            const top = (moved.y - force.moved.y < 0) ? Math.abs(moved.y - force.moved.y) : 0;
+            const right = Math.max(moved.x - force.moved.x, 0);
+            const bottom = Math.max(moved.y - force.moved.y, 0);
+            const left = (moved.x - force.moved.x < 0) ? Math.abs(moved.x - force.moved.x) : 0;
+
+            velocityComponent.top = Math.max(velocityComponent.top, top);
+            velocityComponent.right = Math.max(velocityComponent.right, right);
+            velocityComponent.bottom = Math.max(velocityComponent.bottom, bottom);
+            velocityComponent.left = Math.max(velocityComponent.left, left);
+
             force.moved = moved;
 
             force.elapsed += this.delta;

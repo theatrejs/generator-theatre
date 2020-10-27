@@ -3,14 +3,14 @@
     "y": 0,
     "width": 64,
     "height": 64,
-    "type": "body",
+    "type": "dynamic",
     "collideable": {
 
-        "body": {
+        "static": {
 
             "type": "snippets",
             "scope": "common",
-            "name": "remove-hitbox"
+            "name": "handle-hitbox"
         }
     }
 }

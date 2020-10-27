@@ -1,4 +1,4 @@
-export default function (entity) {
+export default function (entity, collision) {
 
     entity.remove('hitbox');
 };

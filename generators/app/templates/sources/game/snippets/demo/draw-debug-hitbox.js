@@ -26,18 +26,6 @@ export default function (entity) {
         this.context.save();
 
         this.context.lineWidth = width;
-        this.context.font = 'bold 16px Courier New';
-        this.context.textAlign = 'start';
-        this.context.textBaseline = 'top';
-
-        this.context.fillStyle = '#639bff';
-
-        this.context.fillText(
-
-            'hitbox \'' + entity.name + '\'',
-            hitbox.x,
-            hitbox.y - 16
-        );
 
         this.context.strokeStyle = '#639bff';
 
