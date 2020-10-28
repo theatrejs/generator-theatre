@@ -1,3 +1,4 @@
+const ip = require('internal-ip');
 const merge = require('webpack-merge');
 const path = require('path');
 const webpack = require('webpack');
@@ -10,6 +11,7 @@ module.exports = merge(require('./webpack.common.js'), {
 
         'clientLogLevel': 'warning',
         'contentBase': path.resolve(__dirname, 'dist/'),
+        'host': ip.v4.sync(),
         'hot': true,
         'open': true,
         'overlay': {
