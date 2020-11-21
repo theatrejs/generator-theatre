@@ -45,9 +45,9 @@ function images(entities) {
                     },
                     'destination': {
 
-                        'x': Math.floor((positionComponent.x + destination[0]) * $origin.scale() + $origin.x()),
-                        'y': Math.floor((positionComponent.y + destination[1]) * $origin.scale() + $origin.y()),
-                        'z': Math.floor(positionComponent.z + destination[2] + $origin.z()),
+                        'x': (positionComponent.x + destination[0]) * $origin.scale() + $origin.x(),
+                        'y': (positionComponent.y + destination[1]) * $origin.scale() + $origin.y(),
+                        'z': positionComponent.z + destination[2] + $origin.z(),
                         'width': (destination[3] * $origin.scale()),
                         'height': (destination[4] * $origin.scale())
                     },

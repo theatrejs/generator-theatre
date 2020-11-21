@@ -1,5 +1,3 @@
-import {inputs} from 'systems/common/inputs.js';
-
 function before() {
 
     // console.log('lifecycle :', 'before <%= title %> scene');

@@ -30,7 +30,7 @@
                     ],
                     "frame": 0,
                     "framerate": 8,
-                    "destination": [0, 0, 0, 64, 64],
+                    "destination": [0, 0, 0, 32, 32],
                     "opacity": 1,
                     "elapsed": 0
                 }
@@ -129,8 +129,8 @@
             "name": "position",
             "parameters": {
 
-                "x": -32,
-                "y": -32,
+                "x": -16,
+                "y": -16,
                 "z": 0
             }
         },

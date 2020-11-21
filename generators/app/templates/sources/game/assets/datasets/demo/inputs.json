@@ -10,11 +10,5 @@
     "GAMEPAD_LS_UP",
     "GAMEPAD_LS_RIGHT",
     "GAMEPAD_LS_DOWN",
-    "GAMEPAD_LS_LEFT",
-
-    "CLICK_LEFT",
-    "KEY_ENTER",
-    "KEY_SHIFT",
-    "KEY_SPACE",
-    "MOVE"
+    "GAMEPAD_LS_LEFT"
 ]

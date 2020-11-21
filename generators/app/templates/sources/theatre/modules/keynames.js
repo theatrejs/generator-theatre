@@ -7,6 +7,7 @@ keynames[17] = 'CTRL';
 keynames[18] = 'ALT';
 keynames[27] = 'ESC';
 keynames[32] = 'SPACE';
+keynames[46] = 'DELETE';
 
 keynames[37] = 'LEFT';
 keynames[38] = 'UP';

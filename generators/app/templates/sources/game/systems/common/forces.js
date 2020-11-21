@@ -82,12 +82,16 @@ function forces(entities) {
             && force.$ending !== false
             && trashes.indexOf(force) === -1) {
 
-                const $source = force.$ending;
-                const $ending = this.snippets[$source.scope][$source.name];
+                if (typeof force.$ending === 'object') {
 
-                const extra = force.elapsed - force.duration;
+                    const $source = force.$ending;
+                    const $ending = this.snippets[$source.scope][$source.name];
 
-                $ending(entity, extra);
+                    const extra = force.elapsed - force.duration;
+
+                    $ending(entity, extra);
+                }
+
                 trashes.push(force);
             }
         });

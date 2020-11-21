@@ -5,6 +5,7 @@ const CTRL = 17;
 const ALT = 18;
 const ESC = 27;
 const SPACE = 32;
+const DELETE = 46;
 
 const LEFT = 37;
 const UP = 38;

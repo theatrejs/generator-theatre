@@ -65,9 +65,7 @@
                 "name": "position",
                 "parameters": {
 
-                    "x": -32,
-                    "y": -832,
-                    "z": 0
+                    "y": -816
                 }
             }
         ]

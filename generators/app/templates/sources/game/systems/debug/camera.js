@@ -1,12 +1,15 @@
-export default function (camera) {
+function camera(entities) {
 
-    const width = 8;
+    const camera = this.$.camera;
+
+    const width = 2 * camera.screen.scale();
+    const size = width * 2;
     const offset = width / 2;
 
     this.context.save();
 
     this.context.lineWidth = width;
-    this.context.font = 'bold 16px Courier New';
+    this.context.font = 'bold ' + size + 'px Courier New';
     this.context.textAlign = 'start';
     this.context.textBaseline = 'top';
 
@@ -15,8 +18,8 @@ export default function (camera) {
     this.context.fillText(
 
         'camera \'' + camera.name + '\'',
-        camera.screen.x() + camera.screen.width() - 16 - this.context.measureText('camera \'' + camera.name + '\'').width,
-        camera.screen.y() + 16
+        camera.screen.x() + camera.screen.width() - size - this.context.measureText('camera \'' + camera.name + '\'').width,
+        camera.screen.y() + size
     );
 
     this.context.strokeStyle = '#d95763';
@@ -30,4 +33,6 @@ export default function (camera) {
     );
 
     this.context.restore();
-};
+}
+
+export {camera};

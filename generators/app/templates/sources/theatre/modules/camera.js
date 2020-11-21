@@ -115,7 +115,7 @@ function Camera(context, name, screen) {
                     source,
                     frame.x - offset.left * (frame.width / canvas.destination.width),
                     frame.y - offset.top * (frame.height / canvas.destination.height),
-                    frame.width - offset.right * (frame.width / canvas.destination.width) - Math.abs(offset.left * (frame.height / canvas.destination.height)),
+                    frame.width - offset.right * (frame.width / canvas.destination.width) - Math.abs(offset.left * (frame.width / canvas.destination.width)),
                     frame.height - offset.bottom * (frame.height / canvas.destination.height) - Math.abs(offset.top * (frame.height / canvas.destination.height)),
                     canvas.destination.x - offset.left,
                     canvas.destination.y - offset.top,

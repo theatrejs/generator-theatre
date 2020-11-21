@@ -13,11 +13,24 @@ function Entity(name, components = [], catalog) {
 
             if (name in $catalog) {
 
-                let reference = parameters;
+                let reference = $catalog[name]();
 
-                if (typeof reference === 'undefined') {
+                if (this.has(name) === true) {
 
-                    reference = $catalog[name]();
+                    reference = this.get(name);
+
+                    if (typeof parameters === 'object') {
+
+                        Object.entries(parameters).forEach(([parameter, value]) => {
+
+                            reference[parameter] = value;
+                        });
+                    }
+                }
+
+                else if (typeof parameters !== 'undefined') {
+
+                    reference = parameters;
                 }
 
                 this.components[name] = reference;
@@ -105,7 +118,20 @@ function World(context, catalog) {
 
         entities.forEach((entity) => {
 
-            this.entities[entity.name] = new Entity(entity.name, entity.components, catalog);
+            this.entities[entity.name] = this.prepare(entity);
+        });
+    }
+
+    function attach(entities) {
+
+        if (Array.isArray(entities) === false) {
+
+            entities = [entities];
+        }
+
+        entities.forEach((entity) => {
+
+            this.entities[entity.name] = entity;
         });
     }
 
@@ -123,6 +149,11 @@ function World(context, catalog) {
 
         this.empty();
         this.add(entities);
+    }
+
+    function prepare(entity) {
+
+        return new Entity(entity.name, entity.components, catalog);
     }
 
     function remove(entities) {
@@ -169,9 +200,11 @@ function World(context, catalog) {
     this.systems = {};
 
     this.add = add;
+    this.attach = attach;
     this.empty = empty;
     this.get = get;
     this.initialize = initialize;
+    this.prepare = prepare;
     this.remove = remove;
     this.system = system;
 }

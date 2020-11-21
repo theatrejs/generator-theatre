@@ -82,6 +82,8 @@ function Theatre(config) {
             module.hot.accept(context.id, () => {
 
                 components.call(this);
+                entities.call(this);
+                pools.call(this);
             });
         }
     }
@@ -112,6 +114,11 @@ function Theatre(config) {
 
                 entity.components = [];
             }
+
+            entity.components = entity.components
+            .reverse()
+            .filter((component, index, self) => index === self.findIndex((model) => component.name === model.name))
+            .reverse();
 
             const getter = () => JSON.parse(JSON.stringify(entity));
 
@@ -232,11 +239,7 @@ function Theatre(config) {
 
                 const components = this.entities[entity.entity.scope][entity.entity.name]().components;
 
-                entity.components = components
-                .concat(entity.components)
-                .reverse()
-                .filter((component, index, self) => index === self.findIndex((model) => component.name === model.name))
-                .reverse();
+                entity.components = components.concat(entity.components);
 
                 delete entity.entity;
             });
