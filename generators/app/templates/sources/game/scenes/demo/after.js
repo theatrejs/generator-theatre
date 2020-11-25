@@ -9,6 +9,8 @@ function after() {
     this.$.world.system('debug-pause', [], this.systems.debug.pause);
 
     this.$.controllers.inputs.length = 0;
+
+    this.$.camera.clean();
 }
 
 export {after};

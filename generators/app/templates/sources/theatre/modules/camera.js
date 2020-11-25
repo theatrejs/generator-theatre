@@ -43,6 +43,11 @@ function Camera(context, name, screen) {
         images.splice(target, 0, image);
     }
 
+    function clean() {
+
+        images = [];
+    }
+
     function idle() {
 
         this.shaking = {
@@ -126,8 +131,6 @@ function Camera(context, name, screen) {
                 context.globalAlpha = alpha;
             }
         });
-
-        images = [];
     }
 
     function shake(x, y, duration, easing = Ease.reverse(Ease.easeOut(2))) {
@@ -209,6 +212,7 @@ function Camera(context, name, screen) {
     this.shaking = shaking;
 
     this.add = add;
+    this.clean = clean;
     this.idle = idle;
     this.look = look;
     this.render = render;

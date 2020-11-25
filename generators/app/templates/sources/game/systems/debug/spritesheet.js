@@ -86,7 +86,7 @@ function spritesheet(entities) {
                         if (collide(mouse, sprite) === true
                         && collide(mouse, screen) === true) {
 
-                            console.log('debugging :', 'entity', '\'' + entity.name + '\'', '/' , 'spritesheet', '\'' + spritesheet.name + '\'', '/', 'z-index ' + destination.z);
+                            console.log('debugging :', 'entity', '\'' + entity.name + '\'', '/' , 'spritesheet', '\'' + spritesheet.name + '\'', '/', 'camera', '\'' + $camera.name + '\'');
                             console.log(entity);
                         }
                     }
@@ -124,7 +124,7 @@ function spritesheet(entities) {
 
         if (spritesheet.height >= size * 1) this.context.fillText('entity \'' + entity.name + '\'', spritesheet.x + spritesheet.width + size, spritesheet.y + size * 0);
         if (spritesheet.height >= size * 2) this.context.fillText('spritesheet \'' + spritesheet.name + '\'', spritesheet.x + spritesheet.width + size, spritesheet.y + size * 1);
-        if (spritesheet.height >= size * 3) this.context.fillText('z-index ' + spritesheet.z, spritesheet.x + spritesheet.width + size, spritesheet.y + size * 2);
+        if (spritesheet.height >= size * 3) this.context.fillText('camera \'' + highest.camera.name + '\'', spritesheet.x + spritesheet.width + size, spritesheet.y + size * 2);
 
         this.context.restore();
 
