@@ -11,8 +11,8 @@ function start() {
 
     this.$.camera.look(
 
-        this.$.origin.x,
-        this.$.origin.y
+        () => 0,
+        () => 0
     );
 }
 

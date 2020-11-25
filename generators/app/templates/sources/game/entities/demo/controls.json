@@ -84,9 +84,6 @@
             ]
         },
         {
-            "name": "origin"
-        },
-        {
             "name": "position",
             "parameters": {
 

@@ -4,13 +4,11 @@ function images(entities) {
 
         const camerasComponent = entity.get('cameras');
         const imagesComponent = entity.get('images');
-        const originComponent = entity.get('origin');
         const positionComponent = entity.get('position');
 
         camerasComponent.forEach((camera) => {
 
             const $camera = this.$[camera.$camera.name];
-            const $origin = this.$[originComponent.$origin.name];
 
             imagesComponent.forEach((image) => {
 
@@ -45,11 +43,11 @@ function images(entities) {
                     },
                     'destination': {
 
-                        'x': (positionComponent.x + destination[0]) * $origin.scale() + $origin.x(),
-                        'y': (positionComponent.y + destination[1]) * $origin.scale() + $origin.y(),
-                        'z': positionComponent.z + destination[2] + $origin.z(),
-                        'width': (destination[3] * $origin.scale()),
-                        'height': (destination[4] * $origin.scale())
+                        'x': positionComponent.x + destination[0],
+                        'y': positionComponent.y + destination[1],
+                        'z': positionComponent.z + destination[2],
+                        'width': destination[3],
+                        'height': destination[4]
                     },
                     'opacity': camera.opacity * opacity * (entity.has('opacity') ? entity.get('opacity').opacity : 1)
                 });

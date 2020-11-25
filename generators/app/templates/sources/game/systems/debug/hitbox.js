@@ -6,13 +6,11 @@ function hitbox(entities) {
 
         const camerasComponent = entity.get('cameras');
         const hitboxComponent = entity.get('hitbox');
-        const originComponent = entity.get('origin');
         const positionComponent = entity.get('position');
 
         camerasComponent.forEach((camera) => {
 
             const $camera = this.$[camera.$camera.name];
-            const $origin = this.$[originComponent.$origin.name];
 
             const hitbox = new Rectangle(
 

@@ -18,21 +18,19 @@ function spritesheet(entities) {
         imagesComponent.forEach((spritesheet) => {
 
             const camerasComponent = entity.get('cameras');
-            const originComponent = entity.get('origin');
             const positionComponent = entity.get('position');
 
             camerasComponent.forEach((camera) => {
 
                 const $camera = this.$[camera.$camera.name];
-                const $origin = this.$[originComponent.$origin.name];
 
                 const destination = {
 
-                    'x': (positionComponent.x + spritesheet.destination[0]) * $origin.scale() + $origin.x(),
-                    'y': (positionComponent.y + spritesheet.destination[1]) * $origin.scale() + $origin.y(),
-                    'z': positionComponent.z + spritesheet.destination[2] + $origin.z(),
-                    'width': (spritesheet.destination[3] * $origin.scale()),
-                    'height': (spritesheet.destination[4] * $origin.scale())
+                    'x': positionComponent.x + spritesheet.destination[0],
+                    'y': positionComponent.y + spritesheet.destination[1],
+                    'z': positionComponent.z + spritesheet.destination[2],
+                    'width': spritesheet.destination[3],
+                    'height': spritesheet.destination[4]
                 };
 
                 const mouse = new Point(this.$.debugging.x, this.$.debugging.y);
