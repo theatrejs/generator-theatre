@@ -77,6 +77,11 @@ function Camera(context, name, screen) {
 
     function render() {
 
+        if (this.screen.opacity === 0) {
+
+            return;
+        }
+
         images.forEach((image) => {
 
             const {destination, frame, opacity, source} = image;
@@ -94,7 +99,7 @@ function Camera(context, name, screen) {
 
                 const alpha = context.globalAlpha;
 
-                context.globalAlpha = opacity;
+                context.globalAlpha = opacity * this.screen.opacity;
 
                 const canvas = {
 
@@ -206,7 +211,8 @@ function Camera(context, name, screen) {
         'y': screen.y,
         'width': screen.width,
         'height': screen.height,
-        'scale': screen.scale
+        'scale': screen.scale,
+        'opacity': screen.opacity
     };
 
     this.shaking = shaking;

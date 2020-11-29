@@ -1,6 +1,6 @@
 import {Camera} from 'modules/camera.js';
 
-export default function (name, type, width, height) {
+export default function (name, type, width, height, opacity) {
 
     let scale = () => Math.min((this.size.width / width), (this.size.height / height));
 
@@ -14,7 +14,8 @@ export default function (name, type, width, height) {
                 'y': () => 0,
                 'width': () => this.size.width,
                 'height': () => this.size.height,
-                'scale': scale
+                'scale': scale,
+                'opacity': opacity
             });
 
         break;
@@ -27,7 +28,8 @@ export default function (name, type, width, height) {
                 'y': () => (this.size.height - height * scale()) / 2,
                 'width': () => width * scale(),
                 'height': () => height * scale(),
-                'scale': scale
+                'scale': scale,
+                'opacity': opacity
             });
 
         break;
@@ -42,7 +44,8 @@ export default function (name, type, width, height) {
                 'y': () => 0,
                 'width': () => this.size.width,
                 'height': () => this.size.height,
-                'scale': scale
+                'scale': scale,
+                'opacity': opacity
             });
 
         break;

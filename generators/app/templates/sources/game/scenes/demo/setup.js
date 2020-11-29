@@ -10,7 +10,7 @@ function setup() {
         ...this.assets.datasets.demo['inputs']()
     ]);
 
-    this.$.camera = this.snippets.common['setup-camera']('default', 'contain-frameless', 160, 160);
+    this.$.camera = this.snippets.common['setup-camera']('default', 'contain-frameless', 160, 160, 1);
     this.$.world = this.snippets.common['setup-world']();
 }
 
