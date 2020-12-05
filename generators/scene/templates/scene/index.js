@@ -1,6 +1,7 @@
 import {after} from './after.js';
 import {before} from './before.js';
 import {destroy} from './destroy.js';
+import {panic} from './panic.js';
 import {render} from './render.js';
 import {resize} from './resize.js';
 import {setup} from './setup.js';
@@ -14,6 +15,7 @@ if (typeof module.hot !== 'undefined') {
         './after.js',
         './before.js',
         './destroy.js',
+        './panic.js',
         './render.js',
         './resize.js',
         './setup.js',
@@ -22,4 +24,4 @@ if (typeof module.hot !== 'undefined') {
     ]);
 }
 
-export {after, before, destroy, render, resize, setup, start, update};
+export {after, before, destroy, panic, render, resize, setup, start, update};

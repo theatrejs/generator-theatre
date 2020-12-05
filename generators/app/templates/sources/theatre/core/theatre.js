@@ -9,6 +9,7 @@ function Theatre(config) {
 
     const expose = config.expose || false;
     const framerate = config.framerate || 60;
+    const panic = config.panic || 4000;
     const sharp = config.sharp || false;
     const speed = config.speed || 1;
 
@@ -135,7 +136,7 @@ function Theatre(config) {
         }
     }
 
-    function forward(timeframe) {
+    function forward(timeframe, panic) {
 
         this.delta = timeframe;
 
@@ -154,7 +155,7 @@ function Theatre(config) {
 
         if (updates > 0) {
 
-            update.call(this);
+            update.call(this, panic);
         }
 
         this.scene.render.call(this);
@@ -176,7 +177,7 @@ function Theatre(config) {
         this.assets = {};
         this.delta = 0;
 
-        this.loop = new Loop(forward.bind(this), framerate, speed);
+        this.loop = new Loop(forward.bind(this), framerate, speed, panic);
 
         assets.call(this);
         components.call(this);
@@ -364,11 +365,19 @@ function Theatre(config) {
         updates += times;
     }
 
-    function update() {
+    function update(panic) {
 
         while (updates > 0) {
 
-            this.scene.update.call(this);
+            if (panic === true) {
+
+                this.scene.panic.call(this);
+            }
+
+            else {
+
+                this.scene.update.call(this);
+            }
 
             updates -= 1;
 

@@ -1,4 +1,4 @@
-function Loop(handler, framerate = 60, speed = 1) {
+function Loop(handler, framerate = 60, speed = 1, panic = 4000) {
 
     let elapsedTime = 0;
     let lastUpdate = null;
@@ -18,10 +18,12 @@ function Loop(handler, framerate = 60, speed = 1) {
             while (elapsedTime >= 1000 / this.framerate / this.speed
             && paused === false) {
 
-                // define elapsed time since last user's update handler matching timeframe and speed
-                elapsedTime -= 1000 / this.framerate / this.speed;
+                const panic = elapsedTime >= this.panic / this.speed;
+                const tick = (panic === false) ? tick = 1000 / this.framerate : elapsedTime * this.speed;
 
-                handler(1000 / this.framerate);
+                elapsedTime -= tick / this.speed;
+
+                handler(tick, panic);
             }
         }
 
@@ -54,6 +56,7 @@ function Loop(handler, framerate = 60, speed = 1) {
     }
 
     this.framerate = framerate;
+    this.panic = panic;
     this.speed = speed;
 
     this.pause = pause;
