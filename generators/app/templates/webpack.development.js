@@ -5,28 +5,33 @@ const webpack = require('webpack');
 
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 
-module.exports = merge(require('./webpack.common.js'), {
+function config(environment) {
 
-    'devServer': {
+    return merge(require('./webpack.common.js')(environment), {
 
-        'clientLogLevel': 'warning',
-        'contentBase': path.resolve(__dirname, 'dist/'),
-        'host': ip.v4.sync(),
-        'hot': true,
-        'open': true,
-        'overlay': {
+        'devServer': {
 
-            'warnings': true,
-            'errors': true
+            'clientLogLevel': 'warning',
+            'contentBase': path.resolve(__dirname, 'dist/'),
+            'host': ip.v4.sync(),
+            'hot': true,
+            'open': true,
+            'overlay': {
+
+                'warnings': true,
+                'errors': true
+            },
+            'port': 8888,
+            'watchContentBase': true
         },
-        'port': 8888,
-        'watchContentBase': true
-    },
-    'devtool': 'inline-source-map',
-    'mode': 'development',
-    'plugins': [
+        'devtool': 'inline-source-map',
+        'mode': 'development',
+        'plugins': [
 
-        new FriendlyErrorsWebpackPlugin(),
-        new webpack.HotModuleReplacementPlugin()
-    ]
-});
+            new FriendlyErrorsWebpackPlugin(),
+            new webpack.HotModuleReplacementPlugin()
+        ]
+    });
+}
+
+module.exports = config;

@@ -42,10 +42,13 @@
         "build:windows:32": "electron-packager dist/ <%= title %> --arch=ia32 --asar --icon=dist/icon.ico --out=build/ --overwrite --platform=win32",
         "build:windows:64": "electron-packager dist/ <%= title %> --arch=x64 --asar --icon=dist/icon.ico --out=build/ --overwrite --platform=win32",
         "dist": "webpack --config webpack.production.js",
+        "dist:expose": "webpack --config webpack.production.js --env.EXPOSE",
+        "dist:debug": "webpack --config webpack.production.js --env.DEBUG",
         "electron": "electron dist/",
         "gh-pages": "node gh-pages.js",
-        "postinstall": "npm run dist",
-        "start": "webpack-dev-server --config webpack.development.js",
+        "postinstall": "npm run dist:expose",
+        "start": "webpack-dev-server --config webpack.development.js --env.EXPOSE",
+        "start:debug": "webpack-dev-server --config webpack.development.js --env.EXPOSE --env.DEBUG",
         "test": "echo \"Hello, friend.\" && exit 0"
     }
 }

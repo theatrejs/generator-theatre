@@ -7,6 +7,7 @@ function Theatre(config) {
 
     const {container} = config;
 
+    const debug = config.debug || false;
     const expose = config.expose || false;
     const framerate = config.framerate || 60;
     const panic = config.panic || 4000;
@@ -406,6 +407,7 @@ function Theatre(config) {
 
     this.$ = {};
     this.components = {};
+    this.debug = debug
     this.entities = {};
     this.playing = true;
     this.pools = {};

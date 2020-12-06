@@ -2,12 +2,17 @@ const merge = require('webpack-merge');
 
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 
-module.exports = merge(require('./webpack.common.js'), {
+function config(environment) {
 
-    'devtool': 'source-map',
-    'mode': 'production',
-    'plugins': [
+    return merge(require('./webpack.common.js')(environment), {
 
-        new FriendlyErrorsWebpackPlugin()
-    ]
-});
+        'devtool': 'source-map',
+        'mode': 'production',
+        'plugins': [
+
+            new FriendlyErrorsWebpackPlugin()
+        ]
+    });
+}
+
+module.exports = config;
