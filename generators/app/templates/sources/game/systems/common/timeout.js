@@ -6,15 +6,20 @@ function timeout(entities) {
 
         timeoutComponent.elapsed += this.delta;
 
-        if (timeoutComponent.elapsed >= timeoutComponent.duration
-        && timeoutComponent.$ending !== false) {
+        if (timeoutComponent.elapsed >= timeoutComponent.duration) {
 
-            const $source = timeoutComponent.$ending;
-            const $ending = this.snippets[$source.scope][$source.name];
+            if (typeof timeoutComponent.$ending === 'object'
+            && timeoutComponent.$ending !== null) {
 
-            const extra = timeoutComponent.elapsed - timeoutComponent.duration;
+                const $ending = timeoutComponent.$ending;
+                const ending = this.snippets[$ending.scope][$ending.name];
 
-            $ending(entity, extra);
+                const extra = timeoutComponent.elapsed - timeoutComponent.duration;
+
+                ending(entity, extra);
+            }
+
+            entity.remove('timeout');
         }
     });
 }

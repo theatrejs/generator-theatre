@@ -5,21 +5,21 @@ export default function (entity, extra) {
         'name': 'fade',
         'parameters': {
 
-            "opacity": 1,
-            "duration": 800,
-            "$easing": {
+            'opacity': 1,
+            'duration': 800,
+            '$easing': {
 
-                "type": "snippets",
-                "scope": "demo",
-                "name": "handle-fade-easing"
+                'type': 'snippets',
+                'scope': 'common',
+                'name': 'easing-in-cubic'
             },
-            "$ending": {
+            '$ending': {
 
-                "type": "snippets",
-                "scope": "common",
-                "name": "remove-fade"
+                'type': 'snippets',
+                'scope': 'common',
+                'name': 'handle-fade-ending'
             },
-            "elapsed": extra
+            'elapsed': extra
         }
     });
 };

@@ -6,9 +6,9 @@ function commands(entities) {
 
         commands.forEach(({$command, parameters}) => {
 
-            const $handling = this.snippets[$command.scope][$command.name];
+            const command = this.snippets[$command.scope][$command.name];
 
-            $handling(entity, ...parameters);
+            command(entity, ...parameters);
         });
 
         entity.remove('commands');

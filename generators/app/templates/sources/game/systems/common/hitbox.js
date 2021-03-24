@@ -3,15 +3,13 @@ import {Rectangle} from 'modules/shape.js';
 
 function hitbox(entities) {
 
+    const collisions = {};
     const resolvers = [];
 
     Object.entries(entities).forEach(([nameA, entityA]) => {
 
         const hitboxComponentA = entityA.get('hitbox');
         const positionComponentA = entityA.get('position');
-
-        const collideableA = hitboxComponentA.collideable;
-        const collideableTypesA = Object.keys(collideableA);
 
         Object.entries(entities).forEach(([nameB, entityB]) => {
 
@@ -23,25 +21,105 @@ function hitbox(entities) {
             const hitboxComponentB = entityB.get('hitbox');
             const positionComponentB = entityB.get('position');
 
-            if (collideableTypesA.indexOf(hitboxComponentB.type) !== -1) {
+            const A = new Rectangle(
 
-                const A = new Rectangle(
+                positionComponentA.x + hitboxComponentA.x,
+                positionComponentA.y + hitboxComponentA.y,
+                hitboxComponentA.width,
+                hitboxComponentA.height
+            );
 
-                    positionComponentA.x + hitboxComponentA.x,
-                    positionComponentA.y + hitboxComponentA.y,
-                    hitboxComponentA.width,
-                    hitboxComponentA.height
-                );
+            const B = new Rectangle(
 
-                const B = new Rectangle(
+                positionComponentB.x + hitboxComponentB.x,
+                positionComponentB.y + hitboxComponentB.y,
+                hitboxComponentB.width,
+                hitboxComponentB.height
+            );
 
-                    positionComponentB.x + hitboxComponentB.x,
-                    positionComponentB.y + hitboxComponentB.y,
-                    hitboxComponentB.width,
-                    hitboxComponentB.height
-                );
+            if (collide(A, B) === true) {
 
-                if (collide(A, B) === true) {
+                if (typeof collisions[nameA] === 'undefined') {
+
+                    collisions[nameA] = {};
+                }
+
+                if (typeof collisions[nameA][hitboxComponentB.type] === 'undefined') {
+
+                    collisions[nameA][hitboxComponentB.type] = [];
+                }
+
+                collisions[nameA][hitboxComponentB.type].push(nameB);
+            }
+        });
+    });
+
+    Object.entries(entities).forEach(([nameA, entityA]) => {
+
+        if (typeof collisions[nameA] === 'undefined') {
+
+            return;
+        }
+
+        const triggers = entityA.get('hitbox').triggers;
+
+        if (triggers.length === 0) {
+
+            return;
+        }
+
+        triggers.forEach((trigger) => {
+
+            let valid = true;
+
+            if (typeof collisions[nameA] === 'undefined'
+            || collisions[nameA].hasOwnProperty(trigger.type) === false) {
+
+                valid = false;
+            }
+
+            trigger.conditions.forEach((condition) => {
+
+                const search = condition;
+                const type = search.replace('not:', '');
+                const exclude = search !== type;
+
+                if (typeof collisions[nameA] === 'undefined'
+                || collisions[nameA].hasOwnProperty(type) === exclude) {
+
+                    valid = false;
+                }
+            });
+
+            if (valid === true) {
+
+                const hitboxComponentA = entityA.get('hitbox');
+                const positionComponentA = entityA.get('position');
+
+                const namesB = collisions[nameA][trigger.type];
+
+                namesB.forEach((nameB) => {
+
+                    const entityB = this.$.world.get(nameB);
+
+                    const hitboxComponentB = entityB.get('hitbox');
+                    const positionComponentB = entityB.get('position');
+
+                    const A = new Rectangle(
+
+                        positionComponentA.x + hitboxComponentA.x,
+                        positionComponentA.y + hitboxComponentA.y,
+                        hitboxComponentA.width,
+                        hitboxComponentA.height
+                    );
+
+                    const B = new Rectangle(
+
+                        positionComponentB.x + hitboxComponentB.x,
+                        positionComponentB.y + hitboxComponentB.y,
+                        hitboxComponentB.width,
+                        hitboxComponentB.height
+                    );
 
                     const penetration = {
 
@@ -73,8 +151,8 @@ function hitbox(entities) {
                         previousHitboxComponentB.height
                     );
 
-                    const previousOverlapX = !(previousA.x + previousA.width - 1 < previousB.x || previousA.x > previousB.x + previousB.width - 1);
-                    const previousOverlapY = !(previousA.y + previousA.height - 1 < previousB.y || previousA.y > previousB.y + previousB.height - 1);
+                    const previousOverlapX = !(previousA.x + previousA.width < previousB.x || previousA.x > previousB.x + previousB.width);
+                    const previousOverlapY = !(previousA.y + previousA.height < previousB.y || previousA.y > previousB.y + previousB.height);
 
                     let top = previousOverlapX === true && previousOverlapY === false && previousA.y > A.y;
                     let right = previousOverlapY === true && previousOverlapX === false && previousA.x < A.x;
@@ -119,10 +197,10 @@ function hitbox(entities) {
                         'from': direction
                     };
 
-                    const {scope, name} = collideableA[hitboxComponentB.type];
+                    const {scope, name} = trigger.action;
 
-                    resolvers.push(this.snippets[scope][name].bind(this, entityA, collision));
-                }
+                    resolvers.push(this.snippets[scope][name].bind(this, entityA, collision, entityB));
+                });
             }
         });
     });

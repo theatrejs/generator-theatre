@@ -33,8 +33,8 @@ function forces(entities) {
 
             const progress = (force.elapsed + delta) / force.duration;
 
-            const $source = force.$easing;
-            const $easing = (force.$easing !== false ? this.snippets[$source.scope][$source.name]() : Ease.linear(1));
+            const $easing = force.$easing;
+            const easing = (force.$easing !== false ? this.snippets[$easing.scope][$easing.name]() : Ease.linear(1));
 
             if (typeof force.moved === 'undefined') {
 
@@ -47,8 +47,8 @@ function forces(entities) {
 
             const moved = {
 
-                'x': force.x * $easing(progress),
-                'y': force.y * $easing(progress)
+                'x': force.x * easing(progress),
+                'y': force.y * easing(progress)
             };
 
             const top = (moved.y - force.moved.y < 0) ? Math.abs(moved.y - force.moved.y) : 0;
@@ -67,29 +67,30 @@ function forces(entities) {
 
             if (force.$handling !== false) {
 
-                const $source = force.$handling;
-                const $handling = this.snippets[$source.scope][$source.name];
+                const $handling = force.$handling;
+                const handling = this.snippets[$handling.scope][$handling.name];
 
                 const remove = () => {
 
                     trashes.push(force);
                 };
 
-                $handling(entity, force.moved.x, force.moved.y, force.elapsed, remove);
+                handling(entity, force.moved.x, force.moved.y, force.elapsed, remove);
             }
 
             if (force.elapsed >= force.duration
             && force.$ending !== false
             && trashes.indexOf(force) === -1) {
 
-                if (typeof force.$ending === 'object') {
+                if (typeof force.$ending === 'object'
+                && force.$ending !== null) {
 
-                    const $source = force.$ending;
-                    const $ending = this.snippets[$source.scope][$source.name];
+                    const $ending = force.$ending;
+                    const ending = this.snippets[$ending.scope][$ending.name];
 
                     const extra = force.elapsed - force.duration;
 
-                    $ending(entity, extra);
+                    ending(entity, extra);
                 }
 
                 trashes.push(force);

@@ -4,13 +4,17 @@
     "width": 64,
     "height": 64,
     "type": "dynamic",
-    "collideable": {
+    "triggers": [
 
-        "static": {
+        {
+            "type": "static",
+            "conditions": [],
+            "action": {
 
-            "type": "snippets",
-            "scope": "common",
-            "name": "handle-hitbox"
+                "type": "snippets",
+                "scope": "common",
+                "name": "handle-hitbox"
+            }
         }
-    }
+    ]
 }

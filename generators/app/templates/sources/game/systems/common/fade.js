@@ -30,27 +30,32 @@ function fade(entities) {
             fadeComponent.faded = 0;
         }
 
-        const $source = fadeComponent.$easing;
-        const $easing = (fadeComponent.$easing !== false ? this.snippets[$source.scope][$source.name]() : Ease.linear(1));
+        const $easing = fadeComponent.$easing;
+        const easing = (fadeComponent.$easing !== false ? this.snippets[$easing.scope][$easing.name]() : Ease.linear(1));
 
         const remaining = fadeComponent.duration - fadeComponent.elapsed;
         const delta = this.delta > remaining ? remaining : this.delta;
 
         const progress = (fadeComponent.elapsed + delta) / fadeComponent.duration;
-        const faded = fadeComponent.fade * $easing(progress);
+        const faded = fadeComponent.fade * easing(progress);
 
         opacityComponent.opacity += faded - fadeComponent.faded;
         fadeComponent.faded = faded;
 
         fadeComponent.elapsed += delta;
 
-        if (fadeComponent.elapsed >= fadeComponent.duration
-        && fadeComponent.$ending !== false) {
+        if (fadeComponent.elapsed >= fadeComponent.duration) {
 
-            const $source = fadeComponent.$ending;
-            const $ending = this.snippets[$source.scope][$source.name];
+            if (typeof fadeComponent.$ending === 'object'
+            && fadeComponent.$ending !== null) {
 
-            $ending(entity, this.delta - delta);
+                const $ending = fadeComponent.$ending;
+                const ending = this.snippets[$ending.scope][$ending.name];
+
+                ending(entity, this.delta - delta);
+            }
+
+            entity.remove('fade');
         }
     });
 }
