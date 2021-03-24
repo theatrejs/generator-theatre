@@ -60,9 +60,9 @@ function collidePointPoint(A, B) {
 function collidePointRectangle(A, BCDE) {
 
     if (A.x < BCDE.x
-    || A.x > BCDE.x + BCDE.width - 1
+    || A.x > BCDE.x + BCDE.width
     || A.y < BCDE.y
-    || A.y > BCDE.y + BCDE.height - 1) {
+    || A.y > BCDE.y + BCDE.height) {
 
         return false;
     }
@@ -72,10 +72,10 @@ function collidePointRectangle(A, BCDE) {
 
 function collideRectangleRectangle(ABCD, EFGH) {
 
-    if (ABCD.x + ABCD.width - 1 < EFGH.x
-    || ABCD.x > EFGH.x + EFGH.width - 1
-    || ABCD.y + ABCD.height - 1 < EFGH.y
-    || ABCD.y > EFGH.y + EFGH.height - 1) {
+    if (ABCD.x + ABCD.width < EFGH.x
+    || ABCD.x > EFGH.x + EFGH.width
+    || ABCD.y + ABCD.height < EFGH.y
+    || ABCD.y > EFGH.y + EFGH.height) {
 
         return false;
     }
