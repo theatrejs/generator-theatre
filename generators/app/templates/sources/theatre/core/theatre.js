@@ -1,6 +1,7 @@
 import {Canvas} from 'core/canvas.js';
 import {Loop} from 'core/loop.js';
 
+import {catcherror} from 'core/catcherror.js';
 import {preload} from 'core/preload.js';
 
 function Theatre(config) {
@@ -202,10 +203,20 @@ function Theatre(config) {
 
     function pause() {
 
+        if (this.debug === true) {
+
+            console.warn('debugging :', 'pause game', '(' + this.loop.framerate + 'fps @' + this.loop.speed + 'x)');
+        }
+
         this.playing = false;
     }
 
     function play() {
+
+        if (this.debug === true) {
+
+            console.warn('debugging :', 'play game', '(' + this.loop.framerate + 'fps @' + this.loop.speed + 'x)');
+        }
 
         this.playing = true;
     }
@@ -272,6 +283,11 @@ function Theatre(config) {
 
     function restart() {
 
+        if (this.debug === true) {
+
+            console.warn('debugging :', 'restart game', '(' + this.loop.framerate + 'fps @' + this.loop.speed + 'x)');
+        }
+
         restarting = true;
     }
 
@@ -317,7 +333,14 @@ function Theatre(config) {
                 this.snippets[scope][name] = {};
             }
 
-            this.snippets[scope][name] = context(key).default.bind(this);
+            let snippet = context(key).default;
+
+            if (this.debug === true) {
+
+                snippet = catcherror(snippet, this.pause);
+            }
+
+            this.snippets[scope][name] = snippet.bind(this);
         });
 
         if (typeof module.hot !== 'undefined') {
@@ -362,6 +385,12 @@ function Theatre(config) {
     }
 
     function tick(times = 1) {
+
+        if (this.debug === true
+        && this.playing === false) {
+
+            console.warn('debugging :', 'tick game', '(' + (Math.round(this.delta * 100) / 100) + 'ms @' + this.loop.speed + 'x)');
+        }
 
         updates += times;
     }

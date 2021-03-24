@@ -6,8 +6,6 @@ function inputs(entities) {
         && input.action === 'KEY_SHIFT'
         && input.state === 'DOWN') {
 
-            console.log('debugging :', 'restart game', '(' + this.loop.framerate + 'fps @' + this.loop.speed + 'x)');
-
             this.restart();
         }
 
@@ -17,14 +15,10 @@ function inputs(entities) {
 
             if (this.playing === false) {
 
-                console.log('debugging :', 'play game', '(' + this.loop.framerate + 'fps @' + this.loop.speed + 'x)');
-
                 this.play();
             }
 
             else if (this.playing === true) {
-
-                console.log('debugging :', 'pause game', '(' + this.loop.framerate + 'fps @' + this.loop.speed + 'x)');
 
                 this.pause();
             }
@@ -34,9 +28,10 @@ function inputs(entities) {
         && input.action === 'KEY_ENTER'
         && input.state === 'DOWN') {
 
-            console.log('debugging :', 'tick game', '(' + (Math.round(this.delta * 100) / 100) + 'ms @' + this.loop.speed + 'x)');
+            if (this.playing === false) {
 
-            this.tick();
+                this.tick();
+            }
         }
 
         else if (input.type === 'MOUSE'
