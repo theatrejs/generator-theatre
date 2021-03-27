@@ -198,6 +198,11 @@ function Theatre(config) {
 
     function load(scene) {
 
+        if (this.debug === true) {
+
+            console.warn('debugging :', 'load scene', '(' + this.loop.framerate + 'fps @' + this.loop.speed + 'x)');
+        }
+
         loading = scene;
     }
 
@@ -205,7 +210,7 @@ function Theatre(config) {
 
         if (this.debug === true) {
 
-            console.warn('debugging :', 'pause game', '(' + this.loop.framerate + 'fps @' + this.loop.speed + 'x)');
+            console.warn('debugging :', 'pause scene', '(' + this.loop.framerate + 'fps @' + this.loop.speed + 'x)');
         }
 
         this.playing = false;
@@ -215,7 +220,7 @@ function Theatre(config) {
 
         if (this.debug === true) {
 
-            console.warn('debugging :', 'play game', '(' + this.loop.framerate + 'fps @' + this.loop.speed + 'x)');
+            console.warn('debugging :', 'play scene', '(' + this.loop.framerate + 'fps @' + this.loop.speed + 'x)');
         }
 
         this.playing = true;
@@ -285,7 +290,7 @@ function Theatre(config) {
 
         if (this.debug === true) {
 
-            console.warn('debugging :', 'restart game', '(' + this.loop.framerate + 'fps @' + this.loop.speed + 'x)');
+            console.warn('debugging :', 'restart scene', '(' + this.loop.framerate + 'fps @' + this.loop.speed + 'x)');
         }
 
         restarting = true;
@@ -389,7 +394,7 @@ function Theatre(config) {
         if (this.debug === true
         && this.playing === false) {
 
-            console.warn('debugging :', 'tick game', '(' + (Math.round(this.delta * 100) / 100) + 'ms @' + this.loop.speed + 'x)');
+            console.warn('debugging :', 'tick scene', '(' + (Math.round(this.delta * 100) / 100) + 'ms @' + this.loop.speed + 'x)');
         }
 
         updates += times;

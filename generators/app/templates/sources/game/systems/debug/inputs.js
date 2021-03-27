@@ -9,7 +9,7 @@ function inputs(entities) {
             this.restart();
         }
 
-        else if (input.type === 'KEYBOARD'
+        if (input.type === 'KEYBOARD'
         && input.action === 'KEY_SPACE'
         && input.state === 'DOWN') {
 
@@ -24,7 +24,7 @@ function inputs(entities) {
             }
         }
 
-        else if (input.type === 'KEYBOARD'
+        if (input.type === 'KEYBOARD'
         && input.action === 'KEY_ENTER'
         && input.state === 'DOWN') {
 
@@ -34,11 +34,39 @@ function inputs(entities) {
             }
         }
 
-        else if (input.type === 'MOUSE'
-        && input.action === 'MOVE') {
+        if (typeof this.$.debugging !== 'undefined') {
 
-            this.$.debugging.x = input.x;
-            this.$.debugging.y = input.y;
+            if (input.type === 'MOUSE'
+            && input.action === 'MOVE') {
+
+                this.$.debugging.x = input.x;
+                this.$.debugging.y = input.y;
+            }
+        }
+
+        if (typeof this.$.debugging !== 'undefined'
+        && typeof this.$.debugging.entity !== 'undefined') {
+
+            if (input.type === 'KEYBOARD'
+            && input.action === 'KEY_DELETE'
+            && input.state === 'DOWN') {
+
+                this.$.world.remove(this.$.debugging.entity);
+            }
+
+            if (input.type === 'KEYBOARD'
+            && input.action === 'KEY_P'
+            && input.state === 'DOWN') {
+
+                this.$.debugging.entity.get('position').z += 1;
+            }
+
+            if (input.type === 'KEYBOARD'
+            && input.action === 'KEY_M'
+            && input.state === 'DOWN') {
+
+                this.$.debugging.entity.get('position').z -= 1;
+            }
         }
     });
 }

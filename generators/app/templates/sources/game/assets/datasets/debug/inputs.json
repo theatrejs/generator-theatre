@@ -1,5 +1,7 @@
 [
     "CLICK_LEFT",
+    "KEY_P",
+    "KEY_M",
     "KEY_DELETE",
     "KEY_ENTER",
     "KEY_SHIFT",

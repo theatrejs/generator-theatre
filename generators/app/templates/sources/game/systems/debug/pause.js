@@ -2,6 +2,8 @@ function pause(entities) {
 
     if (this.playing === false) {
 
+        const camera = this.$.camera;
+
         this.context.save();
 
         const left = 4;
@@ -12,15 +14,21 @@ function pause(entities) {
 
         this.context.fillStyle = 'black';
 
-        this.context.fillRect(32 - 16, 32 - 16, 32 + 2 * 16, 32 + 2 * 16);
+        const alpha = this.context.globalAlpha;
+
+        this.context.globalAlpha = 0.8;
+
+        this.context.fillRect(camera.screen.x() + 32 - 16, camera.screen.y() + 32 - 16, 32 + 2 * 16, 32 + 2 * 16);
+
+        this.context.globalAlpha = alpha;
 
         this.context.strokeStyle = 'white';
 
         this.context.beginPath();
-        this.context.moveTo(left + 32 + offset, 32);
-        this.context.lineTo(left + 32 + offset, 32 + 32);
-        this.context.moveTo(left + 32 + offset + 16, 32);
-        this.context.lineTo(left + 32 + offset + 16, 32 + 32);
+        this.context.moveTo(camera.screen.x() + left + 32 + offset, camera.screen.y() + 32);
+        this.context.lineTo(camera.screen.x() + left + 32 + offset, camera.screen.y() + 32 + 32);
+        this.context.moveTo(camera.screen.x() + left + 32 + offset + 16, camera.screen.y() + 32);
+        this.context.lineTo(camera.screen.x() + left + 32 + offset + 16, camera.screen.y() + 32 + 32);
         this.context.stroke();
 
         this.context.restore();
