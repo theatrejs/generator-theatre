@@ -14,8 +14,8 @@ function hitbox(entities) {
 
             const hitbox = new Rectangle(
 
-                $camera.screen.x() + (positionComponent.x + hitboxComponent.x) * $camera.screen.scale() - ($camera.position.x() * $camera.screen.scale() - $camera.screen.width() / 2 + $camera.shaking.shift.x * $camera.screen.scale()),
-                $camera.screen.y() + (positionComponent.y + hitboxComponent.y) * $camera.screen.scale() - ($camera.position.y() * $camera.screen.scale() - $camera.screen.height() / 2 + $camera.shaking.shift.y * $camera.screen.scale()),
+                $camera.screen.x() + (positionComponent.x + hitboxComponent.x - (hitboxComponent.width / 2)) * $camera.screen.scale() - ($camera.position.x() * $camera.screen.scale() - $camera.screen.width() / 2 + $camera.shaking.shift.x * $camera.screen.scale()),
+                $camera.screen.y() + (positionComponent.y + hitboxComponent.y - (hitboxComponent.height / 2)) * $camera.screen.scale() - ($camera.position.y() * $camera.screen.scale() - $camera.screen.height() / 2 + $camera.shaking.shift.y * $camera.screen.scale()),
                 hitboxComponent.width * $camera.screen.scale(),
                 hitboxComponent.height * $camera.screen.scale()
             );

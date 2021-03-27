@@ -26,8 +26,8 @@ function spritesheet(entities) {
 
                 const destination = {
 
-                    'x': positionComponent.x + spritesheet.destination[0],
-                    'y': positionComponent.y + spritesheet.destination[1],
+                    'x': positionComponent.x + spritesheet.destination[0] - (spritesheet.destination[3] / 2),
+                    'y': positionComponent.y + spritesheet.destination[1] - (spritesheet.destination[4] / 2),
                     'z': positionComponent.z + spritesheet.destination[2],
                     'width': spritesheet.destination[3],
                     'height': spritesheet.destination[4]

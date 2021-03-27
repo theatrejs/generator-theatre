@@ -23,16 +23,16 @@ function hitbox(entities) {
 
             const A = new Rectangle(
 
-                positionComponentA.x + hitboxComponentA.x,
-                positionComponentA.y + hitboxComponentA.y,
+                positionComponentA.x + hitboxComponentA.x - (hitboxComponentA.width / 2),
+                positionComponentA.y + hitboxComponentA.y - (hitboxComponentA.height / 2),
                 hitboxComponentA.width,
                 hitboxComponentA.height
             );
 
             const B = new Rectangle(
 
-                positionComponentB.x + hitboxComponentB.x,
-                positionComponentB.y + hitboxComponentB.y,
+                positionComponentB.x + hitboxComponentB.x - (hitboxComponentB.width / 2),
+                positionComponentB.y + hitboxComponentB.y - (hitboxComponentB.height / 2),
                 hitboxComponentB.width,
                 hitboxComponentB.height
             );
@@ -107,16 +107,16 @@ function hitbox(entities) {
 
                     const A = new Rectangle(
 
-                        positionComponentA.x + hitboxComponentA.x,
-                        positionComponentA.y + hitboxComponentA.y,
+                        positionComponentA.x + hitboxComponentA.x - (hitboxComponentA.width / 2),
+                        positionComponentA.y + hitboxComponentA.y - (hitboxComponentA.height / 2),
                         hitboxComponentA.width,
                         hitboxComponentA.height
                     );
 
                     const B = new Rectangle(
 
-                        positionComponentB.x + hitboxComponentB.x,
-                        positionComponentB.y + hitboxComponentB.y,
+                        positionComponentB.x + hitboxComponentB.x - (hitboxComponentB.width / 2),
+                        positionComponentB.y + hitboxComponentB.y - (hitboxComponentB.height / 2),
                         hitboxComponentB.width,
                         hitboxComponentB.height
                     );
@@ -137,16 +137,16 @@ function hitbox(entities) {
 
                     const previousA = new Rectangle(
 
-                        previousPositionComponentA.x + previousHitboxComponentA.x,
-                        previousPositionComponentA.y + previousHitboxComponentA.y,
+                        previousPositionComponentA.x + previousHitboxComponentA.x - (previousHitboxComponentA.width / 2),
+                        previousPositionComponentA.y + previousHitboxComponentA.y - (previousHitboxComponentA.height / 2),
                         previousHitboxComponentA.width,
                         previousHitboxComponentA.height
                     );
 
                     const previousB = new Rectangle(
 
-                        previousPositionComponentB.x + previousHitboxComponentB.x,
-                        previousPositionComponentB.y + previousHitboxComponentB.y,
+                        previousPositionComponentB.x + previousHitboxComponentB.x - (previousHitboxComponentB.width / 2),
+                        previousPositionComponentB.y + previousHitboxComponentB.y - (previousHitboxComponentB.height / 2),
                         previousHitboxComponentB.width,
                         previousHitboxComponentB.height
                     );

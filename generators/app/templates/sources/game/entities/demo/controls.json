@@ -23,7 +23,7 @@
                     ],
                     "frame": 0,
                     "framerate": 1,
-                    "destination": [32, 0, 0, 32, 32],
+                    "destination": [0, -32, 0, 32, 32],
                     "opacity": 1,
                     "elapsed": 0
                 },
@@ -41,7 +41,7 @@
                     ],
                     "frame": 0,
                     "framerate": 1,
-                    "destination": [64, 32, 0, 32, 32],
+                    "destination": [32, 0, 0, 32, 32],
                     "opacity": 1,
                     "elapsed": 0
                 },
@@ -59,7 +59,7 @@
                     ],
                     "frame": 0,
                     "framerate": 1,
-                    "destination": [32, 64, 0, 32, 32],
+                    "destination": [0, 32, 0, 32, 32],
                     "opacity": 1,
                     "elapsed": 0
                 },
@@ -77,7 +77,7 @@
                     ],
                     "frame": 0,
                     "framerate": 1,
-                    "destination": [0, 32, 0, 32, 32],
+                    "destination": [-32, 0, 0, 32, 32],
                     "opacity": 1,
                     "elapsed": 0
                 }
@@ -87,8 +87,8 @@
             "name": "position",
             "parameters": {
 
-                "x": -48,
-                "y": -48,
+                "x": 0,
+                "y": 0,
                 "z": 1
             }
         }

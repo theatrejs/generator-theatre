@@ -126,8 +126,8 @@
             "name": "position",
             "parameters": {
 
-                "x": -16,
-                "y": -16,
+                "x": 0,
+                "y": 0,
                 "z": 0
             }
         },

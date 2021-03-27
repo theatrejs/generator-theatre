@@ -43,8 +43,8 @@ function images(entities) {
                     },
                     'destination': {
 
-                        'x': positionComponent.x + destination[0],
-                        'y': positionComponent.y + destination[1],
+                        'x': positionComponent.x + destination[0] - (destination[3] / 2),
+                        'y': positionComponent.y + destination[1] - (destination[4] / 2),
                         'z': positionComponent.z + destination[2],
                         'width': destination[3],
                         'height': destination[4]
