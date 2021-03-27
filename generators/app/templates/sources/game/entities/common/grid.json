@@ -1,0 +1,42 @@
+{
+    "name": "grid",
+    "components": [
+
+        {
+            "name": "cameras"
+        },
+        {
+            "name": "images",
+            "parameters": [
+
+                {
+                    "name": "idle",
+                    "$source": {
+
+                        "type": "images",
+                        "scope": "common",
+                        "name": "grid-640x640"
+                    },
+                    "frames": [
+
+                        [0, 0, 640, 640]
+                    ],
+                    "frame": 0,
+                    "framerate": 8,
+                    "destination": [0, 0, 0, 640, 640],
+                    "opacity": 1,
+                    "elapsed": 0
+                }
+            ]
+        },
+        {
+            "name": "position",
+            "parameters": {
+
+                "x": 0,
+                "y": 0,
+                "z": -999
+            }
+        }
+    ]
+}
