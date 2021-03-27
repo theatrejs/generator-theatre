@@ -1,5 +1,13 @@
 [
     {
+        "name": "demo-grid",
+        "entity": {
+
+            "scope": "common",
+            "name": "grid"
+        }
+    },
+    {
         "name": "demo-character",
         "entity": {
 
