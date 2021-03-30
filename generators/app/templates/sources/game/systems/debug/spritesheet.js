@@ -210,10 +210,12 @@ function spritesheet(entities) {
 
         if (spritesheet.height >= size * 1) this.context.fillText('entity : \'' + entity.name + '\'', spritesheet.x + spritesheet.width + size, spritesheet.y + size * 0);
         if (spritesheet.height >= size * 2) this.context.fillText('spritesheet : \'' + spritesheet.name + '\'', spritesheet.x + spritesheet.width + size, spritesheet.y + size * 1);
-        if (spritesheet.height >= size * 3) this.context.fillText('camera : \'' + highest.camera.name + '\'', spritesheet.x + spritesheet.width + size, spritesheet.y + size * 2);
-        if (spritesheet.height >= size * 4) this.context.fillText('x : ' + entity.get('position').x + ' + ' + spritesheet.reference.destination[0], spritesheet.x + spritesheet.width + size, spritesheet.y + size * 3);
-        if (spritesheet.height >= size * 5) this.context.fillText('y : ' + entity.get('position').y + ' + ' + spritesheet.reference.destination[1], spritesheet.x + spritesheet.width + size, spritesheet.y + size * 4);
-        if (spritesheet.height >= size * 6) this.context.fillText('z : ' + entity.get('position').z + ' + ' + spritesheet.reference.destination[2], spritesheet.x + spritesheet.width + size, spritesheet.y + size * 5);
+
+        if (spritesheet.height >= size * 4) this.context.fillText('camera : \'' + highest.camera.name + '\'', spritesheet.x + spritesheet.width + size, spritesheet.y + size * 3);
+
+        if (spritesheet.height >= size * 8) this.context.fillText('x : ' + entity.get('position').x + ' + ' + spritesheet.reference.destination[0], spritesheet.x + spritesheet.width + size, spritesheet.y + size * 5);
+        if (spritesheet.height >= size * 8) this.context.fillText('y : ' + entity.get('position').y + ' + ' + spritesheet.reference.destination[1], spritesheet.x + spritesheet.width + size, spritesheet.y + size * 6);
+        if (spritesheet.height >= size * 8) this.context.fillText('z : ' + entity.get('position').z + ' + ' + spritesheet.reference.destination[2], spritesheet.x + spritesheet.width + size, spritesheet.y + size * 7);
 
         this.context.restore();
     }
