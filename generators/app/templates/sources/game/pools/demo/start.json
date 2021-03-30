@@ -5,7 +5,19 @@
 
             "scope": "common",
             "name": "grid"
-        }
+        },
+        "components": [
+
+            {
+                "name": "position",
+                "parameters": {
+
+                    "x": 0,
+                    "y": 0,
+                    "z": -999
+                }
+            }
+        ]
     },
     {
         "name": "demo-character",
@@ -73,7 +85,9 @@
                 "name": "position",
                 "parameters": {
 
-                    "y": -800
+                    "x": 0,
+                    "y": -800,
+                    "z": 0
                 }
             }
         ]
@@ -92,6 +106,15 @@
                 "parameters": {
 
                     "opacity": 0
+                }
+            },
+            {
+                "name": "position",
+                "parameters": {
+
+                    "x": 0,
+                    "y": 0,
+                    "z": 1
                 }
             },
             {

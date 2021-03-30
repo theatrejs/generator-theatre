@@ -84,13 +84,7 @@
             ]
         },
         {
-            "name": "position",
-            "parameters": {
-
-                "x": 0,
-                "y": 0,
-                "z": 1
-            }
+            "name": "position"
         }
     ]
 }

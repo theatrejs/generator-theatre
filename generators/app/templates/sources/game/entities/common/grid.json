@@ -30,13 +30,7 @@
             ]
         },
         {
-            "name": "position",
-            "parameters": {
-
-                "x": 0,
-                "y": 0,
-                "z": -999
-            }
+            "name": "position"
         }
     ]
 }
