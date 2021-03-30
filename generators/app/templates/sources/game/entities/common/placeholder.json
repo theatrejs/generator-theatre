@@ -1,0 +1,15 @@
+{
+    "name": "placeholder",
+    "components": [
+
+        {
+            "name": "cameras"
+        },
+        {
+            "name": "images"
+        },
+        {
+            "name": "position"
+        }
+    ]
+}
