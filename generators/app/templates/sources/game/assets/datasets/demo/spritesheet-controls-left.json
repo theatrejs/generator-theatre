@@ -1,0 +1,18 @@
+{
+    "name": "controls-left",
+    "$source": {
+
+        "type": "images",
+        "scope": "demo",
+        "name": "controls-32x32"
+    },
+    "frames": [
+
+        [1, 4, 32, 32]
+    ],
+    "frame": 0,
+    "framerate": 1,
+    "destination": [-32, 0, 0, 32, 32],
+    "opacity": 1,
+    "elapsed": 0
+}

@@ -16,7 +16,14 @@ function spritesheet(entities) {
 
         const imagesComponent = entity.get('images');
 
-        imagesComponent.forEach((spritesheet) => {
+        imagesComponent.forEach(($spritesheet) => {
+
+            if (typeof $spritesheet.cache === 'undefined') {
+
+                $spritesheet.cache = this.assets[$spritesheet.type][$spritesheet.scope][$spritesheet.name]();
+            }
+
+            const spritesheet = $spritesheet.cache;
 
             const camerasComponent = entity.get('cameras');
             const positionComponent = entity.get('position');
@@ -141,7 +148,9 @@ function spritesheet(entities) {
 
         const imagesComponent = entity.get('images');
 
-        imagesComponent.forEach((spritesheet) => {
+        imagesComponent.forEach(($spritesheet) => {
+
+            const spritesheet = $spritesheet.cache || ($spritesheet.cache = this.assets[$spritesheet.type][$spritesheet.scope][$spritesheet.name]());
 
             const camerasComponent = entity.get('cameras');
 

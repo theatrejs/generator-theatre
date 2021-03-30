@@ -10,22 +10,9 @@
             "parameters": [
 
                 {
-                    "name": "idle",
-                    "$source": {
-
-                        "type": "images",
-                        "scope": "common",
-                        "name": "grid-640x640"
-                    },
-                    "frames": [
-
-                        [0, 0, 640, 640]
-                    ],
-                    "frame": 0,
-                    "framerate": 8,
-                    "destination": [0, 0, 0, 640, 640],
-                    "opacity": 1,
-                    "elapsed": 0
+                    "type": "datasets",
+                    "scope": "common",
+                    "name": "spritesheet-grid-idle"
                 }
             ]
         },

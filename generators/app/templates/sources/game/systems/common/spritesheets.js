@@ -4,7 +4,14 @@ function spritesheets(entities) {
 
         const imagesComponent = entity.get('images');
 
-        imagesComponent.forEach((image) => {
+        imagesComponent.forEach(($spritesheet) => {
+
+            if (typeof $spritesheet.cache === 'undefined') {
+
+                $spritesheet.cache = this.assets[$spritesheet.type][$spritesheet.scope][$spritesheet.name]();
+            }
+
+            const image = $spritesheet.cache;
 
             const {framerate, frames} = image;
 
