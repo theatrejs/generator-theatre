@@ -1,0 +1,19 @@
+{
+    "$font": {
+
+        "type": "datasets",
+        "scope": "common",
+        "name": "font-theatre-white-shadow-black-6x10"
+    },
+    "anchor": {
+
+        "horizontal": "center",
+        "vertical": "center"
+    },
+    "destination": [0, 0, 0, 6, 10],
+    "lines": [
+
+        "<text>"
+    ],
+    "opacity": 1
+}
