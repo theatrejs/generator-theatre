@@ -61,7 +61,7 @@ function spritesheet(entities) {
 
                 if (typeof this.$.debugging.x === 'number'
                 && typeof this.$.debugging.y === 'number'
-                && (destination.z > highest.z || (destination.z === highest.z && sprite.y > highest.y))
+                && (destination.z >= highest.z)
                 && collide(mouse, sprite) === true
                 && collide(mouse, screen) === true) {
 
