@@ -84,6 +84,11 @@ function Camera(context, name, screen) {
 
             const {destination, frame, opacity, source} = image;
 
+            if (opacity === 0) {
+
+                return;
+            }
+
             const visible = this.visible(
 
                 destination.x * this.screen.scale(),
@@ -92,47 +97,69 @@ function Camera(context, name, screen) {
                 destination.height * this.screen.scale()
             );
 
-            if (opacity > 0
-            && visible === true) {
+            if (visible === false) {
 
-                const alpha = context.globalAlpha;
-
-                context.globalAlpha = opacity * this.screen.opacity;
-
-                const canvas = {
-
-                    'destination': {
-
-                        'x': this.screen.x() + destination.x * this.screen.scale() - (this.position.x() * this.screen.scale() - this.screen.width() / 2 + this.shaking.shift.x * this.screen.scale()),
-                        'y': this.screen.y() + destination.y * this.screen.scale() - (this.position.y() * this.screen.scale() - this.screen.height() / 2 + this.shaking.shift.y * this.screen.scale()),
-                        'width': destination.width * this.screen.scale(),
-                        'height': destination.height * this.screen.scale()
-                    }
-                };
-
-                const offset = {
-
-                    'top': Math.min(0, canvas.destination.y - this.screen.y()),
-                    'right': Math.max(0, canvas.destination.x + canvas.destination.width - (this.screen.x() + this.screen.width())),
-                    'bottom': Math.max(0, canvas.destination.y + canvas.destination.height - (this.screen.y() + this.screen.height())),
-                    'left': Math.min(0, canvas.destination.x - this.screen.x())
-                };
-
-                context.drawImage(
-
-                    source,
-                    frame.x - offset.left * (frame.width / canvas.destination.width),
-                    frame.y - offset.top * (frame.height / canvas.destination.height),
-                    frame.width - offset.right * (frame.width / canvas.destination.width) - Math.abs(offset.left * (frame.width / canvas.destination.width)),
-                    frame.height - offset.bottom * (frame.height / canvas.destination.height) - Math.abs(offset.top * (frame.height / canvas.destination.height)),
-                    canvas.destination.x - offset.left,
-                    canvas.destination.y - offset.top,
-                    canvas.destination.width - offset.right - Math.abs(offset.left),
-                    canvas.destination.height - offset.bottom - Math.abs(offset.top)
-                );
-
-                context.globalAlpha = alpha;
+                return;
             }
+
+            const alpha = context.globalAlpha;
+
+            context.globalAlpha = opacity * this.screen.opacity;
+
+            for (let row = 0; row < destination.height / frame.height; row += 1) {
+
+                const height = Math.min(1, (destination.height / frame.height) - row) * frame.height;
+
+                for (let column = 0; column < destination.width / frame.width; column += 1) {
+
+                    const width = Math.min(1, (destination.width / frame.width) - column) * frame.width;
+
+                    const canvas = {
+
+                        'destination': {
+
+                            'x': this.screen.x() + (destination.x + column * frame.width) * this.screen.scale() - (this.position.x() * this.screen.scale() - this.screen.width() / 2 + this.shaking.shift.x * this.screen.scale()),
+                            'y': this.screen.y() + (destination.y + row * frame.height) * this.screen.scale() - (this.position.y() * this.screen.scale() - this.screen.height() / 2 + this.shaking.shift.y * this.screen.scale()),
+                            'width': width * this.screen.scale(),
+                            'height': height * this.screen.scale()
+                        }
+                    };
+
+                    const offset = {
+
+                        'top': Math.min(0, canvas.destination.y - this.screen.y()),
+                        'right': Math.max(0, canvas.destination.x + canvas.destination.width - (this.screen.x() + this.screen.width())),
+                        'bottom': Math.max(0, canvas.destination.y + canvas.destination.height - (this.screen.y() + this.screen.height())),
+                        'left': Math.min(0, canvas.destination.x - this.screen.x())
+                    };
+
+                    const visible = this.visible(
+
+                        (destination.x + column * frame.width) * this.screen.scale(),
+                        (destination.y + row * frame.height) * this.screen.scale(),
+                        width * this.screen.scale(),
+                        height * this.screen.scale()
+                    );
+
+                    if (visible === true) {
+
+                        context.drawImage(
+
+                            source,
+                            frame.x - offset.left * (width / canvas.destination.width),
+                            frame.y - offset.top * (height / canvas.destination.height),
+                            width - offset.right * (width / canvas.destination.width) - Math.abs(offset.left * (width / canvas.destination.width)),
+                            height - offset.bottom * (height / canvas.destination.height) - Math.abs(offset.top * (height / canvas.destination.height)),
+                            canvas.destination.x - offset.left,
+                            canvas.destination.y - offset.top,
+                            canvas.destination.width - offset.right - Math.abs(offset.left),
+                            canvas.destination.height - offset.bottom - Math.abs(offset.top)
+                        );
+                    }
+                }
+            }
+
+            context.globalAlpha = alpha;
         });
     }
 
