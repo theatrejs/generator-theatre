@@ -118,11 +118,6 @@ function Theatre(config) {
                 entity.components = [];
             }
 
-            entity.components = entity.components
-            .reverse()
-            .filter((component, index, self) => index === self.findIndex((model) => component.name === model.name))
-            .reverse();
-
             const getter = () => JSON.parse(JSON.stringify(entity));
 
             this.entities[scope][name] = getter;

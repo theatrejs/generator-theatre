@@ -15,20 +15,7 @@ function Entity(name, components = [], catalog) {
 
                 let reference = $catalog[name]();
 
-                if (this.has(name) === true) {
-
-                    reference = this.get(name);
-
-                    if (typeof parameters === 'object') {
-
-                        Object.entries(parameters).forEach(([parameter, value]) => {
-
-                            reference[parameter] = value;
-                        });
-                    }
-                }
-
-                else if (typeof parameters !== 'undefined') {
+                if (typeof parameters !== 'undefined') {
 
                     reference = parameters;
                 }
