@@ -3,8 +3,8 @@ function text(entities) {
     Object.entries(entities).forEach(([name, entity]) => {
 
         const camerasComponent = entity.get('cameras');
-        const textComponent = entity.get('text');
         const positionComponent = entity.get('position');
+        const textComponent = entity.get('text');
 
         const {$font, anchor, destination, lines, opacity} = textComponent;
 
