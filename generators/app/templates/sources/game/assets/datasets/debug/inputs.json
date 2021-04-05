@@ -1,10 +1,17 @@
 [
     "CLICK_LEFT",
-    "KEY_P",
     "KEY_M",
+    "KEY_O",
+    "KEY_P",
+    "KEY_UP",
+    "KEY_DOWN",
+    "KEY_RIGHT",
+    "KEY_LEFT",
     "KEY_DELETE",
     "KEY_ENTER",
+    "KEY_ESC",
     "KEY_SHIFT",
     "KEY_SPACE",
+    "KEY_TAB",
     "MOVE"
 ]

@@ -25,12 +25,12 @@ function hitbox(entities) {
 
             this.context.save();
 
-            this.context.fillStyle = 'rgba(106, 190, 48, 0.2)';
+            this.context.fillStyle = 'rgba(251, 242, 54, 0.2)';
             this.context.fillRect(hitbox.x, hitbox.y, hitbox.width, hitbox.height);
 
             this.context.lineWidth = width;
 
-            this.context.strokeStyle = '#6abe30';
+            this.context.strokeStyle = 'rgba(251, 242, 54, 1)';
 
             this.context.strokeRect(hitbox.x + offset, hitbox.y + offset, hitbox.width - width, hitbox.height - width);
 

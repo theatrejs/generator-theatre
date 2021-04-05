@@ -9,9 +9,7 @@ function camera(entities) {
     this.context.save();
 
     this.context.lineWidth = width;
-    this.context.strokeStyle = '#d95763';
-
-    this.context.globalAlpha = 0.8;
+    this.context.strokeStyle = 'rgba(217, 87, 99, 0.5)';
 
     this.context.strokeRect(
 

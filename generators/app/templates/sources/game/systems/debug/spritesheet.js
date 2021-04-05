@@ -191,7 +191,24 @@ function spritesheet(entities) {
         const width = 2 * camera.screen.scale();
         const size = width * 2;
 
+        const $camera = this.$.camera;
+
+        const center = new Rectangle(
+
+            $camera.screen.x() + entity.get('position').x * $camera.screen.scale() - ($camera.position.x() * $camera.screen.scale() - $camera.screen.width() / 2 + $camera.shaking.shift.x * $camera.screen.scale()) - width / 2,
+            $camera.screen.y() + entity.get('position').y * $camera.screen.scale() - ($camera.position.y() * $camera.screen.scale() - $camera.screen.height() / 2 + $camera.shaking.shift.y * $camera.screen.scale()) - width / 2,
+            width,
+            width
+        );
+
         this.context.save();
+
+        this.context.fillStyle = 'black';
+        this.context.fillRect(center.x - 1 * camera.screen.scale(), center.y, center.width + 2 * camera.screen.scale(), center.height);
+        this.context.fillRect(center.x, center.y - 1 * camera.screen.scale(), center.width, center.height + 2 * camera.screen.scale());
+
+        this.context.fillStyle = 'rgba(217, 87, 99, 1)';
+        this.context.fillRect(center.x, center.y, center.width, center.height);
 
         this.context.lineWidth = width;
         this.context.font = 'bold ' + size + 'px Courier New';
