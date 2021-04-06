@@ -225,23 +225,23 @@ function spritesheet(entities) {
 
         this.context.globalAlpha = 0.8;
 
-        this.context.fillRect(spritesheet.x + spritesheet.width, spritesheet.y - size, layer + (size * 2), spritesheet.height + (size * 2));
+        this.context.fillRect(spritesheet.x + spritesheet.width, spritesheet.y - size, layer + (size * 2), Math.max(spritesheet.height, size * 8) + (size * 2));
         this.context.fillRect(spritesheet.x - size, spritesheet.y - size, spritesheet.width + size, size);
         this.context.fillRect(spritesheet.x - size, spritesheet.y, size, spritesheet.height);
-        this.context.fillRect(spritesheet.x - size, spritesheet.y + spritesheet.height, spritesheet.width + size, size);
+        this.context.fillRect(spritesheet.x - size, spritesheet.y + spritesheet.height, spritesheet.width + size, Math.max(size, (size * 9) - spritesheet.height));
 
         this.context.globalAlpha = alpha;
 
         this.context.fillStyle = 'white';
 
-        if (spritesheet.height >= size * 1) this.context.fillText('entity : \'' + entity.name + '\'', spritesheet.x + spritesheet.width + size, spritesheet.y + size * 0);
-        if (spritesheet.height >= size * 2) this.context.fillText('spritesheet : \'' + spritesheet.name + '\'', spritesheet.x + spritesheet.width + size, spritesheet.y + size * 1);
+        this.context.fillText('entity : \'' + entity.name + '\'', spritesheet.x + spritesheet.width + size, spritesheet.y + size * 0);
+        this.context.fillText('spritesheet : \'' + spritesheet.name + '\'', spritesheet.x + spritesheet.width + size, spritesheet.y + size * 1);
 
-        if (spritesheet.height >= size * 4) this.context.fillText('camera : \'' + highest.camera.name + '\'', spritesheet.x + spritesheet.width + size, spritesheet.y + size * 3);
+        this.context.fillText('camera : \'' + highest.camera.name + '\'', spritesheet.x + spritesheet.width + size, spritesheet.y + size * 3);
 
-        if (spritesheet.height >= size * 8) this.context.fillText('x : ' + entity.get('position').x + ' + ' + spritesheet.reference.destination[0], spritesheet.x + spritesheet.width + size, spritesheet.y + size * 5);
-        if (spritesheet.height >= size * 8) this.context.fillText('y : ' + entity.get('position').y + ' + ' + spritesheet.reference.destination[1], spritesheet.x + spritesheet.width + size, spritesheet.y + size * 6);
-        if (spritesheet.height >= size * 8) this.context.fillText('z : ' + entity.get('position').z + ' + ' + spritesheet.reference.destination[2], spritesheet.x + spritesheet.width + size, spritesheet.y + size * 7);
+        this.context.fillText('x : ' + entity.get('position').x + ' + ' + spritesheet.reference.destination[0], spritesheet.x + spritesheet.width + size, spritesheet.y + size * 5);
+        this.context.fillText('y : ' + entity.get('position').y + ' + ' + spritesheet.reference.destination[1], spritesheet.x + spritesheet.width + size, spritesheet.y + size * 6);
+        this.context.fillText('z : ' + entity.get('position').z + ' + ' + spritesheet.reference.destination[2], spritesheet.x + spritesheet.width + size, spritesheet.y + size * 7);
 
         this.context.restore();
     }
