@@ -3,13 +3,38 @@
     "components": [
 
         {
-            "name": "cameras"
+            "name": "cameras",
+            "parameters": [
+
+                {
+                    "$camera": {
+
+                        "type": "$",
+                        "name": "camera"
+                    },
+                    "opacity": 1
+                }
+            ]
         },
         {
-            "name": "images"
+            "name": "images",
+            "parameters": [
+
+                {
+                    "type": "datasets",
+                    "scope": "common",
+                    "name": "spritesheet-placeholder-idle"
+                }
+            ]
         },
         {
-            "name": "position"
+            "name": "position",
+            "parameters": {
+
+                "x": 0,
+                "y": 0,
+                "z": 0
+            }
         }
     ]
 }
