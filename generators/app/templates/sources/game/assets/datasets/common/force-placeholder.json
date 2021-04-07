@@ -1,0 +1,19 @@
+{
+    "x": 0,
+    "y": -64,
+    "duration": 1000,
+    "$easing": {
+
+        "type": "snippets",
+        "scope": "common",
+        "name": "easing-sine-half"
+    },
+    "$handling": false,
+    "$ending": {
+
+        "type": "snippets",
+        "scope": "common",
+        "name": "handle-forces-ending"
+    },
+    "elapsed": 0
+}

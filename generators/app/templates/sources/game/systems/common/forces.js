@@ -25,7 +25,14 @@ function forces(entities) {
 
         const trashes = [];
 
-        forcesComponent.forEach((force) => {
+        forcesComponent.forEach(($force) => {
+
+            if (typeof $force.cache === 'undefined') {
+
+                $force.cache = this.assets[$force.type][$force.scope][$force.name]();
+            }
+
+            const force = $force.cache;
 
             const unlimited = force.$ending === false;
             const remaining = force.duration - force.elapsed;
@@ -56,10 +63,10 @@ function forces(entities) {
             const bottom = Math.max(moved.y - force.moved.y, 0);
             const left = (moved.x - force.moved.x < 0) ? Math.abs(moved.x - force.moved.x) : 0;
 
-            velocityComponent.top = Math.max(velocityComponent.top, top);
-            velocityComponent.right = Math.max(velocityComponent.right, right);
-            velocityComponent.bottom = Math.max(velocityComponent.bottom, bottom);
-            velocityComponent.left = Math.max(velocityComponent.left, left);
+            velocityComponent.top = velocityComponent.top + top;
+            velocityComponent.right = velocityComponent.right + right;
+            velocityComponent.bottom = velocityComponent.bottom + bottom;
+            velocityComponent.left = velocityComponent.left + left;
 
             force.moved = moved;
 
@@ -72,7 +79,7 @@ function forces(entities) {
 
                 const remove = () => {
 
-                    trashes.push(force);
+                    trashes.push($force);
                 };
 
                 handling(entity, force.moved.x, force.moved.y, force.elapsed, remove);
@@ -80,7 +87,7 @@ function forces(entities) {
 
             if (force.elapsed >= force.duration
             && force.$ending !== false
-            && trashes.indexOf(force) === -1) {
+            && trashes.indexOf($force) === -1) {
 
                 if (typeof force.$ending === 'object'
                 && force.$ending !== null) {
@@ -93,13 +100,13 @@ function forces(entities) {
                     ending(entity, extra);
                 }
 
-                trashes.push(force);
+                trashes.push($force);
             }
         });
 
-        const forces = forcesComponent.filter((force) => {
+        const forces = forcesComponent.filter(($force) => {
 
-            return trashes.indexOf(force) === -1;
+            return trashes.indexOf($force) === -1;
         });
 
         if (forces.length === 0) {
