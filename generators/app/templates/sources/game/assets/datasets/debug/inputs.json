@@ -1,5 +1,6 @@
 [
     "CLICK_LEFT",
+    "CLICK_RIGHT",
     "KEY_M",
     "KEY_O",
     "KEY_P",

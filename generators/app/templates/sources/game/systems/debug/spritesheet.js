@@ -118,6 +118,11 @@ function spritesheet(entities) {
                     && input.state === 'UP') {
 
                         this.$.debugging.drag = false;
+                    }
+
+                    if (input.type === 'MOUSE'
+                    && input.action === 'CLICK_RIGHT'
+                    && input.state === 'DOWN') {
 
                         const mouse = new Point(
 
