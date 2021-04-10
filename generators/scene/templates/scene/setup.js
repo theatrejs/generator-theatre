@@ -4,6 +4,7 @@ function setup() {
 
     this.$.controllers = this.snippets.common['setup-inputs']('<%= title %>');
     this.$.camera = this.snippets.common['setup-camera']('default', 'contain-framed', 320, 256, 1);
+    this.$.interface = this.snippets.common['setup-camera']('interface', 'contain-framed', 320, 256, 1);
     this.$.world = this.snippets.common['setup-world']();
 }
 

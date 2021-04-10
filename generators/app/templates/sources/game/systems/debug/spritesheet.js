@@ -96,7 +96,7 @@ function spritesheet(entities) {
                         if (collide(mouse, sprite) === true
                         && collide(mouse, screen) === true) {
 
-                            this.$.debugging.drag = true;
+                            this.$.debugging.drag = $camera;
 
                             if (entity === highest.entity) {
 
@@ -168,7 +168,7 @@ function spritesheet(entities) {
                     if (input.type === 'MOUSE'
                     && input.action === 'MOVE') {
 
-                        if (this.$.debugging.drag === true
+                        if (this.$.debugging.drag === $camera
                         && typeof this.$.debugging.entity !== 'undefined') {
 
                             const mouse = new Point(
@@ -191,64 +191,80 @@ function spritesheet(entities) {
 
     if (highest.entity !== null) {
 
-        const {camera, entity, spritesheet} = highest;
+        const {entity, spritesheet} = highest;
 
-        const width = 2 * camera.screen.scale();
-        const size = width * 2;
+        const camerasComponent = entity.get('cameras');
 
-        const $camera = this.$.camera;
+        camerasComponent.forEach((camera) => {
 
-        const center = new Rectangle(
+            const $camera = this.$[camera.$camera.name];
 
-            $camera.screen.x() + entity.get('position').x * $camera.screen.scale() - ($camera.position.x() * $camera.screen.scale() - $camera.screen.width() / 2 + $camera.shaking.shift.x * $camera.screen.scale()) - width / 2,
-            $camera.screen.y() + entity.get('position').y * $camera.screen.scale() - ($camera.position.y() * $camera.screen.scale() - $camera.screen.height() / 2 + $camera.shaking.shift.y * $camera.screen.scale()) - width / 2,
-            width,
-            width
-        );
+            const width = 2 * $camera.screen.scale();
+            const size = width * 2;
 
-        this.context.save();
+            const center = new Rectangle(
 
-        this.context.fillStyle = 'black';
-        this.context.fillRect(center.x - 1 * camera.screen.scale(), center.y, center.width + 2 * camera.screen.scale(), center.height);
-        this.context.fillRect(center.x, center.y - 1 * camera.screen.scale(), center.width, center.height + 2 * camera.screen.scale());
+                $camera.screen.x() + entity.get('position').x * $camera.screen.scale() - ($camera.position.x() * $camera.screen.scale() - $camera.screen.width() / 2 + $camera.shaking.shift.x * $camera.screen.scale()) - width / 2,
+                $camera.screen.y() + entity.get('position').y * $camera.screen.scale() - ($camera.position.y() * $camera.screen.scale() - $camera.screen.height() / 2 + $camera.shaking.shift.y * $camera.screen.scale()) - width / 2,
+                width,
+                width
+            );
 
-        this.context.fillStyle = 'rgba(217, 87, 99, 1)';
-        this.context.fillRect(center.x, center.y, center.width, center.height);
+            this.context.save();
 
-        this.context.lineWidth = width;
-        this.context.font = 'bold ' + size + 'px Courier New';
-        this.context.textAlign = 'start';
-        this.context.textBaseline = 'top';
+            this.context.fillStyle = 'black';
+            this.context.fillRect(center.x - 1 * $camera.screen.scale(), center.y, center.width + 2 * $camera.screen.scale(), center.height);
+            this.context.fillRect(center.x, center.y - 1 * $camera.screen.scale(), center.width, center.height + 2 * $camera.screen.scale());
 
-        this.context.fillStyle = 'black';
+            this.context.fillStyle = 'rgba(217, 87, 99, 1)';
+            this.context.fillRect(center.x, center.y, center.width, center.height);
 
-        let layer = this.context.measureText('entity : \'' + entity.name + '\'').width;
+            this.context.lineWidth = width;
+            this.context.font = 'bold ' + size + 'px Courier New';
+            this.context.textAlign = 'start';
+            this.context.textBaseline = 'top';
 
-        if (spritesheet.height >= size * 2) layer = Math.max(this.context.measureText('entity : \'' + entity.name + '\'').width, this.context.measureText('spritesheet : \'' + spritesheet.name + '\'').width);
+            this.context.fillStyle = 'black';
 
-        const alpha = this.context.globalAlpha;
+            const lines = [
 
-        this.context.globalAlpha = 0.8;
+                'entity : \'' + entity.name + '\'',
+                'spritesheet : \'' + spritesheet.name + '\'',
+                '',
+                'camera : \'' + highest.camera.name + '\'',
+                '',
+                'x : ' + entity.get('position').x + ' + ' + spritesheet.reference.destination[0],
+                'y : ' + entity.get('position').y + ' + ' + spritesheet.reference.destination[1],
+                'z : ' + entity.get('position').z + ' + ' + spritesheet.reference.destination[2]
+            ];
 
-        this.context.fillRect(spritesheet.x + spritesheet.width, spritesheet.y - size, layer + (size * 2), Math.max(spritesheet.height, size * 8) + (size * 2));
-        this.context.fillRect(spritesheet.x - size, spritesheet.y - size, spritesheet.width + size, size);
-        this.context.fillRect(spritesheet.x - size, spritesheet.y, size, spritesheet.height);
-        this.context.fillRect(spritesheet.x - size, spritesheet.y + spritesheet.height, spritesheet.width + size, Math.max(size, (size * 9) - spritesheet.height));
+            let characters = 0;
 
-        this.context.globalAlpha = alpha;
+            for (let iterator = 0, length = lines.length; iterator < length; iterator += 1) {
 
-        this.context.fillStyle = 'white';
+                characters = Math.max(characters, this.context.measureText(lines[iterator]).width);
+            }
 
-        this.context.fillText('entity : \'' + entity.name + '\'', spritesheet.x + spritesheet.width + size, spritesheet.y + size * 0);
-        this.context.fillText('spritesheet : \'' + spritesheet.name + '\'', spritesheet.x + spritesheet.width + size, spritesheet.y + size * 1);
+            const alpha = this.context.globalAlpha;
 
-        this.context.fillText('camera : \'' + highest.camera.name + '\'', spritesheet.x + spritesheet.width + size, spritesheet.y + size * 3);
+            this.context.globalAlpha = 0.8;
 
-        this.context.fillText('x : ' + entity.get('position').x + ' + ' + spritesheet.reference.destination[0], spritesheet.x + spritesheet.width + size, spritesheet.y + size * 5);
-        this.context.fillText('y : ' + entity.get('position').y + ' + ' + spritesheet.reference.destination[1], spritesheet.x + spritesheet.width + size, spritesheet.y + size * 6);
-        this.context.fillText('z : ' + entity.get('position').z + ' + ' + spritesheet.reference.destination[2], spritesheet.x + spritesheet.width + size, spritesheet.y + size * 7);
+            this.context.fillRect(spritesheet.x + spritesheet.width, spritesheet.y - size, characters + (size * 2), Math.max(spritesheet.height, size * 8) + (size * 2));
+            this.context.fillRect(spritesheet.x - size, spritesheet.y - size, spritesheet.width + size, size);
+            this.context.fillRect(spritesheet.x - size, spritesheet.y, size, spritesheet.height);
+            this.context.fillRect(spritesheet.x - size, spritesheet.y + spritesheet.height, spritesheet.width + size, Math.max(size, (size * 9) - spritesheet.height));
 
-        this.context.restore();
+            this.context.globalAlpha = alpha;
+
+            this.context.fillStyle = 'white';
+
+            for (let iterator = 0, length = lines.length; iterator < length; iterator += 1) {
+
+                this.context.fillText(lines[iterator], spritesheet.x + spritesheet.width + size, spritesheet.y + size * iterator);
+            }
+
+            this.context.restore();
+        });
     }
 }
 

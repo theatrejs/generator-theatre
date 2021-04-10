@@ -15,6 +15,8 @@ function inputs(entities) {
             && input.action === 'KEY_SHIFT'
             && input.state === 'DOWN') {
 
+                console.clear();
+
                 this.restart();
             }
 
@@ -43,52 +45,83 @@ function inputs(entities) {
                 }
             }
 
-            if (typeof this.$.debugging !== 'undefined') {
+            if (input.type === 'MOUSE'
+            && input.action === 'MOVE') {
 
-                if (input.type === 'MOUSE'
-                && input.action === 'MOVE') {
-
-                    this.$.debugging.x = input.x;
-                    this.$.debugging.y = input.y;
-                }
+                this.$.debugging.x = input.x;
+                this.$.debugging.y = input.y;
             }
 
-            if (typeof this.$.debugging !== 'undefined'
-            && typeof this.$.debugging.entity !== 'undefined') {
+            if (input.type === 'KEYBOARD'
+            && input.action === 'KEY_UP'
+            && input.state === 'DOWN') {
+
+                const x = this.$.camera.position.x();
+                const y = this.$.camera.position.y() - 16;
+
+                this.$.camera.look(
+
+                    () => x,
+                    () => y
+                );
+            }
+
+            if (input.type === 'KEYBOARD'
+            && input.action === 'KEY_RIGHT'
+            && input.state === 'DOWN') {
+
+                const x = this.$.camera.position.x() + 16;
+                const y = this.$.camera.position.y();
+
+                this.$.camera.look(
+
+                    () => x,
+                    () => y
+                );
+            }
+
+            if (input.type === 'KEYBOARD'
+            && input.action === 'KEY_DOWN'
+            && input.state === 'DOWN') {
+
+                const x = this.$.camera.position.x();
+                const y = this.$.camera.position.y() + 16;
+
+                this.$.camera.look(
+
+                    () => x,
+                    () => y
+                );
+            }
+
+            if (input.type === 'KEYBOARD'
+            && input.action === 'KEY_LEFT'
+            && input.state === 'DOWN') {
+
+                const x = this.$.camera.position.x() - 16;
+                const y = this.$.camera.position.y();
+
+                this.$.camera.look(
+
+                    () => x,
+                    () => y
+                );
+            }
+
+            if (input.type === 'KEYBOARD'
+            && input.action === 'KEY_CTRL'
+            && input.state === 'DOWN') {
+
+                this.$.debugging.optional = !this.$.debugging.optional;
+            }
+
+            if (typeof this.$.debugging.entity !== 'undefined') {
 
                 if (input.type === 'KEYBOARD'
                 && input.action === 'KEY_DELETE'
                 && input.state === 'DOWN') {
 
                     this.$.world.remove(this.$.debugging.entity);
-                }
-
-                if (input.type === 'KEYBOARD'
-                && input.action === 'KEY_UP'
-                && input.state === 'DOWN') {
-
-                    this.$.debugging.entity.get('position').y -= 8;
-                }
-
-                if (input.type === 'KEYBOARD'
-                && input.action === 'KEY_RIGHT'
-                && input.state === 'DOWN') {
-
-                    this.$.debugging.entity.get('position').x += 8;
-                }
-
-                if (input.type === 'KEYBOARD'
-                && input.action === 'KEY_DOWN'
-                && input.state === 'DOWN') {
-
-                    this.$.debugging.entity.get('position').y += 8;
-                }
-
-                if (input.type === 'KEYBOARD'
-                && input.action === 'KEY_LEFT'
-                && input.state === 'DOWN') {
-
-                    this.$.debugging.entity.get('position').x -= 8;
                 }
 
                 if (input.type === 'KEYBOARD'

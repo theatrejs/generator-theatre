@@ -14,6 +14,7 @@ function update() {
     this.$.world.system('spritesheets', ['images'], this.systems.common.spritesheets);
 
     this.$.camera.update(this.delta);
+    this.$.interface.update(this.delta);
 }
 
 export {update};

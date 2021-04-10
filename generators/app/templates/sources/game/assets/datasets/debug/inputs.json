@@ -8,6 +8,7 @@
     "KEY_DOWN",
     "KEY_RIGHT",
     "KEY_LEFT",
+    "KEY_CTRL",
     "KEY_DELETE",
     "KEY_ENTER",
     "KEY_ESC",

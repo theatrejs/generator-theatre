@@ -9,6 +9,7 @@ function render() {
     this.$.world.system('text', ['cameras', 'position', 'text'], this.systems.common.text);
 
     this.$.camera.render();
+    this.$.interface.render();
 }
 
 export {render};

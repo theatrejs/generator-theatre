@@ -12,6 +12,12 @@ function start() {
         () => 0,
         () => 0
     );
+
+    this.$.interface.look(
+
+        () => 0,
+        () => 0
+    );
 }
 
 export {start};
