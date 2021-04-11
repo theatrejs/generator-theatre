@@ -24,10 +24,10 @@ export default function (name, type, width, height, opacity) {
 
             return new Camera(this.context, name, {
 
-                'x': () => (this.size.width - width * scale()) / 2,
-                'y': () => (this.size.height - height * scale()) / 2,
-                'width': () => width * scale(),
-                'height': () => height * scale(),
+                'x': () => Math.floor((this.size.width - width * scale()) / 2),
+                'y': () => Math.floor((this.size.height - height * scale()) / 2),
+                'width': () => Math.floor(width * scale()),
+                'height': () => Math.floor(height * scale()),
                 'scale': scale,
                 'opacity': opacity
             });
