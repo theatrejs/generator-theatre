@@ -12,7 +12,7 @@ function forces(entities) {
 
             const $camera = this.$[camera.$camera.name];
 
-            const duration = 4000;
+            const duration = 1000;
             const frames = this.loop.framerate * duration / 1000;
 
             for (let iterator = 0; iterator <= frames; iterator += 1) {
