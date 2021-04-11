@@ -1,31 +1,35 @@
 export default function (entity, changes) {
 
     const state = entity.get('state').state;
-    const part = entity.get('images')[0];
+    const parts = entity.get('images');
 
-    const {elapsed, frame} = part.cache;
+    delete parts['character-idle'];
+    delete parts['character-up'];
+    delete parts['character-right'];
+    delete parts['character-down'];
+    delete parts['character-left'];
 
     switch ('' + state.UP + state.RIGHT + state.DOWN + state.LEFT) {
 
         case '0000':
 
-            part.type = 'datasets';
-            part.scope = 'demo';
-            part.name = 'spritesheet-character-idle';
-            part.cache = this.assets.datasets['demo']['spritesheet-character-idle']();
-            part.cache.elapsed = elapsed;
-            part.cache.frame = frame;
+            parts['character-idle'] = {
+
+                'type': 'datasets',
+                'scope': 'demo',
+                'name': 'spritesheet-character-idle'
+            };
 
         break;
 
         case '1000':
 
-            part.type = 'datasets';
-            part.scope = 'demo';
-            part.name = 'spritesheet-character-up';
-            part.cache = this.assets.datasets['demo']['spritesheet-character-up']();
-            part.cache.elapsed = elapsed;
-            part.cache.frame = frame;
+            parts['character-up'] = {
+
+                'type': 'datasets',
+                'scope': 'demo',
+                'name': 'spritesheet-character-up'
+            };
 
         break;
 
@@ -33,23 +37,23 @@ export default function (entity, changes) {
         case '0100':
         case '0110':
 
-            part.type = 'datasets';
-            part.scope = 'demo';
-            part.name = 'spritesheet-character-right';
-            part.cache = this.assets.datasets['demo']['spritesheet-character-right']();
-            part.cache.elapsed = elapsed;
-            part.cache.frame = frame;
+            parts['character-right'] = {
+
+                'type': 'datasets',
+                'scope': 'demo',
+                'name': 'spritesheet-character-right'
+            };
 
         break;
 
         case '0010':
 
-            part.type = 'datasets';
-            part.scope = 'demo';
-            part.name = 'spritesheet-character-down';
-            part.cache = this.assets.datasets['demo']['spritesheet-character-down']();
-            part.cache.elapsed = elapsed;
-            part.cache.frame = frame;
+            parts['character-down'] = {
+
+                'type': 'datasets',
+                'scope': 'demo',
+                'name': 'spritesheet-character-down'
+            };
 
         break;
 
@@ -57,12 +61,12 @@ export default function (entity, changes) {
         case '0001':
         case '1001':
 
-            part.type = 'datasets';
-            part.scope = 'demo';
-            part.name = 'spritesheet-character-left';
-            part.cache = this.assets.datasets['demo']['spritesheet-character-left']();
-            part.cache.elapsed = elapsed;
-            part.cache.frame = frame;
+            parts['character-left'] = {
+
+                'type': 'datasets',
+                'scope': 'demo',
+                'name': 'spritesheet-character-left'
+            };
 
         break;
     }

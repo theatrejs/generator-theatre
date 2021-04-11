@@ -16,7 +16,7 @@ function spritesheet(entities) {
 
         const imagesComponent = entity.get('images');
 
-        imagesComponent.forEach(($spritesheet) => {
+        Object.entries(imagesComponent).forEach(([name, $spritesheet]) => {
 
             if (typeof $spritesheet.cache === 'undefined') {
 
@@ -71,7 +71,7 @@ function spritesheet(entities) {
                     highest.entity = entity;
                     highest.spritesheet = {
 
-                        'name': spritesheet.name,
+                        'name': name,
                         'x': sprite.x,
                         'y': sprite.y,
                         'z': destination.z,
@@ -133,7 +133,7 @@ function spritesheet(entities) {
                         if (collide(mouse, sprite) === true
                         && collide(mouse, screen) === true) {
 
-                            console.log('debugging :', 'entity', '\'' + entity.name + '\'', '/' , 'spritesheet', '\'' + spritesheet.name + '\'', '/', 'camera', '\'' + $camera.name + '\'');
+                            console.log('debugging :', 'entity', '\'' + entity.name + '\'', '/' , 'spritesheet', '\'' + name + '\'', '/', 'camera', '\'' + $camera.name + '\'');
                             console.log(entity);
                         }
                     }
@@ -153,7 +153,7 @@ function spritesheet(entities) {
 
         const imagesComponent = entity.get('images');
 
-        imagesComponent.forEach(($spritesheet) => {
+        Object.entries(imagesComponent).forEach(([name, $spritesheet]) => {
 
             const spritesheet = $spritesheet.cache || ($spritesheet.cache = this.assets[$spritesheet.type][$spritesheet.scope][$spritesheet.name]());
 

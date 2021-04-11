@@ -10,7 +10,7 @@ function images(entities) {
 
             const $camera = this.$[camera.$camera.name];
 
-            imagesComponent.forEach(($spritesheet) => {
+            Object.entries(imagesComponent).forEach(([name, $spritesheet]) => {
 
                 if (typeof $spritesheet.cache === 'undefined') {
 

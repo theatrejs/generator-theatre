@@ -7,29 +7,33 @@
         },
         {
             "name": "images",
-            "parameters": [
+            "parameters": {
 
-                {
+                "controls-up": {
+
                     "type": "datasets",
                     "scope": "demo",
                     "name": "spritesheet-controls-up"
                 },
-                {
+                "controls-right": {
+
                     "type": "datasets",
                     "scope": "demo",
                     "name": "spritesheet-controls-right"
                 },
-                {
+                "controls-down": {
+
                     "type": "datasets",
                     "scope": "demo",
                     "name": "spritesheet-controls-down"
                 },
-                {
+                "controls-left": {
+
                     "type": "datasets",
                     "scope": "demo",
                     "name": "spritesheet-controls-left"
                 }
-            ]
+            }
         },
         {
             "name": "position"

@@ -7,14 +7,15 @@
         },
         {
             "name": "images",
-            "parameters": [
+            "parameters": {
 
-                {
+                "grid-idle": {
+
                     "type": "datasets",
                     "scope": "common",
                     "name": "spritesheet-grid-idle"
                 }
-            ]
+            }
         },
         {
             "name": "position"

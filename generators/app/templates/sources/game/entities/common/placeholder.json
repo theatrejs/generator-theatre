@@ -18,14 +18,15 @@
         },
         {
             "name": "images",
-            "parameters": [
+            "parameters": {
 
-                {
+                "placeholder-idle": {
+
                     "type": "datasets",
                     "scope": "common",
                     "name": "spritesheet-placeholder-idle"
                 }
-            ]
+            }
         },
         {
             "name": "position",

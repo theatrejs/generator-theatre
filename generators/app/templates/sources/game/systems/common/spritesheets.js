@@ -4,7 +4,7 @@ function spritesheets(entities) {
 
         const imagesComponent = entity.get('images');
 
-        imagesComponent.forEach(($spritesheet) => {
+        Object.entries(imagesComponent).forEach(([name, $spritesheet]) => {
 
             if (typeof $spritesheet.cache === 'undefined') {
 

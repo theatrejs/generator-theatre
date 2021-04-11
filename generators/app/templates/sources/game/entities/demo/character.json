@@ -7,14 +7,15 @@
         },
         {
             "name": "images",
-            "parameters": [
+            "parameters": {
 
-                {
+                "character-idle": {
+
                     "type": "datasets",
                     "scope": "demo",
                     "name": "spritesheet-character-idle"
                 }
-            ]
+            }
         },
         {
             "name": "inputs",
