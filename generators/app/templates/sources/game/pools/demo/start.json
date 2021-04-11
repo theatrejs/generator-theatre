@@ -51,14 +51,15 @@
             },
             {
                 "name": "forces",
-                "parameters": [
+                "parameters": {
 
-                    {
+                    "arrival": {
+
                         "type": "datasets",
                         "scope": "demo",
                         "name": "force-character"
                     }
-                ]
+                }
             },
             {
                 "name": "opacity",

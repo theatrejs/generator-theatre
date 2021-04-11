@@ -25,7 +25,7 @@ function forces(entities) {
 
         const trashes = [];
 
-        forcesComponent.forEach(($force) => {
+        Object.entries(forcesComponent).forEach(([name, $force]) => {
 
             if (typeof $force.cache === 'undefined') {
 
@@ -79,7 +79,7 @@ function forces(entities) {
 
                 const remove = () => {
 
-                    trashes.push($force);
+                    trashes.push(name);
                 };
 
                 handling(entity, force.moved.x, force.moved.y, force.elapsed, remove);
@@ -87,7 +87,7 @@ function forces(entities) {
 
             if (force.elapsed >= force.duration
             && force.$ending !== false
-            && trashes.indexOf($force) === -1) {
+            && trashes.indexOf(name) === -1) {
 
                 if (typeof force.$ending === 'object'
                 && force.$ending !== null) {
@@ -100,27 +100,22 @@ function forces(entities) {
                     ending(entity, extra);
                 }
 
-                trashes.push($force);
+                trashes.push(name);
             }
         });
 
-        const forces = forcesComponent.filter(($force) => {
+        Object.entries(forcesComponent).forEach(([name, $force]) => {
 
-            return trashes.indexOf($force) === -1;
+            if (trashes.indexOf(name) !== -1
+            && forcesComponent.hasOwnProperty(name)) {
+
+                delete forcesComponent[name];
+            }
         });
 
-        if (forces.length === 0) {
+        if (Object.keys(forcesComponent).length === 0) {
 
             entity.remove('forces');
-        }
-
-        else {
-
-            entity.add({
-
-                'name': 'forces',
-                'parameters': forces
-            });
         }
     });
 }

@@ -31,7 +31,7 @@ function forces(entities) {
                     'y': 0
                 };
 
-                forcesComponent.forEach(($force) => {
+                Object.entries(forcesComponent).forEach(([name, $force]) => {
 
                     if (typeof $force.cache === 'undefined') {
 
