@@ -1,1 +1,36 @@
-[]
+[
+    {
+        "name": "grid",
+        "entity": {
+
+            "scope": "common",
+            "name": "grid"
+        },
+        "components": [
+
+            {
+                "name": "position",
+                "parameters": {
+
+                    "x": 0,
+                    "y": 0,
+                    "z": -999
+                }
+            }
+        ]
+    },
+    {
+        "name": "placeholder",
+        "entity": {
+
+            "scope": "common",
+            "name": "placeholder"
+        },
+        "components": [
+
+            {
+                "name": "forces"
+            }
+        ]
+    }
+]
