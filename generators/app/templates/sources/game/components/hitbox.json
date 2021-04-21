@@ -9,12 +9,13 @@
         {
             "type": "static",
             "conditions": [],
-            "action": {
+            "$match": {
 
                 "type": "snippets",
                 "scope": "common",
                 "name": "handle-hitbox"
-            }
+            },
+            "$unmatch": false
         }
     ]
 }

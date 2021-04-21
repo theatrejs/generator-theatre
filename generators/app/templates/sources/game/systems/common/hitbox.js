@@ -9,6 +9,14 @@ function hitbox(entities) {
     Object.entries(entities).forEach(([nameA, entityA]) => {
 
         const hitboxComponentA = entityA.get('hitbox');
+
+        const triggers = hitboxComponentA.triggers;
+
+        if (triggers.length === 0) {
+
+            return;
+        }
+
         const positionComponentA = entityA.get('position');
 
         Object.entries(entities).forEach(([nameB, entityB]) => {
@@ -56,11 +64,6 @@ function hitbox(entities) {
 
     Object.entries(entities).forEach(([nameA, entityA]) => {
 
-        if (typeof collisions[nameA] === 'undefined') {
-
-            return;
-        }
-
         const triggers = entityA.get('hitbox').triggers;
 
         if (triggers.length === 0) {
@@ -91,7 +94,18 @@ function hitbox(entities) {
                 }
             });
 
-            if (valid === true) {
+            if (valid === false
+            && typeof trigger.$unmatch !== 'undefined'
+            && trigger.$unmatch !== false) {
+
+                const {scope, name} = trigger.$unmatch;
+
+                resolvers.push(this.snippets[scope][name].bind(this, entityA));
+            }
+
+            if (valid === true
+            && typeof trigger.$match !== 'undefined'
+            && trigger.$match !== false) {
 
                 const hitboxComponentA = entityA.get('hitbox');
                 const positionComponentA = entityA.get('position');
@@ -151,8 +165,8 @@ function hitbox(entities) {
                         previousHitboxComponentB.height
                     );
 
-                    const previousOverlapX = !(previousA.x + previousA.width < previousB.x || previousA.x > previousB.x + previousB.width);
-                    const previousOverlapY = !(previousA.y + previousA.height < previousB.y || previousA.y > previousB.y + previousB.height);
+                    const previousOverlapX = !((previousA.x + previousA.width - previousB.x).toFixed(this.precision) <= 0 || (previousB.x + previousB.width - previousA.x).toFixed(this.precision) <= 0);
+                    const previousOverlapY = !((previousA.y + previousA.height - previousB.y).toFixed(this.precision) <= 0 || (previousB.y + previousB.height - previousA.y).toFixed(this.precision) <= 0);
 
                     let top = previousOverlapX === true && previousOverlapY === false && previousA.y > A.y;
                     let right = previousOverlapY === true && previousOverlapX === false && previousA.x < A.x;
@@ -197,7 +211,7 @@ function hitbox(entities) {
                         'from': direction
                     };
 
-                    const {scope, name} = trigger.action;
+                    const {scope, name} = trigger.$match;
 
                     resolvers.push(this.snippets[scope][name].bind(this, entityA, collision, entityB));
                 });

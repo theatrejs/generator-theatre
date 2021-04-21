@@ -440,6 +440,7 @@ function Theatre(config) {
     this.entities = {};
     this.playing = true;
     this.pools = {};
+    this.precision = 3;
     this.preloading = false;
     this.scenes = {};
     this.size = size;
