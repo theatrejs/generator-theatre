@@ -114,6 +114,19 @@ function Camera(context, name, screen) {
 
                     const width = Math.min(1, (destination.width / frame.width) - column) * frame.width;
 
+                    const visible = this.visible(
+
+                        (destination.x + column * frame.width) * this.screen.scale(),
+                        (destination.y + row * frame.height) * this.screen.scale(),
+                        width * this.screen.scale(),
+                        height * this.screen.scale()
+                    );
+
+                    if (visible === false) {
+
+                        continue;
+                    }
+
                     const canvas = {
 
                         'destination': {
@@ -133,29 +146,36 @@ function Camera(context, name, screen) {
                         'left': Math.min(0, canvas.destination.x - this.screen.x())
                     };
 
-                    const visible = this.visible(
+                    const draw = {
 
-                        (destination.x + column * frame.width) * this.screen.scale(),
-                        (destination.y + row * frame.height) * this.screen.scale(),
-                        width * this.screen.scale(),
-                        height * this.screen.scale()
+                        'source': {
+
+                            'x': frame.x - offset.left * (width / canvas.destination.width),
+                            'y': frame.y - offset.top * (height / canvas.destination.height),
+                            'width': width - offset.right * (width / canvas.destination.width) - Math.abs(offset.left * (width / canvas.destination.width)),
+                            'height': height - offset.bottom * (height / canvas.destination.height) - Math.abs(offset.top * (height / canvas.destination.height))
+                        },
+                        'destination': {
+
+                            'x': canvas.destination.x - offset.left,
+                            'y': canvas.destination.y - offset.top,
+                            'width': canvas.destination.width - offset.right - Math.abs(offset.left),
+                            'height': canvas.destination.height - offset.bottom - Math.abs(offset.top)
+                        }
+                    };
+
+                    context.drawImage(
+
+                        source,
+                        draw.source.x,
+                        draw.source.y,
+                        draw.source.width,
+                        draw.source.height,
+                        draw.destination.x,
+                        draw.destination.y,
+                        draw.destination.width,
+                        draw.destination.height
                     );
-
-                    if (visible === true) {
-
-                        context.drawImage(
-
-                            source,
-                            frame.x - offset.left * (width / canvas.destination.width),
-                            frame.y - offset.top * (height / canvas.destination.height),
-                            width - offset.right * (width / canvas.destination.width) - Math.abs(offset.left * (width / canvas.destination.width)),
-                            height - offset.bottom * (height / canvas.destination.height) - Math.abs(offset.top * (height / canvas.destination.height)),
-                            canvas.destination.x - offset.left,
-                            canvas.destination.y - offset.top,
-                            canvas.destination.width - offset.right - Math.abs(offset.left),
-                            canvas.destination.height - offset.bottom - Math.abs(offset.top)
-                        );
-                    }
                 }
             }
 
@@ -211,10 +231,10 @@ function Camera(context, name, screen) {
             'height': this.screen.height()
         };
 
-        if (x + width <= camera.x
-        || x >= camera.x + camera.width
-        || y + height <= camera.y
-        || y >= camera.y + camera.height) {
+        if ((x + width - camera.x).toFixed(this.precision) <= 0
+        || 0 >= (camera.x + camera.width - x).toFixed(this.precision)
+        || (y + height - camera.y).toFixed(this.precision) <= 0
+        || 0 >= (camera.y + camera.height - y).toFixed(this.precision)) {
 
             return false;
         }
@@ -229,6 +249,8 @@ function Camera(context, name, screen) {
         'x': () => 0,
         'y': () => 0
     };
+
+    this.precision = 3;
 
     this.screen = {
 
