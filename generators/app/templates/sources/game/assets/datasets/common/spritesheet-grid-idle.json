@@ -3,15 +3,15 @@
 
         "type": "images",
         "scope": "common",
-        "name": "grid-640x640"
+        "name": "grid-1280x1280"
     },
     "frames": [
 
-        [0, 0, 640, 640]
+        [0, 0, 1280, 1280]
     ],
     "frame": 0,
     "framerate": 8,
-    "destination": [0, 0, 0, 640, 640],
+    "destination": [0, 0, 0, 1280, 1280],
     "opacity": 1,
     "elapsed": 0
 }
