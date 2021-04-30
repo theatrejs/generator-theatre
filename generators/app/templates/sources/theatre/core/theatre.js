@@ -153,6 +153,8 @@ function Theatre(config) {
         if (updates > 0) {
 
             update.call(this, panic);
+
+            this.events.length = 0;
         }
 
         this.scene.render.call(this);
@@ -438,6 +440,7 @@ function Theatre(config) {
     this.components = {};
     this.debug = debug
     this.entities = {};
+    this.events = [];
     this.playing = true;
     this.pools = {};
     this.precision = 3;

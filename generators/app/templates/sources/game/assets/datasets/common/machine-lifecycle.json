@@ -1,0 +1,21 @@
+{
+    "state": "CREATED",
+    "events": [],
+    "transitions": [
+
+        {
+            "from": "CREATED",
+            "to": "DESTROYED",
+            "triggers": ["GLOBAL_DESTROY", "LOCAL_DESTROY"],
+            "$conditions": [],
+            "$matches": [
+
+                {
+                    "type": "snippets",
+                    "scope": "common",
+                    "name": "remove-entity"
+                }
+            ]
+        }
+    ]
+}

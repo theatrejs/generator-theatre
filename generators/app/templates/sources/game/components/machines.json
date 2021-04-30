@@ -1,0 +1,8 @@
+{
+    "lifecycle": {
+
+        "type": "datasets",
+        "scope": "common",
+        "name": "machine-lifecycle"
+    }
+}

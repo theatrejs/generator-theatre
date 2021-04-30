@@ -4,7 +4,7 @@ function before() {
 
     this.$.controllers.inputs.forEach((input) => {
 
-        // console.log('debugging :', input);
+        this.events.push('INPUT_' + input.action + '_' + input.state);
     });
 
     this.$.world.system('inputs', ['inputs'], this.systems.common.inputs);
