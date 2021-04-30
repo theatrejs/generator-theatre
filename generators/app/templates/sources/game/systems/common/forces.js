@@ -5,23 +5,7 @@ function forces(entities) {
     Object.entries(entities).forEach(([name, entity]) => {
 
         const forcesComponent = entity.get('forces');
-
-        if (entity.has('velocity') === false) {
-
-            entity.add({
-
-                'name': 'velocity',
-                'parameters': {
-
-                    'top': 0,
-                    'right': 0,
-                    'bottom': 0,
-                    'left': 0
-                }
-            });
-        }
-
-        const velocityComponent = entity.get('velocity');
+        const velocityComponent = this.snippets.common['get-velocity-anyway'](entity);
 
         const trashes = [];
 

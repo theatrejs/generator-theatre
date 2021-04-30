@@ -5,20 +5,7 @@ function fade(entities) {
     Object.entries(entities).forEach(([name, entity]) => {
 
         const fadeComponent = entity.get('fade');
-
-        if (entity.has('opacity') === false) {
-
-            entity.add({
-
-                'name': 'opacity',
-                'parameters': {
-
-                    'opacity': 1
-                }
-            });
-        }
-
-        const opacityComponent = entity.get('opacity');
+        const opacityComponent = this.snippets.common['get-opacity-anyway'](entity);
 
         if (typeof fadeComponent.fade === 'undefined') {
 
