@@ -13,7 +13,7 @@
 
                 "type": "snippets",
                 "scope": "common",
-                "name": "handle-hitbox"
+                "name": "handle-hitbox-match-multidirectional"
             },
             "$unmatch": false
         }
