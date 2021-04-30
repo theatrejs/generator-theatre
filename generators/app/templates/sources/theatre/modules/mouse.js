@@ -2,7 +2,7 @@ function Mouse(container, actions, inputs) {
 
     function contextmenu(event) {
 
-        const action = 'CLICK_RIGHT';
+        const action = 'MOUSE_RIGHT';
 
         if (actions.indexOf(action) !== -1) {
 
@@ -31,7 +31,7 @@ function Mouse(container, actions, inputs) {
             return;
         }
 
-        const action = 'CLICK_' + buttons[button];
+        const action = 'MOUSE_' + buttons[button];
 
         if (actions.indexOf(action) !== -1) {
 
@@ -54,7 +54,7 @@ function Mouse(container, actions, inputs) {
 
     function mouseenter(event) {
 
-        const action = 'MOVE';
+        const action = 'MOUSE_MOVE';
 
         if (actions.indexOf(action) !== -1) {
 
@@ -77,7 +77,7 @@ function Mouse(container, actions, inputs) {
 
     function mouseleave(event) {
 
-        const action = 'MOVE';
+        const action = 'MOUSE_MOVE';
 
         if (actions.indexOf(action) !== -1) {
 
@@ -100,7 +100,7 @@ function Mouse(container, actions, inputs) {
 
     function mousemove(event) {
 
-        const action = 'MOVE';
+        const action = 'MOUSE_MOVE';
 
         if (actions.indexOf(action) !== -1) {
 
@@ -114,6 +114,7 @@ function Mouse(container, actions, inputs) {
 
                 'type': 'MOUSE',
                 'action': action,
+                'state': 'OVER',
                 'x': x,
                 'y': y
             });
@@ -130,7 +131,7 @@ function Mouse(container, actions, inputs) {
             return;
         }
 
-        const action = 'CLICK_' + buttons[button];
+        const action = 'MOUSE_' + buttons[button];
 
         if (actions.indexOf(action) !== -1) {
 
@@ -164,7 +165,7 @@ function Mouse(container, actions, inputs) {
 
     function wheel(event) {
 
-        const action = 'SCROLL';
+        const action = 'MOUSE_SCROLL';
 
         if (actions.indexOf(action) !== -1) {
 

@@ -32,7 +32,7 @@ function Keyboard(container, actions, inputs) {
 
     function keydown(event) {
 
-        const action = 'KEY_' + keynames[event.keyCode];
+        const action = 'KEYBOARD_' + keynames[event.keyCode];
 
         if (actions.indexOf(action) !== -1
         && states[action] === false) {
@@ -52,7 +52,7 @@ function Keyboard(container, actions, inputs) {
 
     function keyup(event) {
 
-        const action = 'KEY_' + keynames[event.keyCode];
+        const action = 'KEYBOARD_' + keynames[event.keyCode];
 
         if (actions.indexOf(action) !== -1
         && states[action] === true) {

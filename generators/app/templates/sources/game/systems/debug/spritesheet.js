@@ -83,8 +83,7 @@ function spritesheet(entities) {
 
                 this.$.controllers.inputs.forEach((input) => {
 
-                    if (input.type === 'MOUSE'
-                    && input.action === 'CLICK_LEFT'
+                    if (input.action === 'MOUSE_LEFT'
                     && input.state === 'DOWN') {
 
                         const mouse = new Point(
@@ -113,15 +112,13 @@ function spritesheet(entities) {
                         }
                     }
 
-                    if (input.type === 'MOUSE'
-                    && input.action === 'CLICK_LEFT'
+                    if (input.action === 'MOUSE_LEFT'
                     && input.state === 'UP') {
 
                         this.$.debugging.drag = false;
                     }
 
-                    if (input.type === 'MOUSE'
-                    && input.action === 'CLICK_RIGHT'
+                    if (input.action === 'MOUSE_RIGHT'
                     && input.state === 'DOWN') {
 
                         const mouse = new Point(
@@ -138,8 +135,7 @@ function spritesheet(entities) {
                         }
                     }
 
-                    if (input.type === 'MOUSE'
-                    && input.action === 'MOVE'
+                    if (input.action === 'MOUSE_MOVE'
                     && input.state === 'LEAVE') {
 
                         this.$.debugging.drag = false;
@@ -165,8 +161,7 @@ function spritesheet(entities) {
 
                 this.$.controllers.inputs.forEach((input) => {
 
-                    if (input.type === 'MOUSE'
-                    && input.action === 'MOVE') {
+                    if (input.action === 'MOUSE_MOVE') {
 
                         if (this.$.debugging.drag === $camera
                         && typeof this.$.debugging.entity !== 'undefined') {
