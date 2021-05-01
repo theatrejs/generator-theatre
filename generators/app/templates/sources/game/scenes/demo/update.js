@@ -6,8 +6,6 @@ function update() {
     this.$.world.system('events', ['machines'], this.systems.common.events);
 
     this.$.world.system('timeout', ['timeout'], this.systems.common.timeout);
-    this.$.world.system('commands', ['commands'], this.systems.common.commands);
-    this.$.world.system('state', ['state'], this.systems.common.state);
     this.$.world.system('machines', ['machines'], this.systems.common.machines);
 
     this.$.world.system('forces', ['forces'], this.systems.common.forces);

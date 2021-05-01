@@ -6,8 +6,6 @@ function before() {
 
         this.events.push('INPUT_' + input.action + '_' + input.state);
     });
-
-    this.$.world.system('inputs', ['inputs'], this.systems.common.inputs);
 }
 
 export {before};
