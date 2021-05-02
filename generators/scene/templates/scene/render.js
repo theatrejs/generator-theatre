@@ -5,6 +5,7 @@ function render() {
     this.context.fillStyle = '#000000';
     this.context.fillRect(0, 0, this.size.width, this.size.height);
 
+    this.$.world.system('grid', [], this.systems.common.grid);
     this.$.world.system('images', ['cameras', 'images', 'position'], this.systems.common.images);
     this.$.world.system('text', ['cameras', 'position', 'text'], this.systems.common.text);
 
