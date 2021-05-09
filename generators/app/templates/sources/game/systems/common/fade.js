@@ -39,10 +39,15 @@ function fade(entities) {
                 const $ending = fadeComponent.$ending;
                 const ending = this.snippets[$ending.scope][$ending.name];
 
+                entity.remove('fade');
+
                 ending(entity, this.delta - delta);
             }
 
-            entity.remove('fade');
+            else {
+
+                entity.remove('fade');
+            }
         }
     });
 }

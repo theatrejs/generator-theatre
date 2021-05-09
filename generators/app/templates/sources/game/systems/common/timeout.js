@@ -16,10 +16,15 @@ function timeout(entities) {
 
                 const extra = timeoutComponent.elapsed - timeoutComponent.duration;
 
+                entity.remove('timeout');
+
                 ending(entity, extra);
             }
 
-            entity.remove('timeout');
+            else {
+
+                entity.remove('timeout');
+            }
         }
     });
 }
