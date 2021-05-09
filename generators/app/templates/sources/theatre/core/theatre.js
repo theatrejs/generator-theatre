@@ -153,8 +153,6 @@ function Theatre(config) {
         if (updates > 0) {
 
             update.call(this, panic);
-
-            this.events.length = 0;
         }
 
         this.scene.render.call(this);
