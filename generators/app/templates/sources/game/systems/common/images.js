@@ -22,25 +22,10 @@ function images(entities) {
                 const {destination, frames, opacity, $source} = image;
 
                 let [x, y, width, height] = frames[image.frame];
-                let data;
-
-                try {
-
-                    data = this.assets[$source.type][$source.scope][$source.name]();
-                }
-                catch (error) {
-
-                    x = x % 8;
-                    y = y % 1;
-                    width = 1;
-                    height = 1;
-
-                    data = this.assets.images.common['placeholder-8x1']();
-                }
 
                 $camera.add({
 
-                    'source': data,
+                    'source': this.assets[$source.type][$source.scope][$source.name](),
                     'frame': {
 
                         'x': width * x,
