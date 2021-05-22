@@ -4,6 +4,7 @@ function update() {
 
     this.$.world.system('previous', [], this.systems.common.previous);
     this.$.world.system('machines', ['machines'], this.systems.common.machines);
+    this.$.world.system('intervals', ['intervals'], this.systems.common.intervals);
     this.$.world.system('timeout', ['timeout'], this.systems.common.timeout);
     this.$.world.system('forces', ['forces'], this.systems.common.forces);
     this.$.world.system('velocity', ['position', 'velocity'], this.systems.common.velocity);
