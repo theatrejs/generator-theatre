@@ -15,13 +15,19 @@ function config(environment) {
             'contentBase': path.resolve(__dirname, 'dist/'),
             'host': ip.v4.sync(),
             'hot': true,
-            'open': true,
+            'open': false,
             'overlay': {
 
                 'warnings': true,
                 'errors': true
             },
             'port': 8888,
+            'stats': {
+
+                'all': false,
+                'builtAt': true,
+                'colors': true
+            },
             'watchContentBase': true
         },
         'devtool': 'inline-source-map',

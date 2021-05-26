@@ -28,6 +28,40 @@ function config(environment) {
                     ]
                 },
                 {
+                    'test': /\.json$/,
+                    'include': [
+
+                        path.resolve(__dirname, 'sources/game/entities')
+                    ],
+                    'use': [
+
+                        {
+                            'loader': path.resolve(__dirname, 'webpack/loaders/schema-loader.js'),
+                            'options': {
+
+                                'schema': require(path.resolve(__dirname, 'schemas/entity.js'))
+                            }
+                        }
+                    ]
+                },
+                {
+                    'test': /\.json$/,
+                    'include': [
+
+                        path.resolve(__dirname, 'sources/game/pools')
+                    ],
+                    'use': [
+
+                        {
+                            'loader': path.resolve(__dirname, 'webpack/loaders/schema-loader.js'),
+                            'options': {
+
+                                'schema': require(path.resolve(__dirname, 'schemas/pool.js'))
+                            }
+                        }
+                    ]
+                },
+                {
                     'test': /\.mp3|\.png$/,
                     'use': [
 

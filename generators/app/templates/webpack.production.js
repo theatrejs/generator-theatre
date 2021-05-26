@@ -11,7 +11,13 @@ function config(environment) {
         'plugins': [
 
             new FriendlyErrorsWebpackPlugin()
-        ]
+        ],
+        'stats': {
+
+            'all': false,
+            'builtAt': true,
+            'colors': true
+        }
     });
 }
 
