@@ -31,6 +31,24 @@ function config(environment) {
                     'test': /\.json$/,
                     'include': [
 
+                        path.resolve(__dirname, 'sources/game/components')
+                    ],
+                    'use': [
+
+                        {
+                            'loader': path.resolve(__dirname, 'webpack/loaders/schema-loader.js'),
+                            'options': {
+
+                                'path': path.resolve(__dirname, 'schemas/components'),
+                                'filename': '[name].js'
+                            }
+                        }
+                    ]
+                },
+                {
+                    'test': /\.json$/,
+                    'include': [
+
                         path.resolve(__dirname, 'sources/game/entities')
                     ],
                     'use': [
@@ -39,7 +57,8 @@ function config(environment) {
                             'loader': path.resolve(__dirname, 'webpack/loaders/schema-loader.js'),
                             'options': {
 
-                                'schema': require(path.resolve(__dirname, 'schemas/entity.js'))
+                                'path': path.resolve(__dirname, 'schemas'),
+                                'filename': 'entity.js'
                             }
                         }
                     ]
@@ -56,7 +75,8 @@ function config(environment) {
                             'loader': path.resolve(__dirname, 'webpack/loaders/schema-loader.js'),
                             'options': {
 
-                                'schema': require(path.resolve(__dirname, 'schemas/pool.js'))
+                                'path': path.resolve(__dirname, 'schemas'),
+                                'filename': 'pool.js'
                             }
                         }
                     ]

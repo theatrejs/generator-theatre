@@ -1,17 +1,20 @@
 const path = require('path');
 
-const { getOptions } = require('loader-utils');
+const { getOptions, interpolateName } = require('loader-utils');
 
 const Ajv = require('ajv')
 const betterAjvErrors = require('better-ajv-errors');
 
 module.exports = function loader(source) {
 
-    const {schema} = getOptions(this);
-
     const ajv = new Ajv();
-    const json = JSON.parse(source);
+
+    const options = getOptions(this);
+    const filename = interpolateName(this, options.filename, {});
+    const schema = require(path.resolve(options.path, filename));
+
     const validate = ajv.compile(schema);
+    const json = JSON.parse(source);
     const valid = validate(json);
 
     if (valid === false) {
@@ -39,6 +42,7 @@ module.exports = function loader(source) {
 
             this.emitError(new Error(output));
         }
+
         else {
 
             console.error(new Error(output));
