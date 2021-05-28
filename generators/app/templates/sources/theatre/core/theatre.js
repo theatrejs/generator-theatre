@@ -245,6 +245,13 @@ function Theatre(config) {
 
             pools.forEach((entity) => {
 
+                if (entity.hasOwnProperty('entity') === false
+                || typeof entity.entity.scope !== 'string'
+                || typeof entity.entity.name !== 'string') {
+
+                    return;
+                }
+
                 if (entity.hasOwnProperty('components') === false) {
 
                     entity.components = [];
