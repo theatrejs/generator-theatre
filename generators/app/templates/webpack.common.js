@@ -40,7 +40,31 @@ function config(environment) {
                             'options': {
 
                                 'path': path.resolve(__dirname, 'schemas/components'),
-                                'filename': '[name].js'
+                                'name': '[name]',
+                                'pattern': /^(.*)$/,
+                                'replacement': '$1',
+                                'extension': 'js'
+                            }
+                        }
+                    ]
+                },
+                {
+                    'test': /\.json$/,
+                    'include': [
+
+                        path.resolve(__dirname, 'sources/game/assets/datasets')
+                    ],
+                    'use': [
+
+                        {
+                            'loader': path.resolve(__dirname, 'webpack/loaders/schema-loader.js'),
+                            'options': {
+
+                                'path': path.resolve(__dirname, 'schemas/datasets'),
+                                'name': '[name]',
+                                'pattern': /^([^-]+)-.+$/,
+                                'replacement': '$1',
+                                'extension': 'js'
                             }
                         }
                     ]
@@ -58,7 +82,10 @@ function config(environment) {
                             'options': {
 
                                 'path': path.resolve(__dirname, 'schemas'),
-                                'filename': 'entity.js'
+                                'name': '[name]',
+                                'pattern': /^(.*)$/,
+                                'replacement': 'entity',
+                                'extension': 'js'
                             }
                         }
                     ]
@@ -76,7 +103,10 @@ function config(environment) {
                             'options': {
 
                                 'path': path.resolve(__dirname, 'schemas'),
-                                'filename': 'pool.js'
+                                'name': '[name]',
+                                'pattern': /^(.*)$/,
+                                'replacement': 'pool',
+                                'extension': 'js'
                             }
                         }
                     ]

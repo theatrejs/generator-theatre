@@ -6,7 +6,7 @@ module.exports = {
         'type': {
 
             'type': 'string',
-            'enum': ['snippets']
+            'enum': ['images']
         },
         'scope': {'type': 'string'},
         'name': {'type': 'string'}

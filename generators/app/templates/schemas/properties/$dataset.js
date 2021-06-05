@@ -6,7 +6,7 @@ module.exports = {
         'type': {
 
             'type': 'string',
-            'enum': ['datasets'],
+            'enum': ['datasets']
         },
         'scope': {'type': 'string'},
         'name': {'type': 'string'}

@@ -40,7 +40,7 @@ module.exports = {
                 'required': ['type', 'conditions', '$match', '$unmatch'],
                 'additionalProperties': false
             }
-        },
+        }
     },
     'required': ['x', 'y', 'width', 'height', 'type', 'triggers'],
     'additionalProperties': false

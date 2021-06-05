@@ -10,8 +10,14 @@ module.exports = function loader(source) {
     const ajv = new Ajv();
 
     const options = getOptions(this);
-    const filename = interpolateName(this, options.filename, {});
-    const schema = require(path.resolve(options.path, filename));
+    const name = interpolateName(this, options.name, {});
+
+    if (options.pattern.test(name) === false) {
+
+        return source;
+    }
+
+    const schema = require(path.resolve(options.path, name.replace(options.pattern, options.replacement) + '.' + options.extension));
 
     const validate = ajv.compile(schema);
     const json = JSON.parse(source);

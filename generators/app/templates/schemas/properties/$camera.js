@@ -6,7 +6,7 @@ module.exports = {
         'type': {
 
             'type': 'string',
-            'enum': ['$'],
+            'enum': ['$']
         },
         'name': {'type': 'string'}
     },

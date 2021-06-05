@@ -3,16 +3,17 @@ const path = require('path');
 const $snippetPropertySchema = require(path.resolve('schemas/properties/$snippet.js'));
 const durationPropertySchema = require(path.resolve('schemas/properties/duration.js'));
 const elapsedPropertySchema = require(path.resolve('schemas/properties/elapsed.js'));
-const opacityPropertySchema = require(path.resolve('schemas/properties/opacity.js'));
 
 module.exports = {
 
     'type': 'object',
     'properties': {
 
-        'opacity': opacityPropertySchema,
+        'x': {'type': 'number'},
+        'y': {'type': 'number'},
         'duration': durationPropertySchema,
-        '$easing': {
+        '$easing': $snippetPropertySchema,
+        '$handling': {
 
             'oneOf': [
 
@@ -25,11 +26,11 @@ module.exports = {
             'oneOf': [
 
                 $snippetPropertySchema,
-                {'enum': [true]}
+                {'enum': [false]}
             ]
         },
         'elapsed': elapsedPropertySchema
     },
-    'required': ['opacity', 'duration', '$easing', '$ending', 'elapsed'],
+    'required': ['x', 'y', 'duration', '$easing', '$handling', '$ending', 'elapsed'],
     'additionalProperties': false
 };
