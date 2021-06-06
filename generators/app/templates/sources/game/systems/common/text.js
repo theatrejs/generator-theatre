@@ -10,9 +10,9 @@ function text(entities) {
 
         let [x, y, z, width, height] = destination;
 
-        const $spritesheet = this.assets[$font.type][$font.scope][$font.name]();
+        const $spritesheet = this[$font.type][$font.scope][$font.name]();
         const {$source, map, size} = $spritesheet;
-        const font = this.assets[$source.type][$source.scope][$source.name]();
+        const font = this[$source.type][$source.scope][$source.name]();
 
         camerasComponent.forEach((camera) => {
 

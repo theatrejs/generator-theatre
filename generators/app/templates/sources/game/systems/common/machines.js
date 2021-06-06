@@ -10,7 +10,7 @@ function machines(entities) {
 
                 if (typeof $machine.cache === 'undefined') {
 
-                    $machine.cache = this.assets[$machine.type][$machine.scope][$machine.name]();
+                    $machine.cache = this[$machine.type][$machine.scope][$machine.name]();
                 }
 
                 const machine = $machine.cache;
@@ -32,7 +32,7 @@ function machines(entities) {
 
             if (typeof $machine.cache === 'undefined') {
 
-                $machine.cache = this.assets[$machine.type][$machine.scope][$machine.name]();
+                $machine.cache = this[$machine.type][$machine.scope][$machine.name]();
             }
 
             const machine = $machine.cache;

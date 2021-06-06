@@ -27,6 +27,12 @@ function fade(entities) {
         const faded = fadeComponent.fade * easing(progress);
 
         opacityComponent.opacity += faded - fadeComponent.faded;
+
+        if (opacityComponent.opacity < 0) {
+
+            opacityComponent.opacity = 0;
+        }
+
         fadeComponent.faded = faded;
 
         fadeComponent.elapsed += delta;

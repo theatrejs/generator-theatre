@@ -179,6 +179,7 @@ function Theatre(config) {
         assets.call(this);
         components.call(this);
         entities.call(this);
+        partials.call(this);
         pools.call(this);
         scenes.call(this);
         snippets.call(this);
@@ -199,6 +200,41 @@ function Theatre(config) {
         }
 
         loading = scene;
+    }
+
+    function partials() {
+
+        const context = require.context('partials/', true, /^\.\/([^\/]+)\/([^\/]+)\.json$/, 'sync');
+
+        this.partials = {};
+
+        context.keys().forEach((key) => {
+
+            const [path, scope, name] = key.match(/^\.\/([^\/]+)\/([^\/]+)\.json$/);
+
+            if (typeof this.partials[scope] === 'undefined') {
+
+                this.partials[scope] = {};
+            }
+
+            if (typeof this.partials[scope][name] === 'undefined') {
+
+                this.partials[scope][name] = {};
+            }
+
+            const partial = context(key);
+            const getter = () => JSON.parse(JSON.stringify(partial));
+
+            this.partials[scope][name] = getter;
+        });
+
+        if (typeof module.hot !== 'undefined') {
+
+            module.hot.accept(context.id, () => {
+
+                partials.call(this);
+            });
+        }
     }
 
     function pause() {
@@ -446,6 +482,7 @@ function Theatre(config) {
     this.debug = debug
     this.entities = {};
     this.events = [];
+    this.partials = {};
     this.playing = true;
     this.pools = {};
     this.precision = 3;

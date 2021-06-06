@@ -52,27 +52,6 @@ function config(environment) {
                     'test': /\.json$/,
                     'include': [
 
-                        path.resolve(__dirname, 'sources/game/assets/datasets')
-                    ],
-                    'use': [
-
-                        {
-                            'loader': path.resolve(__dirname, 'webpack/loaders/schema-loader.js'),
-                            'options': {
-
-                                'path': path.resolve(__dirname, 'schemas/datasets'),
-                                'name': '[name]',
-                                'pattern': /^([^-]+)-.+$/,
-                                'replacement': '$1',
-                                'extension': 'js'
-                            }
-                        }
-                    ]
-                },
-                {
-                    'test': /\.json$/,
-                    'include': [
-
                         path.resolve(__dirname, 'sources/game/entities')
                     ],
                     'use': [
@@ -85,6 +64,27 @@ function config(environment) {
                                 'name': '[name]',
                                 'pattern': /^(.*)$/,
                                 'replacement': 'entity',
+                                'extension': 'js'
+                            }
+                        }
+                    ]
+                },
+                {
+                    'test': /\.json$/,
+                    'include': [
+
+                        path.resolve(__dirname, 'sources/game/partials')
+                    ],
+                    'use': [
+
+                        {
+                            'loader': path.resolve(__dirname, 'webpack/loaders/schema-loader.js'),
+                            'options': {
+
+                                'path': path.resolve(__dirname, 'schemas/partials'),
+                                'name': '[name]',
+                                'pattern': /^([^-]+)-.+$/,
+                                'replacement': '$1',
                                 'extension': 'js'
                             }
                         }
@@ -142,6 +142,7 @@ function config(environment) {
                 'assets': path.resolve(__dirname, 'sources/game/assets/'),
                 'components': path.resolve(__dirname, 'sources/game/components/'),
                 'entities': path.resolve(__dirname, 'sources/game/entities/'),
+                'partials': path.resolve(__dirname, 'sources/game/partials/'),
                 'pools': path.resolve(__dirname, 'sources/game/pools/'),
                 'scenes': path.resolve(__dirname, 'sources/game/scenes/'),
                 'snippets': path.resolve(__dirname, 'sources/game/snippets/'),

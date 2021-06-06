@@ -8,7 +8,7 @@ function spritesheets(entities) {
 
             if (typeof $spritesheet.cache === 'undefined') {
 
-                $spritesheet.cache = this.assets[$spritesheet.type][$spritesheet.scope][$spritesheet.name]();
+                $spritesheet.cache = this[$spritesheet.type][$spritesheet.scope][$spritesheet.name]();
             }
 
             const image = $spritesheet.cache;

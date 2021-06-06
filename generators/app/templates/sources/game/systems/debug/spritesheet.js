@@ -20,7 +20,7 @@ function spritesheet(entities) {
 
             if (typeof $spritesheet.cache === 'undefined') {
 
-                $spritesheet.cache = this.assets[$spritesheet.type][$spritesheet.scope][$spritesheet.name]();
+                $spritesheet.cache = this[$spritesheet.type][$spritesheet.scope][$spritesheet.name]();
             }
 
             const spritesheet = $spritesheet.cache;
@@ -151,7 +151,7 @@ function spritesheet(entities) {
 
         Object.entries(imagesComponent).forEach(([name, $spritesheet]) => {
 
-            const spritesheet = $spritesheet.cache || ($spritesheet.cache = this.assets[$spritesheet.type][$spritesheet.scope][$spritesheet.name]());
+            const spritesheet = $spritesheet.cache || ($spritesheet.cache = this[$spritesheet.type][$spritesheet.scope][$spritesheet.name]());
 
             const camerasComponent = entity.get('cameras');
 

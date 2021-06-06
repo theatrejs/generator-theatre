@@ -13,7 +13,7 @@ function forces(entities) {
 
             if (typeof $force.cache === 'undefined') {
 
-                $force.cache = this.assets[$force.type][$force.scope][$force.name]();
+                $force.cache = this[$force.type][$force.scope][$force.name]();
             }
 
             const force = $force.cache;

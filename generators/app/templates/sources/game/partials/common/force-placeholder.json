@@ -6,9 +6,14 @@
 
         "type": "snippets",
         "scope": "common",
-        "name": "easing-sine"
+        "name": "easing-sine-half"
     },
     "$handling": false,
-    "$ending": false,
+    "$ending": {
+
+        "type": "snippets",
+        "scope": "common",
+        "name": "handle-forces-ending"
+    },
     "elapsed": 0
 }

@@ -11,7 +11,7 @@
 
                 "grid-idle": {
 
-                    "type": "datasets",
+                    "type": "partials",
                     "scope": "common",
                     "name": "spritesheet-grid-idle"
                 }

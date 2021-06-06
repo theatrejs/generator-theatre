@@ -73,6 +73,20 @@ module.exports = class extends Generator {
             }
         );
 
+        // generates partials structure
+        this.fs.copyTpl(
+
+            this.templatePath('./partials/**/*'),
+            this.destinationPath('sources/game/partials/' + this.answers.title),
+            {
+                'title': this.answers.title
+            },
+            undefined,
+            {
+                'globOptions': {'dot': true}
+            }
+        );
+
         // generates pools structure
         this.fs.copyTpl(
 

@@ -1,6 +1,6 @@
 const path = require('path');
 
-const $datasetPropertySchema = require(path.resolve('schemas/properties/$dataset.js'));
+const $partialPropertySchema = require(path.resolve('schemas/properties/$partial.js'));
 const destinationPropertySchema = require(path.resolve('schemas/properties/destination.js'));
 const opacityPropertySchema = require(path.resolve('schemas/properties/opacity.js'));
 
@@ -9,7 +9,7 @@ module.exports = {
     'type': 'object',
     'properties': {
 
-        '$font': $datasetPropertySchema,
+        '$font': $partialPropertySchema,
         'anchor': {
 
             'type': 'object',

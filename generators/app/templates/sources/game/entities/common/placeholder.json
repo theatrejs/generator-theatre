@@ -22,7 +22,7 @@
 
                 "placeholder-idle": {
 
-                    "type": "datasets",
+                    "type": "partials",
                     "scope": "common",
                     "name": "spritesheet-placeholder-idle"
                 }

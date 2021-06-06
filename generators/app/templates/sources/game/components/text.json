@@ -1,7 +1,7 @@
 {
     "$font": {
 
-        "type": "datasets",
+        "type": "partials",
         "scope": "common",
         "name": "font-theatre-white-shadow-black-6x10"
     },

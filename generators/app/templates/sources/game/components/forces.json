@@ -1,7 +1,7 @@
 {
     "placeholder": {
 
-        "type": "datasets",
+        "type": "partials",
         "scope": "common",
         "name": "force-placeholder"
     }

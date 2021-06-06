@@ -1,9 +1,9 @@
 const path = require('path');
 
-const $datasetPropertySchema = require(path.resolve('schemas/properties/$dataset.js'));
+const $partialPropertySchema = require(path.resolve('schemas/properties/$partial.js'));
 
 module.exports = {
 
     'type': 'object',
-    'additionalProperties': $datasetPropertySchema
+    'additionalProperties': $partialPropertySchema
 };
