@@ -96,17 +96,25 @@ function Entity(name, components = [], catalog) {
 
 function World(context, catalog) {
 
-    function add(entities) {
+    function add(entities, ...position) {
 
         if (Array.isArray(entities) === false) {
 
             entities = [entities];
         }
 
+        const instances = [];
+
         entities.forEach((entity) => {
 
-            this.entities[entity.name] = this.prepare(entity);
+            const instance = this.prepare(entity, ...position);
+
+            this.entities[instance.name] = instance;
+
+            instances.push(this.entities[instance.name]);
         });
+
+        return instances;
     }
 
     function attach(entities) {
@@ -132,13 +140,35 @@ function World(context, catalog) {
         return this.entities[entity];
     }
 
-    function initialize(entities) {
+    function initialize(entities, ...shift) {
 
         this.empty();
-        this.add(entities);
+
+        const instances = this.add(entities);
+
+        if (shift.length === 3) {
+
+            this.shift(instances, ...shift);
+        }
     }
 
-    function prepare(entity) {
+    function prepare(entity, ...position) {
+
+        if (position.length === 3) {
+
+            const [x, y, z] = position;
+
+            entity.components.push({
+
+                'name': 'position',
+                'parameters': {
+
+                    'x': x,
+                    'y': y,
+                    'z': z
+                }
+            });
+        }
 
         return new Entity(entity.name, entity.components, catalog);
     }
@@ -160,6 +190,18 @@ function World(context, catalog) {
                 delete this.entities[key];
             }
         }
+    }
+
+    function shift(entities, ...shift) {
+
+        entities.forEach((entity) => {
+
+            const [x, y, z] = shift;
+
+            entity.get('position').x += x;
+            entity.get('position').y += y;
+            entity.get('position').z += z;
+        });
     }
 
     function system(name, components, handler, entities = this.entities) {
@@ -193,6 +235,7 @@ function World(context, catalog) {
     this.initialize = initialize;
     this.prepare = prepare;
     this.remove = remove;
+    this.shift = shift;
     this.system = system;
 }
 

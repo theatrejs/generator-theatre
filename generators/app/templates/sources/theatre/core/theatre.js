@@ -113,12 +113,17 @@ function Theatre(config) {
 
             const entity = JSON.parse(JSON.stringify(context(key)));
 
-            if (entity.hasOwnProperty('components') === false) {
+            const getter = (suffix = null) => {
 
-                entity.components = [];
-            }
+                const copy = JSON.parse(JSON.stringify(entity));
 
-            const getter = () => JSON.parse(JSON.stringify(entity));
+                if (suffix !== null) {
+
+                    copy.name += suffix;
+                }
+
+                return copy;
+            };
 
             this.entities[scope][name] = getter;
         });
@@ -277,16 +282,9 @@ function Theatre(config) {
                 this.pools[scope][name] = {};
             }
 
-            const pools = JSON.parse(JSON.stringify(context(key)));
+            const pool = JSON.parse(JSON.stringify(context(key)));
 
-            pools.forEach((entity) => {
-
-                if (entity.hasOwnProperty('entity') === false
-                || typeof entity.entity.scope !== 'string'
-                || typeof entity.entity.name !== 'string') {
-
-                    return;
-                }
+            pool.forEach((entity) => {
 
                 if (entity.hasOwnProperty('components') === false) {
 
@@ -300,7 +298,20 @@ function Theatre(config) {
                 delete entity.entity;
             });
 
-            const getter = () => JSON.parse(JSON.stringify(pools));
+            const getter = (suffix = null) => {
+
+                const copy = JSON.parse(JSON.stringify(pool));
+
+                if (suffix !== null) {
+
+                    copy.forEach((entity) => {
+
+                        entity.name += suffix;
+                    });
+                }
+
+                return copy;
+            };
 
             this.pools[scope][name] = getter;
         });
