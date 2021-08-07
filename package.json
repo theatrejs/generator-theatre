@@ -33,5 +33,5 @@
 
         "test": "echo \"Hello, friend.\" && exit 0"
     },
-    "version": "0.47.0"
+    "version": "0.48.0"
 }
